@@ -43,6 +43,7 @@ mongoose
   .then(() => console.log("mongo connected"))
   .catch(() => console.log("mongo failed"));
 
+// auth controller connections
 app.get("/api/user", userInfo);
 app.post("/api/register", register);
 app.post("/api/login", login);
