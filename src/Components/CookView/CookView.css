@@ -1,0 +1,19 @@
+.orderDisplayMainFlexCV {
+  display: flex;
+  justify-content: center;
+}
+
+.ticketsContainerCV {
+  background-color: aqua;
+  height: 50vh;
+  width: 90vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ticketsContainerCV > article {
+  background-color: white;
+  border-style: solid;
+  border-width: 0.5px;
+  width: 20vw;
+}
