@@ -1,5 +1,6 @@
 const menu = require("../collections/menu");
 module.exports = {
+  // pulls whole menu by restaurant name
   getRestaurantMenu: (req, res, next) => {
     const { restaurant } = req.params;
     menu
@@ -9,7 +10,8 @@ module.exports = {
       })
       .catch(err => console.log(err));
   },
-  postDivisions: (req, res, next) => {
+  // posts a new header section and a new item
+  postDivision: (req, res, next) => {
     const { restaurant, division, item } = req.body;
     menu
       .save({ restaurant: restaurant, division: division, items: item })
@@ -21,6 +23,7 @@ module.exports = {
           });
       });
   },
+  // edits headers
   updateDivisions: (req, res, next) => {
     const { restaurant, division, newdiv } = req.body;
     menu
@@ -36,6 +39,7 @@ module.exports = {
         });
       });
   },
+  // removes a header and all objects within it
   deleteDivision: (req, res, next) => {
     const { restaurant, division } = req.body;
     menu.remove({ restaurant: restaurant, division: division }).then(() => {
@@ -46,6 +50,7 @@ module.exports = {
         });
     });
   },
+  // adds an item to a division
   postItem: (req, res, next) => {
     const { restaurant, division, item, price } = req.body;
     menu
@@ -62,6 +67,7 @@ module.exports = {
       })
       .catch(err => console.log(err));
   },
+  // updates one item under a given division
   updateItem: (req, res, next) => {
     const { restaurant, division, item, price } = req.body;
     menu
@@ -77,6 +83,7 @@ module.exports = {
         });
       });
   },
+  // removes a single item
   deleteItem: (req, res, next) => {
     const { restaurant, division, item } = req.body;
     menu
