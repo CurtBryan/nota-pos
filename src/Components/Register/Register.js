@@ -10,9 +10,8 @@ class Register extends Component {
     constructor(props){
         super(props) 
         this.state = {
-            store : "",
-            employee : "",
-            email : "",
+            name : "",
+            email: "",
             password : ""
         }
     }
@@ -30,7 +29,11 @@ class Register extends Component {
     registerAccount = () => {
 
         // Add post endpoint for account register 
-        axios.post()
+        const { name, email, password } = this.sate
+        axios.post("/api/register", { name, email, password}).then(res => {
+            this.setState({name: "", password: ""})
+            this.props.setEmployee()
+        }).catch((err) => {console.log("RIGISTER", err)})
 
 
     }
@@ -40,23 +43,13 @@ class Register extends Component {
             <div className="form">
                 <div>
                     <input 
-                    placeholder="store"
-                    onChange={e => 
-                        this.registerHandler(e.target.name, e.target.value)
-                    }
-                    type="number"
-                    value={this.state.store}
-                    name="store"
-
-                    />
-                    <input 
-                    placeholder="employee"
+                    placeholder="name"
                     onChange={e => 
                         this.registerHandler(e.target.name, e.target.value)
                     }
                     type="text"
-                    value={this.state.employee}
-                    name="employee"
+                    value={this.state.name}
+                    name="name"
                     />
                     <input 
                     placeholder="email"
@@ -65,7 +58,7 @@ class Register extends Component {
                     }
                     type="text"
                     value={this.state.email}
-                    name="employee"
+                    name="email"
                     />
                     <input 
                     placeholder="password"
