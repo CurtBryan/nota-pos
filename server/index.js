@@ -1,8 +1,8 @@
-require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const app = express();
+require("dotenv").config();
 
 app.use(express.static(__dirname + "/build"));
 
@@ -50,7 +50,7 @@ app.post("/api/login", login);
 app.delete("/api/logout", logout);
 
 // menu controller connections
-app.get("/api/menu", getRestaurantMenu);
+app.get("/api/menu/:restaurant", getRestaurantMenu);
 app.post("/api/menu", postDivision);
 app.put("/api/menu", updateDivisions);
 app.delete("/api/menu", deleteDivision);

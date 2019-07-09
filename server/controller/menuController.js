@@ -13,15 +13,18 @@ module.exports = {
   // posts a new header section and a new item
   postDivision: (req, res, next) => {
     const { restaurant, division, item } = req.body;
-    menu
-      .save({ restaurant: restaurant, division: division, items: item })
-      .then(() => {
-        menu
-          .find({ restaurant: restaurant }, { division: 1, items: 1 })
-          .then(response => {
-            res.status(200).send(response);
-          });
-      });
+    const div = new menu({
+      restaurant: restaurant,
+      division: division,
+      items: item
+    });
+    div.save().then(() => {
+      menu
+        .find({ restaurant: restaurant }, { division: 1, items: 1 })
+        .then(response => {
+          res.status(200).send(response);
+        });
+    });
   },
   // edits headers
   updateDivisions: (req, res, next) => {
@@ -69,11 +72,11 @@ module.exports = {
   },
   // updates one item under a given division
   updateItem: (req, res, next) => {
-    const { restaurant, division, item, price } = req.body;
+    const { restaurant, division, item, price, index } = req.body;
     menu
       .findOne({ restaurant: restaurant, division: division })
       .then(record => {
-        record.items[record.items.indexOf(item)].price = price;
+        record.items[index - 1].price = price;
         record.save().then(() => {
           menu
             .find({ restaurant: restaurant }, { division: 1, items: 1 })
@@ -85,11 +88,11 @@ module.exports = {
   },
   // removes a single item
   deleteItem: (req, res, next) => {
-    const { restaurant, division, item } = req.body;
+    const { restaurant, division, index } = req.body;
     menu
       .findOne({ restaurant: restaurant, division: division })
       .then(record => {
-        record.items.splice(record.items.indexOf(item), 1);
+        record.items.splice(index - 1, 1);
         record.save().then(() => {
           menu
             .find({ restaurant: restaurant }, { division: 1, items: 1 })
