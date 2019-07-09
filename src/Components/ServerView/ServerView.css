@@ -1,0 +1,67 @@
+
+.server-page{
+    background-color: #547374;
+    width: 100vw;
+    height: 100vh;
+}
+
+/*TABLE DATA START*/
+.table-container{
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    margin-left: 50px;
+    
+}
+
+.table {
+    width: 80px;
+    height: 40px;
+    background-color: #585555;
+    margin-left: 20px;
+}
+/*TABLE DATA END*/
+
+
+/*MENU TABLE START*/
+.items-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: white;
+    width: 70%;
+    height: 70%;
+}
+
+.menu-items {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+.box{
+    width: 100px;
+    height: 70px;
+    margin-bottom: 10px;
+}
+
+.item1 {
+    background-color:  #D84848; 
+}
+
+.item2 {
+    background-color:  #62B8EF;
+}
+
+.item3 {
+    background-color: #A0F290;
+
+}
+
+.item4 {
+    background-color:  #FCC751;
+
+}
+
+/*MENU TABLE END*/

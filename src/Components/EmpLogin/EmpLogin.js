@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { setEmployee } from '../../ducks/employeeReducer';
+import { setUser } from '../../ducks/userReducer';
 import { connect } from  'react-redux';
 import '../EmpLogin/EmpLogin.css';
 
@@ -53,7 +53,7 @@ const mapStateToProps = (reduxStates) => {
 }
 
 const mapDispatchToProps = {
-    setEmployee
+    setUser
 }
 
 const invokedConnect = connect (
