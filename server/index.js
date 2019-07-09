@@ -36,7 +36,7 @@ mongoose
 app.get("/api/user", userInfo);
 app.post("/api/register", register);
 app.post("/api/login", login);
-app.get("/api/logout", logout);
+app.delete("/api/logout", logout);
 
 const port = SERVER_PORT || 4000;
 app.listen(port, () => console.log(`server up and running on ${port}`));
