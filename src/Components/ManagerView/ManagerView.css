@@ -1,0 +1,18 @@
+#mVBody {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#mVBody > header {
+  height: 10vh;
+  background-color: aquamarine;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mainBoxMV {
+  height: 80vh;
+  background-color: white;
+}
