@@ -1,6 +1,16 @@
 const employee = require("../collections/employee");
 
 module.exports = {
+  // pulls employee by pin
+  getCurrentEmployee: (req, res, next) => {
+    const { restaurant, pin } = req.body;
+    employee
+      .findOne({ restaurant: restaurant, pin: pin })
+      .then(response => {
+        res.status(200).send(response);
+      })
+      .catch(err => res.status(500).send("Incorrect Pin"));
+  },
   // pulls complete restaurant employee list
   getEmployees: (req, res, next) => {
     const { restaurant } = req.params;

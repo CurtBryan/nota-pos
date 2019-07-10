@@ -1,9 +1,9 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import promiseMiddleware from 'redux-promise-middleware';
-import userReducer from './userReducer';
+import { createStore, applyMiddleware, combineReducers } from "redux";
+import promiseMiddleware from "redux-promise-middleware";
+import restaurantReducer from "./restaurantReducer";
 
 const rootReducer = combineReducers({
- userReducer 
-})
+  restaurantInfo: restaurantReducer
+});
 
 export default createStore(rootReducer, applyMiddleware(promiseMiddleware));
