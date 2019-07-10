@@ -45,31 +45,34 @@ class Login extends Component {
 
     render(){
         return(
-            <div className="form">
-                <div>
-                    <input 
-                    placeholder="email"
-                    onChange={e => 
-                        this.loginEmailHandler(e.target.value)
-                    }
-                    type="text"
-                    value={this.typedEmail}
-                    name="typedEmail"
+            <div className="form-container">
+                <div className="form">
+                <p className= "title">NonaPOS</p>
+                        <div>
+                            <input 
+                            placeholder="email"
+                            onChange={e => 
+                                this.loginEmailHandler(e.target.value)
+                            }
+                            type="text"
+                            value={this.typedEmail}
+                            name="typedEmail"
 
-                    />
+                            />
 
-                    <input 
-                    placeholder="password"
-                    onChange={e => 
-                        this.loginPasswordHandler(e.target.value)
-                    }
-                    type="text"
-                    value={this.typedPassword}
-                    name="typedPassword"
+                            <input 
+                            placeholder="password"
+                            onChange={e => 
+                                this.loginPasswordHandler(e.target.value)
+                            }
+                            type="text"
+                            value={this.typedPassword}
+                            name="typedPassword"
 
-                    />
+                            />
 
-                    <button onClick={this.loginAccount}>Submit</button>
+                            <button onClick={this.loginAccount}>Submit</button>
+                        </div>
                 </div>
             </div>
         )

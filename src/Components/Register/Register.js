@@ -44,37 +44,38 @@ class Register extends Component {
         return (
             <div className="form-container">
                 <div className="form">
-                    <div>
-                        <input 
-                        placeholder="name"
-                        onChange={e => 
-                            this.registerHandler(e.target.name, e.target.value)
-                        }
-                        type="text"
-                        value={this.state.typedName}
-                        name="typedName"
-                        />
-                        <input 
-                        placeholder="email"
-                        onChange={e => 
-                            this.registerHandler(e.target.name, e.target.value)
-                        }
-                        type="text"
-                        value={this.state.typedEmail}
-                        name="typedEmail"
-                        />
-                        <input 
-                        placeholder="password"
-                        onChange={e => 
-                            this.registerHandler(e.target.name, e.target.value)
-                        }
-                        type="current-password"
-                        value={this.state.typedPassword}
-                        name="typedPassword"
-                        />
+                    <p className= "title">NonaPOS</p>
+                        <div>
+                            <input 
+                            placeholder="Name"
+                            onChange={e => 
+                                this.registerHandler(e.target.name, e.target.value)
+                            }
+                            type="text"
+                            value={this.state.typedName}
+                            name="typedName"
+                            />
+                            <input 
+                            placeholder="Email"
+                            onChange={e => 
+                                this.registerHandler(e.target.name, e.target.value)
+                            }
+                            type="text"
+                            value={this.state.typedEmail}
+                            name="typedEmail"
+                            />
+                            <input 
+                            placeholder="Password"
+                            onChange={e => 
+                                this.registerHandler(e.target.name, e.target.value)
+                            }
+                            type="current-password"
+                            value={this.state.typedPassword}
+                            name="typedPassword"
+                            />
 
-                    
-                            <button onClick={this.registerAccount}> Register </button>
+                        
+                                <button onClick={this.registerAccount}> Register </button>
 
                     </div>
                 </div>
