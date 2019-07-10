@@ -1,8 +1,10 @@
 import React from "react";
 // import Register from './Components/Register/Register';
-import ManagerView from "./Components/ManagerView/ManagerView";
 import ServerView from "./Components/ServerView/ServerView";
 import "./App.css";
+import BartenderView from "./Components/BartenderView/BartenderView";
+import ManagerView from "./Components/ManagerView/ManagerView";
+import Login from "./Components/Login/Login";
 
 /*
 Red = #D84848
@@ -18,8 +20,11 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <Login />
         {/* <Register /> */}
-        <ManagerView />
+        {/* <ServerView /> */}
+        {/* <BartenderView /> */}
+        {/* <ManagerView /> */}
       </header>
     </div>
   );

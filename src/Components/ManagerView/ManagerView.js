@@ -27,7 +27,7 @@ class ManagerView extends Component {
   };
 
   render() {
-    console.log(this);
+    console.log(window.sessionStorage);
     return (
       <div className="manager-page">
         <div className="table-containerMV">
