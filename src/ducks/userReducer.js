@@ -1,21 +1,21 @@
 const initalState = {
-    employee: null
+    user: null
 }
 
-const SET_EMPLOYEE = "SET_EMPLOYEE";
+const SET_USER = "SET_USER";
 
 export default function reducer(state = initalState, action){
     switch(action.type){
-        case SET_EMPLOYEE:
+        case SET_USER:
             return {...state, user: action.payload};
         default:
             return state;
     }
 }
 
-export function setEmployee(employee){
+export function setUser(user){
     return {
-        type: SET_EMPLOYEE,
-        payload: employee
+        type: SET_USER,
+        payload: user
     }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { setEmployee } from '../../ducks/employeeReducer';
+import { setUser } from '../../ducks/userReducer';
 import './Login.css';
 
 class Login extends Component {
@@ -56,7 +56,7 @@ const mapStateToProps = (reduxState) => {
 }
 
 const mapDispatchToProps = {
-    setEmployee
+    setUser
 }
 
 const invokedConnect = connect(
