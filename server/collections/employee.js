@@ -1,6 +1,6 @@
-const mongooose = require("mongoose");
+const mongoose = require("mongoose");
 
-const employee = new mongoose.Schema({
+const employeeSchema = new mongoose.Schema({
   restaurant: {
     type: String,
     required: true
@@ -20,4 +20,4 @@ const employee = new mongoose.Schema({
   }
 });
 
-module.exports = mogoose.model("employee", employeeSchema);
+module.exports = mongoose.model("employee", employeeSchema);

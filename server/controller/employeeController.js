@@ -34,7 +34,7 @@ module.exports = {
     employee.findOne({ restaurant: restaurant, pin: pin }).then(record => {
       record.pin = newpin;
       record.position = newpos;
-      employee.save().then(() => {
+      record.save().then(() => {
         employee
           .find({ restaurant: restaurant }, { name: 1, pin: 1, position: 1 })
           .then(response => {

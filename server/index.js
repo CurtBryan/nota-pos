@@ -34,6 +34,16 @@ const {
   deleteEmployee
 } = require("./controller/employeeController");
 
+const {
+  getAllTickets,
+  getDrinkTickets,
+  getFoodTickets,
+  getFullTicket,
+  postTicket,
+  editTicket,
+  printTicket
+} = require("./controller/ticketController");
+
 app.use(
   session({
     saveUninitialized: false,
@@ -68,10 +78,19 @@ app.put("/api/items", updateItem);
 app.delete("/api/items", deleteItem);
 
 // employee controller connections
-app.get("/api/employee", getEmployees);
+app.get(`/api/employee/:restaurant`, getEmployees);
 app.post("/api/employee", postEmployee);
 app.put("/api/employee", updateEmployee);
 app.delete("/api/employee", deleteEmployee);
+
+// ticket controller connections
+app.get("/api/tickets", getAllTickets);
+app.get("/api/kitchen/:restaurant", getFoodTickets);
+app.get("/api/bar/:restaurant", getDrinkTickets);
+app.get("/api/ticket", getFullTicket);
+app.post("/api/tickets", postTicket);
+app.put("/api/ticket", editTicket);
+app.put("/api/tickets", printTicket);
 
 const port = SERVER_PORT || 4000;
 app.listen(port, () => console.log(`server up and running on ${port}`));
