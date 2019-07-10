@@ -9,6 +9,10 @@ const itemSchema = new mongoose.Schema({
   price: {
     type: Number,
     required: true
+  },
+  drink: {
+    type: Boolean,
+    required: true
   }
 });
 

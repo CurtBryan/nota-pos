@@ -12,11 +12,12 @@ module.exports = {
   },
   // posts a new header section and a new item
   postDivision: (req, res, next) => {
-    const { restaurant, division, item } = req.body;
+    const { restaurant, division, item, drink } = req.body;
     const div = new menu({
       restaurant: restaurant,
       division: division,
-      items: item
+      items: item,
+      drink: drink
     });
     div.save().then(() => {
       menu
@@ -55,11 +56,11 @@ module.exports = {
   },
   // adds an item to a division
   postItem: (req, res, next) => {
-    const { restaurant, division, item, price } = req.body;
+    const { restaurant, division, item, price, drink } = req.body;
     menu
       .findOne({ restaurant: restaurant, division: division })
       .then(record => {
-        record.items.push({ item: item, price: price });
+        record.items.push({ item: item, price: price, drink: drink });
         record.save().then(() => {
           menu
             .find({ restaurant: restaurant }, { division: 1, items: 1 })
@@ -72,7 +73,7 @@ module.exports = {
   },
   // updates one item under a given division
   updateItem: (req, res, next) => {
-    const { restaurant, division, item, price, index } = req.body;
+    const { restaurant, division, price, index } = req.body;
     menu
       .findOne({ restaurant: restaurant, division: division })
       .then(record => {

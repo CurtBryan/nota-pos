@@ -27,6 +27,13 @@ const {
   deleteItem
 } = require("./controller/menuController");
 
+const {
+  getEmployees,
+  postEmployee,
+  updateEmployee,
+  deleteEmployee
+} = require("./controller/employeeController");
+
 app.use(
   session({
     saveUninitialized: false,
@@ -59,6 +66,12 @@ app.delete("/api/menu", deleteDivision);
 app.post("/api/items", postItem);
 app.put("/api/items", updateItem);
 app.delete("/api/items", deleteItem);
+
+// employee controller connections
+app.get("/api/employee", getEmployees);
+app.post("/api/employee", postEmployee);
+app.put("/api/employee", updateEmployee);
+app.delete("/api/employee", deleteEmployee);
 
 const port = SERVER_PORT || 4000;
 app.listen(port, () => console.log(`server up and running on ${port}`));
