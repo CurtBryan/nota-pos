@@ -1,10 +1,7 @@
 import React from "react";
-// import Register from './Components/Register/Register';
 import ServerView from "./Components/ServerView/ServerView";
-import "./App.css";
-import BartenderView from "./Components/BartenderView/BartenderView";
-import ManagerView from "./Components/ManagerView/ManagerView";
 import Login from "./Components/Login/Login";
+import "./App.css";
 
 /*
 Red = #D84848
@@ -17,14 +14,12 @@ darkgray=#585555
 
 */
 function App() {
+  console.log(window.sessionStorage);
   return (
     <div className="App">
       <header className="App-header">
-        <Login />
-        {/* <Register /> */}
         {/* <ServerView /> */}
-        {/* <BartenderView /> */}
-        {/* <ManagerView /> */}
+        <Login />
       </header>
     </div>
   );
