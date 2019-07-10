@@ -27,6 +27,7 @@ class ManagerView extends Component {
   };
 
   render() {
+    console.log(this);
     return (
       <div className="manager-page">
         <div className="table-containerMV">
@@ -42,109 +43,116 @@ class ManagerView extends Component {
             <FaAngleDoubleRight />
           </button>
         </div>
-        <div className="menu-selections">
-          <div className="circle-container">
-            <div className="circle" />
-            <div className="circle" />
-            <div className="circle" />
-            <div className="circle" />
+        <div className="middleContMV">
+          <div className="menu-selectionsMV">
+            <div className="circle-containerMV">
+              <button className="circleMV">App</button>
+              <button className="circleMV">Entree</button>
+              <button className="circleMV">Dessert</button>
+              <button className="circleMV">Drink</button>
+            </div>
           </div>
-        </div>
-        <div className="info-section">
-          <div className="items-containerMV">
-            <section className="menu-items">
-              <div className="box item1" />
-              <div className="box item1" />
-              <div className="box item1" />
-              <div className="box item1" />
-              <div className="box item1" />
-            </section>
-            <section className="menu-items">
-              <div className="box item2" />
-              <div className="box item2" />
-              <div className="box item2" />
-              <div className="box item2" />
-              <div className="box item2" />
-            </section>
-            <section className="menu-items">
-              <div className="box item3" />
-              <div className="box item3" />
-              <div className="box item3" />
-              <div className="box item3" />
-              <div className="box item3" />
-            </section>
-            <section className="menu-items">
-              <div className="box item4" />
-              <div className="box item4" />
-              <div className="box item4" />
-              <div className="box item4" />
-              <div className="box item4" />
-            </section>
-          </div>
-          <div className="tickets">
-            <p className="title">POS-SYSTEM</p>
-            <div className="bar" />
-            <div className="ticket">
-              {this.state.editMenu ? (
-                <div>
-                  {" "}
-                  <h1>EDIT MENU</h1>
+          <div className="info-section">
+            <div className="items-containerMV">
+              <section className="menu-itemsMV">
+                <div className="boxMV item1MV" />
+                <div className="boxMV item1MV" />
+                <div className="boxMV item1MV" />
+                <div className="boxMV item1MV" />
+                <div className="boxMV item1MV" />
+              </section>
+              <section className="menu-itemsMV">
+                <div className="boxMV item2MV" />
+                <div className="boxMV item2MV" />
+                <div className="boxMV item2MV" />
+                <div className="boxMV item2MV" />
+                <div className="boxMV item2MV" />
+              </section>
+              <section className="menu-itemsMV">
+                <div className="boxMV item3MV" />
+                <div className="boxMV item3MV" />
+                <div className="boxMV item3MV" />
+                <div className="boxMV item3MV" />
+                <div className="boxMV item3MV" />
+              </section>
+              <section className="menu-itemsMV">
+                <div className="boxMV item4MV" />
+                <div className="boxMV item4MV" />
+                <div className="boxMV item4MV" />
+                <div className="boxMV item4MV" />
+                <div className="boxMV item4MV" />
+              </section>
+            </div>
+            <div className="ticketsMV">
+              <p className="titleMV">POS-SYSTEM</p>
+              <div className="barMV" />
+              <div className="ticketMV">
+                {this.state.editMenu ? (
                   <div>
+                    {" "}
+                    <h1>EDIT MENU</h1>
                     <div>
-                      <h2>Catergory:</h2>
+                      <div>
+                        <h2>Catergory:</h2>
+                        <select>
+                          <option value="App">App</option>
+                          <option value="Entree">Entree</option>
+                          <option value="Dessert">Dessert</option>
+                          <option value="Drink">Drink</option>
+                        </select>
+                      </div>
+                      <div>
+                        <input type="checkbox" />
+                        <h2>Send Ticket to Bar?</h2>
+                      </div>
+                      <div>
+                        <h2>Item Name:</h2>
+                        <input />
+                      </div>
+                      <div>
+                        <h2>Price:</h2>
+                        <input />
+                      </div>
+                    </div>
+                    <button>ADD ITEM</button>
+                  </div>
+                ) : (
+                  <div>
+                    <h1>EDIT EMPLOYEE</h1>
+                    <div>
+                      <h2>Name:</h2>
+                      <input />
+                    </div>
+                    <div>
+                      <h2>Job Title:</h2>
                       <select>
-                        <option value="App">App</option>
-                        <option value="Entree">Entree</option>
-                        <option value="Dessert">Dessert</option>
-                        <option value="Drink">Drink</option>
+                        <option>Bartender</option>
+                        <option>Chef</option>
+                        <option>Manager</option>
+                        <option>Server</option>
                       </select>
                     </div>
                     <div>
-                      <input type="checkbox" />
-                      <h2>Send Ticket to Bar?</h2>
+                      <h2>Pin Number:</h2>
+                      <input
+                        onChange={e => {
+                          this.setState({
+                            pin: e.target.value
+                          });
+                        }}
+                      />
                     </div>
-                    <div>
-                      <h2>Item Name:</h2>
-                      <input />
-                    </div>
-                    <div>
-                      <h2>Price:</h2>
-                      <input />
-                    </div>
+                    <button>ADD EMPLOYEE</button>
                   </div>
-                  <button>ADD ITEM</button>
-                </div>
-              ) : (
-                <div>
-                  <h1>EDIT EMPLOYEE</h1>
-                  <div>
-                    <h2>Name:</h2>
-                    <input />
-                  </div>
-                  <div>
-                    <h2>Job Title:</h2>
-                    <input />
-                  </div>
-                  <div>
-                    <h2>Pin Number:</h2>
-                    <input
-                      onChange={e => {
-                        this.setState({
-                          pin: e.target.value
-                        });
-                      }}
-                    />
-                  </div>
-                  <button>ADD EMPLOYEE</button>
-                </div>
-              )}
+                )}
+              </div>
+              <div className="price-tagMV" />
             </div>
-            <div className="price-tag" />
           </div>
         </div>
-        <footer>
-          <div className="footerButtons">
-            <button className="logout"> LOGOUT </button>
+        <footer className="footerMV">
+          <div className="footerButtonsMV">
+            <button className="logout">LOGOUT</button>
             <button
               className="logout"
               onClick={() => {
