@@ -8,25 +8,39 @@ class Login extends Component {
     constructor(){
         super()
         this.state = {
-            pin_number: "",
+            typedEmail: "",
+            typedPassword: ""
 
         }
     }
 
     componentDidMount(){
-        this.loginHandler()
+        this.loginEmailHandler()
+        this.loginPasswordHandler()
     }
 
-    loginHandler = (prop, value) => {
+    loginEmailHandler = ( value ) => {
         this.setState({
-            [prop]: value
+            typedEmail: value,
         })
     }
 
-    loginAccount = () => {
+    loginPasswordHandler = ( value ) => {
+        this.setState({
+            typedPassword: value,
+        })
+    }
 
+
+    loginAccount = () => {
+        const { typedEmail,  typedPassword } = this.state
          // Add post endpoint for account login
-        axios.post()
+         console.log(this.state)
+        axios.post("/api/login", { typedEmail, typedPassword}).then(res => {
+
+            this.props.setUser(res.data)
+            console.log(res.data)
+        }).catch((err) => console.log("LOGIN",err))
     }
 
     render(){
@@ -34,13 +48,24 @@ class Login extends Component {
             <div className="form">
                 <div>
                     <input 
-                    placeholder="employee"
+                    placeholder="email"
                     onChange={e => 
-                        this.loginHandler(e.target.name,e.target.value)
+                        this.loginEmailHandler(e.target.value)
                     }
                     type="text"
-                    value={this.pin_number}
-                    name="employee"
+                    value={this.typedEmail}
+                    name="typedEmail"
+
+                    />
+
+                    <input 
+                    placeholder="password"
+                    onChange={e => 
+                        this.loginPasswordHandler(e.target.value)
+                    }
+                    type="text"
+                    value={this.typedPassword}
+                    name="typedPassword"
 
                     />
 

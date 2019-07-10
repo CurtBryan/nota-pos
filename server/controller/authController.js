@@ -4,10 +4,12 @@ const Restaurant = require("../collections/restaurant");
 module.exports = {
   login: (req, res, next) => {
     const { typedEmail, typedPassword } = req.body;
-    // console.log(typedEmail, typedPassword);
+    console.log(req.body)
+    console.log(typedEmail, typedPassword);
     // const query = { email: `${typedEmail}`, password: `${typedPassword}` };
     Restaurant.find({ email: typedEmail })
       .then(restaurant => {
+        console.log(restaurant)
         bcrypt
           .compare(typedPassword, restaurant[0].password)
           .then(matchedPassword => {
@@ -26,9 +28,11 @@ module.exports = {
   },
   register: (req, res, next) => {
     const { typedName, typedEmail, typedPassword } = req.body;
+    console.log(req.body)
     const saltRounds = 12;
     bcrypt.genSalt(saltRounds).then(salt => {
       bcrypt.hash(typedPassword, salt).then(hashedPassword => {
+        console.log(hashedPassword)
         const restaurant = new Restaurant({
           name: typedName,
           email: typedEmail,
@@ -46,7 +50,7 @@ module.exports = {
           });
         });
       });
-    });
+    }).catch(err => console.log(err));
   },
   userInfo: (req, res, next) => {
     res.status(200).send(req.session.user);

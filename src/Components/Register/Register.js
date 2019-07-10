@@ -10,9 +10,9 @@ class Register extends Component {
     constructor(props){
         super(props) 
         this.state = {
-            name : "",
-            email: "",
-            password : ""
+            typedName: "", 
+            typedEmail: "", 
+            typedPassword: ""
         }
     }
 
@@ -29,10 +29,11 @@ class Register extends Component {
     registerAccount = () => {
 
         // Note Request Error 
-        const { name, email, password } = this.state
-        axios.post("/api/register", { name, email, password}).then(res => {
-            this.setState({name: "", email: "", password: ""})
-            this.props.setEmployee(res.data)
+        const {typedName, typedEmail, typedPassword}  = this.state
+        console.log(typedName, typedEmail, typedPassword)
+        axios.post("/api/register", { typedName, typedEmail, typedPassword}).then(res => {
+
+            this.props.setUser(res.data)
             console.log(res.data)
         }).catch((err) => {console.log("RIGISTER", err)})
 
@@ -41,39 +42,41 @@ class Register extends Component {
 
     render(){
         return (
-            <div className="form">
-                <div>
-                    <input 
-                    placeholder="name"
-                    onChange={e => 
-                        this.registerHandler(e.target.name, e.target.value)
-                    }
-                    type="text"
-                    value={this.state.name}
-                    name="name"
-                    />
-                    <input 
-                    placeholder="email"
-                    onChange={e => 
-                        this.registerHandler(e.target.name, e.target.value)
-                    }
-                    type="text"
-                    value={this.state.email}
-                    name="email"
-                    />
-                    <input 
-                    placeholder="password"
-                    onChange={e => 
-                        this.registerHandler(e.target.name, e.target.value)
-                    }
-                    type="current-password"
-                    value={this.state.password}
-                    name="password"
-                    />
+            <div className="form-container">
+                <div className="form">
+                    <div>
+                        <input 
+                        placeholder="name"
+                        onChange={e => 
+                            this.registerHandler(e.target.name, e.target.value)
+                        }
+                        type="text"
+                        value={this.state.typedName}
+                        name="typedName"
+                        />
+                        <input 
+                        placeholder="email"
+                        onChange={e => 
+                            this.registerHandler(e.target.name, e.target.value)
+                        }
+                        type="text"
+                        value={this.state.typedEmail}
+                        name="typedEmail"
+                        />
+                        <input 
+                        placeholder="password"
+                        onChange={e => 
+                            this.registerHandler(e.target.name, e.target.value)
+                        }
+                        type="current-password"
+                        value={this.state.typedPassword}
+                        name="typedPassword"
+                        />
 
-                  
-                        <button onClick={this.registerAccount}> Register </button>
+                    
+                            <button onClick={this.registerAccount}> Register </button>
 
+                    </div>
                 </div>
             </div>
         )
