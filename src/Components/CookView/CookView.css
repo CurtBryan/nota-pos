@@ -4,8 +4,7 @@
 }
 
 .ticketsContainerCV {
-  background-color: aqua;
-  height: 50vh;
+  height: 90vh;
   width: 90vw;
   display: flex;
   justify-content: space-between;
@@ -16,4 +15,5 @@
   border-style: solid;
   border-width: 0.5px;
   width: 20vw;
+  height: 90%;
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { setEmployee } from '../../ducks/employeeReducer';
+import { setUser } from '../../ducks/userReducer';
 import { connect } from 'react-redux';
 import './Register.css';
 
@@ -28,11 +28,12 @@ class Register extends Component {
 
     registerAccount = () => {
 
-        // Add post endpoint for account register 
-        const { name, email, password } = this.sate
+        // Note Request Error 
+        const { name, email, password } = this.state
         axios.post("/api/register", { name, email, password}).then(res => {
-            this.setState({name: "", password: ""})
-            this.props.setEmployee()
+            this.setState({name: "", email: "", password: ""})
+            this.props.setEmployee(res.data)
+            console.log(res.data)
         }).catch((err) => {console.log("RIGISTER", err)})
 
 
@@ -87,7 +88,7 @@ const mapStateToProps = (reduxState) => {
 }
 
 const mapDispatchToProps = {
-    setEmployee
+    setUser
 }
 
 

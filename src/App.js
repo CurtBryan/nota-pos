@@ -1,6 +1,7 @@
 import React from "react";
-import Register from "./Components/Register/Register";
-import CookView from "./Components/CookView/CookView";
+// import Register from './Components/Register/Register';
+import ManagerView from "./Components/ManagerView/ManagerView";
+import ServerView from "./Components/ServerView/ServerView";
 import "./App.css";
 
 /*
@@ -17,7 +18,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <CookView />
+        {/* <Register /> */}
+        <ManagerView />
       </header>
     </div>
   );

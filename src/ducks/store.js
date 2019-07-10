@@ -1,9 +1,9 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import promiseMiddleware from 'redux-promise-middleware';
-import employeeReducer from './employeeReducer';
+import userReducer from './userReducer';
 
 const rootReducer = combineReducers({
- employeeReducer 
+ userReducer 
 })
 
 export default createStore(rootReducer, applyMiddleware(promiseMiddleware));
