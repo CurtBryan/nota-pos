@@ -31,52 +31,54 @@ class ServerView extends Component {
                      <FaAngleDoubleRight />
                     </button>
                 </div>
-                <div className="menu-selections">
-                    <div className="circle-container">
-                        <div className="circle"></div>
-                        <div className="circle"></div>
-                        <div className="circle"></div>
-                        <div className="circle"></div>
+                <div className="middleCont">
+                    <div className="menu-selections">
+                        <div className="circle-container">
+                            <div className="circle"></div>
+                            <div className="circle"></div>
+                            <div className="circle"></div>
+                            <div className="circle"></div>
+                        </div>
                     </div>
-                </div>
-                <div className="info-section">
-                    <div className="items-container">
-                        <section className="menu-items">
-                            <div className="box item1"></div>
-                            <div className="box item1"></div>
-                            <div className="box item1"></div>
-                            <div className="box item1"></div>
-                            <div className="box item1"></div>
-                        </section>
-                        <section className="menu-items">
-                            <div className="box item2"></div>
-                            <div className="box item2"></div>
-                            <div className="box item2"></div>
-                            <div className="box item2"></div>
-                            <div className="box item2"></div>
-                        </section>
-                        <section className="menu-items">
-                            <div className="box item3"></div>
-                            <div className="box item3"></div>
-                            <div className="box item3"></div>
-                            <div className="box item3"></div>
-                            <div className="box item3"></div>
-                        </section>
-                        <section className="menu-items">
-                            <div className="box item4"></div>
-                            <div className="box item4"></div>
-                            <div className="box item4"></div>
-                            <div className="box item4"></div>
-                            <div className="box item4"></div>
-                        </section>
+                    <div className="info-section">
+                        <div className="items-container">
+                            <section className="menu-items">
+                                <div className="box item1"></div>
+                                <div className="box item1"></div>
+                                <div className="box item1"></div>
+                                <div className="box item1"></div>
+                                <div className="box item1"></div>
+                            </section>
+                            <section className="menu-items">
+                                <div className="box item2"></div>
+                                <div className="box item2"></div>
+                                <div className="box item2"></div>
+                                <div className="box item2"></div>
+                                <div className="box item2"></div>
+                            </section>
+                            <section className="menu-items">
+                                <div className="box item3"></div>
+                                <div className="box item3"></div>
+                                <div className="box item3"></div>
+                                <div className="box item3"></div>
+                                <div className="box item3"></div>
+                            </section>
+                            <section className="menu-items">
+                                <div className="box item4"></div>
+                                <div className="box item4"></div>
+                                <div className="box item4"></div>
+                                <div className="box item4"></div>
+                                <div className="box item4"></div>
+                            </section>
+                        </div>
+                        <div className="tickets">
+                            <p className="title">POS-SYSTEM</p>
+                            <div className="bar"></div>
+                            <div className="ticket"></div>
+                            <div className="price-tag"></div>
+                        </div>
+                        
                     </div>
-                    <div className="tickets">
-                        <p className="title">POS-SYSTEM</p>
-                        <div className="bar"></div>
-                        <div className="ticket"></div>
-                        <div className="price-tag"></div>
-                    </div>
-                    
                 </div>
                 <footer>
                     <button className="logout"> LOGOUT </button>

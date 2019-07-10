@@ -1,72 +1,71 @@
-
 .server-page {
-    background-color: #547374;
-    /* width: 800px;
-    height: 700px; */
-    width: 100vw;
-    height: 100vh;
+  background-color: #547374;
+  /* width: 800px;
+  height: 700px; */
+  width: 100vw;
+  height: 100vh;
 
 }
 
 
 /*TABLE DATA START*/
 .table-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 69%;
-    border: 1px solid grey;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 69%;
+  border: 1px solid grey;
 }
 
 .table {
-    width: 100px;
-    height: 80px;
-    background-color: #585555;
-    margin-left: 10px;
-    margin-right: 10px;
-    border: 1px solid #585555;
+  width: 100px;
+  height: 80px;
+  background-color: #585555;
+  margin-left: 10px;
+  margin-right: 10px;
+  border: 1px solid #585555;
 } 
 
 /*TABLE DATA END*/
 
 /*MENU SELECTION START*/
 .menu-selections {
-    width: 100px;
-    height: 490px;
-    background-color: #EDEDED;
-    margin-top: 40px;
-    position: absolute;
-    z-index: 5;
+  width: 100px;
+  height: 490px;
+  background-color: #EDEDED;
+  margin-top: 40px;
+  position: absolute;
+  z-index: 5;
 }
 
 .circle-container {
-    margin-top: 30px;
-    margin-left: 20px;
+  margin-top: 30px;
+  margin-left: 20px;
 }
 
 .circle {
-  height: 50px;
-  width: 50px;
-  background-color: #bbb;
-  margin-bottom: 5px;
-  border: 3px solid white;
-  border-radius: 50%;
+height: 50px;
+width: 50px;
+background-color: #bbb;
+margin-bottom: 5px;
+border: 3px solid white;
+border-radius: 50%;
 }
 
 .circle:nth-child(1) {
-    background-color: #D84848;
+  background-color: #D84848;
 }
 
 .circle:nth-child(2) {
-    background-color: #62B8EF;
+  background-color: #62B8EF;
 }
 
 .circle:nth-child(3) {
-    background-color: #A0F290;
+  background-color: #A0F290;
 }
 
 .circle:nth-child(4) {
-    background-color: #FCC751;
+  background-color: #FCC751;
 }
 
 
@@ -76,8 +75,8 @@
 
 /*INFO SECTION START*/
 .info-section{
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 /*INFO SECTION END*/
 
@@ -85,42 +84,42 @@
 
 /*MENU TABLE START*/
 .items-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    background-color: white;
-    width: 885px;
-    height: 570px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: white;
+  width: 885px;
+  height: 570px;
 }
 
 .menu-items {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10px;
 }
 
 .box {
-    width: 130px;
-    height: 90px;
-    margin-bottom: 10px;
+  width: 130px;
+  height: 90px;
+  margin-bottom: 10px;
 }
 
 .item1 {
-    background-color:  #D84848; 
+  background-color:  #D84848; 
 }
 
 .item2 {
-    background-color:  #62B8EF;
+  background-color:  #62B8EF;
 }
 
 .item3 {
-    background-color: #A0F290;
+  background-color: #A0F290;
 
 }
 
 .item4 {
-    background-color:  #FCC751;
+  background-color:  #FCC751;
 
 }
 
@@ -130,49 +129,49 @@
 
 /*TICKET START*/
 .tickets {
-    background-color: #547374;
-    width: 300px;
-    height: 450px;
+  background-color: #547374;
+  width: 300px;
+  height: 450px;
 }
 
 .title {
-    background-color: #547374;
-    color: white;
-    font-weight: 800;
-    font-size: 40px;
-    margin-left: 30px;
-    text-align: center;
-    width: 350px;
+  background-color: #547374;
+  color: white;
+  font-weight: 800;
+  font-size: 40px;
+  margin-left: 30px;
+  text-align: center;
+  width: 350px;
 
 }
 
 .bar {
-    width: 395px;;
-    height: 30px;
-    background-color: #EDEDED;
-    border: 1px solid gray;
+  width: 395px;;
+  height: 30px;
+  background-color: #EDEDED;
+  border: 1px solid gray;
 }
 
 .ticket {
-    width: 395px;
-    height: 407px;;
-    background-color: white;
-    border: 1px solid grey;
+  width: 395px;
+  height: 407px;;
+  background-color: white;
+  border: 1px solid grey;
 }
 
 .price-tag {
-    width: 395px;
-    height: 50px;
-    background-color: #585555;
-    
+  width: 395px;
+  height: 50px;
+  background-color: #585555;
+  
 }
 /*TICKET END*/
 
 /*FOOTER START*/
 
 footer {
- background-color: #EDEDED;
- height: 50px;
+background-color: #EDEDED;
+height: 50px;
 }
 
 .logout {
