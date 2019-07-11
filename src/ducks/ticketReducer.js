@@ -29,6 +29,7 @@ export const setBarTickets = restaurant => {
   };
 };
 
+// pulls list of open kitchen tickets
 export const setKitchenTickets = restaurant => {
   const kitchenTicks = axios
     .get(`/api/kitchen/${restaurant}`)
@@ -38,3 +39,26 @@ export const setKitchenTickets = restaurant => {
     payload: kitchenTicks
   };
 };
+
+// manipulates redux state of all ticket lists
+export default function reducer(state = initialState, action) {
+  switch (action.type) {
+    case SET_ALLTICKETS + "_FULFILLED":
+      return {
+        ...state,
+        allTickets: action.payload
+      };
+    case SET_BARTICKETS + "_FULFILLED":
+      return {
+        ...state,
+        barTickets: action.payload
+      };
+    case SET_KITCHENTICKETS + "_FULFILLED":
+      return {
+        ...state,
+        kitchenTickets: action.payload
+      };
+    default:
+      return state;
+  }
+}
