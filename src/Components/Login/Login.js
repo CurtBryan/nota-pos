@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { setUser } from '../../ducks/userReducer';
@@ -9,7 +10,7 @@ class Login extends Component {
         super()
         this.state = {
             typedEmail: "",
-            typedPassword: ""
+            typedPassword: "",
 
         }
     }
@@ -45,31 +46,41 @@ class Login extends Component {
 
     render(){
         return(
-            <div className="form">
-                <div>
-                    <input 
-                    placeholder="email"
-                    onChange={e => 
-                        this.loginEmailHandler(e.target.value)
-                    }
-                    type="text"
-                    value={this.typedEmail}
-                    name="typedEmail"
+            <div className="form-container">
+                <div className="form">
+                <p className="title-pos">NotaPOS</p>
+                        <div className="info-card">
+                            <input 
+                            placeholder="Email"
+                            onChange={e => 
+                                this.loginEmailHandler(e.target.value)
+                            }
+                            type="text"
+                            value={this.typedEmail}
+                            name="typedEmail"
 
-                    />
+                            />
 
-                    <input 
-                    placeholder="password"
-                    onChange={e => 
-                        this.loginPasswordHandler(e.target.value)
-                    }
-                    type="text"
-                    value={this.typedPassword}
-                    name="typedPassword"
+                            <input 
+                            placeholder="Password"
+                            onChange={e => 
+                                this.loginPasswordHandler(e.target.value)
+                            }
+                            type="text"
+                            value={this.typedPassword}
+                            name="typedPassword"
 
-                    />
+                            />
 
-                    <button onClick={this.loginAccount}>Submit</button>
+                        <Link to="/emplogin" style={{ textDecoration: 'none'}}>
+                            <button className ="account-btn" onClick={this.loginAccount}>Submit</button>
+                        </Link>
+
+                        </div>
+
+                        <Link to="/" style={{ textDecoration: 'none'}}>
+                            <p className="account">Need to create an account?</p>
+                       </Link>
                 </div>
             </div>
         )
