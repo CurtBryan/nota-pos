@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { setUser } from '../../ducks/userReducer';
@@ -11,8 +11,6 @@ class Login extends Component {
         this.state = {
             typedEmail: "",
             typedPassword: "",
-            Redirect: false,
-            positon: null
 
         }
     }
@@ -47,27 +45,11 @@ class Login extends Component {
     }
 
     render(){
-        if(this.state.Redirect){
-            if( this.state.position === "Server") {
-            return <Redirect to='/server' />
-            }
-            if(this.state.position === "Chef") {
-            return <Redirect to='/cook' />
-            }
-           
-            if(this.state.position === "Bartender") {
-            return <Redirect to='/bartender' />
-            }
-            if(this.state.positon === "Manager") {
-             return <Redirect to='/manager' />
-            }
-
-        }
         return(
             <div className="form-container">
                 <div className="form">
-                <p className= "title-pos">NotaPOS</p>
-                        <div>
+                <p className="title-pos">NotaPOS</p>
+                        <div className="info-card">
                             <input 
                             placeholder="Email"
                             onChange={e => 
@@ -90,7 +72,10 @@ class Login extends Component {
 
                             />
 
-                            <button onClick={this.loginAccount}>Submit</button>
+                        <Link to="/emplogin" style={{ textDecoration: 'none'}}>
+                            <button className ="account-btn" onClick={this.loginAccount}>Submit</button>
+                        </Link>
+
                         </div>
 
                         <Link to="/" style={{ textDecoration: 'none'}}>

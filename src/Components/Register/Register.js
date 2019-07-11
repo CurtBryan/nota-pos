@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { setUser } from '../../ducks/userReducer';
 import { connect } from 'react-redux';
@@ -14,9 +14,6 @@ class Register extends Component {
             typedName: "", 
             typedEmail: "", 
             typedPassword: "",
-            Redirect: false,
-            positon: null
-
         }
     }
 
@@ -45,29 +42,11 @@ class Register extends Component {
     }
 
     render(){
-     
-        if(this.state.Redirect){
-            if( this.state.position === "Server") {
-            return <Redirect to='/server' />
-            }
-            if(this.state.position === "Chef") {
-            return <Redirect to='/cook' />
-            }
-           
-            if(this.state.position === "Bartender") {
-            return <Redirect to='/bartender' />
-            }
-            if(this.state.positon === "Manager") {
-             return <Redirect to='/manager' />
-            }
-
-        }
-
         return (
             <div className="form-container">
                 <div className="form">
                     <p className= "title-pos">NotaPOS</p>
-                        <div>
+                        <div className="info-card">
                             <input 
                             placeholder="Name"
                             onChange={e => 
@@ -96,7 +75,7 @@ class Register extends Component {
                             name="typedPassword"
                             />
                         
-                                <button onClick={this.registerAccount}> Register </button>
+                                <button className ="account-btn" onClick={this.registerAccount}> Register </button>
                              
                         </div>
                        

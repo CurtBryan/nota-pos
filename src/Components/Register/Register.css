@@ -15,7 +15,7 @@
     margin: 0;
 }
 
-.form div {
+.info-card {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -23,6 +23,7 @@
     width: 60%;
     height: 50%;
     margin: 0 auto;
+   
 }
 
 .form input {
@@ -31,9 +32,9 @@
     margin-bottom: 3%;
 }
 
-.form button {
-    width: 45%;
-    height: 10%;
+.account-btn {
+    width: 700%;
+    height: 200%;
     margin-top: 5%;
     color: white;
     border: none;

@@ -15,7 +15,7 @@
     margin: 0;
 }
 
-.form div {
+.conatiner {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -23,7 +23,7 @@
     width: 60%;
     height: 50%;
     margin: 0 auto;
-}
+} 
 
 .form input {
     width: 45%;
@@ -31,7 +31,7 @@
     margin-bottom: 3%;
 }
 
-.form button {
+.account-btn {
     width: 45%;
     height: 10%;
     margin-top: 5%;
@@ -44,3 +44,4 @@
     color: white;
     text-align: center;
 }
+
