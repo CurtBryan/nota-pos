@@ -6,7 +6,7 @@
     background-color: #547374
 }
 
-.title {
+.title-pos {
     text-align: center;
     color: white;
     font-size: 40px;
@@ -38,4 +38,9 @@
     color: white;
     border: none;
     background-color: #38494A;
+}
+
+.account {
+    color: white;
+    text-align: center;
 }

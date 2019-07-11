@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { setUser } from '../../ducks/userReducer';
 import { connect } from 'react-redux';
@@ -12,7 +13,10 @@ class Register extends Component {
         this.state = {
             typedName: "", 
             typedEmail: "", 
-            typedPassword: ""
+            typedPassword: "",
+            Redirect: false,
+            positon: null
+
         }
     }
 
@@ -41,10 +45,28 @@ class Register extends Component {
     }
 
     render(){
+     
+        if(this.state.Redirect){
+            if( this.state.position === "Server") {
+            return <Redirect to='/server' />
+            }
+            if(this.state.position === "Chef") {
+            return <Redirect to='/cook' />
+            }
+           
+            if(this.state.position === "Bartender") {
+            return <Redirect to='/bartender' />
+            }
+            if(this.state.positon === "Manager") {
+             return <Redirect to='/manager' />
+            }
+
+        }
+
         return (
             <div className="form-container">
                 <div className="form">
-                    <p className= "title">NonaPOS</p>
+                    <p className= "title-pos">NotaPOS</p>
                         <div>
                             <input 
                             placeholder="Name"
@@ -73,11 +95,14 @@ class Register extends Component {
                             value={this.state.typedPassword}
                             name="typedPassword"
                             />
-
                         
                                 <button onClick={this.registerAccount}> Register </button>
-
-                    </div>
+                             
+                        </div>
+                       
+                       <Link to="/login" style={{ textDecoration: 'none'}}>
+                            <p className="account">Do you have an account?</p>
+                       </Link>
                 </div>
             </div>
         )
