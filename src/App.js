@@ -1,6 +1,8 @@
 import React from "react";
 import ServerView from "./Components/ServerView/ServerView";
 import Login from "./Components/Login/Login";
+import Register from "./Components/Register/Register";
+import ManagerView from "./Components/ManagerView/ManagerView";
 import "./App.css";
 
 /*
@@ -11,15 +13,15 @@ Yellow = #FCC751 opacity 70%
 lightgray= #EDEDED
 darkgray=#585555
 #547374 Background Color
-
 */
 function App() {
-  console.log(window.sessionStorage);
   return (
     <div className="App">
       <header className="App-header">
         {/* <ServerView /> */}
-        <Login />
+        {/* <Login /> */}
+        {/* <Register /> */}
+        <ManagerView />
       </header>
     </div>
   );

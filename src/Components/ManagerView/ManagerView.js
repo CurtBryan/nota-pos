@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { setUser } from "../../ducks/userReducer";
+import axios from "axios";
+import { setEmployees, setMenu } from "../../ducks/restaurantReducer";
 import { connect } from "react-redux";
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
 import "./ManagerView.css";
@@ -8,9 +9,9 @@ class ManagerView extends Component {
   constructor() {
     super();
     this.state = {
-      editMenu: false,
+      editMenu: true,
       editItem: false,
-      EditEmployee: true,
+      EditEmployee: false,
       division: "",
       item: "",
       price: 0,
@@ -19,6 +20,22 @@ class ManagerView extends Component {
       pin: 0
     };
   }
+
+  componentDidMount = () => {
+    const { user } = this.props.userInfo;
+    Promise.all([
+      //employees list
+      axios.get(`/api/employee/${user}`),
+      // all tickets
+      axios.get("/api/tickets", { user }),
+      //menu
+      axios.get(`/api/menu/${user}`)
+    ]).then(([res1, res2, res3]) => {
+      this.props.setEmployees(res1),
+        this.props.setAllUsers(res2),
+        this.props.setMenu(res3);
+    });
+  };
 
   universalHandler = (prop, value) => {
     this.setState({
@@ -88,10 +105,10 @@ class ManagerView extends Component {
               <div className="barMV" />
               <div className="ticketMV">
                 {this.state.editMenu ? (
-                  <div>
+                  <div className="addItemInfoBox">
                     {" "}
-                    <h1>EDIT MENU</h1>
-                    <div>
+                    <h1>ADD MENU ITEM</h1>
+                    <div className="inputContItemMV">
                       <div>
                         <h2>Catergory:</h2>
                         <select>
@@ -117,30 +134,33 @@ class ManagerView extends Component {
                     <button>ADD ITEM</button>
                   </div>
                 ) : (
-                  <div>
-                    <h1>EDIT EMPLOYEE</h1>
-                    <div>
-                      <h2>Name:</h2>
-                      <input />
-                    </div>
-                    <div>
-                      <h2>Job Title:</h2>
-                      <select>
-                        <option>Bartender</option>
-                        <option>Chef</option>
-                        <option>Manager</option>
-                        <option>Server</option>
-                      </select>
-                    </div>
-                    <div>
-                      <h2>Pin Number:</h2>
-                      <input
-                        onChange={e => {
-                          this.setState({
-                            pin: e.target.value
-                          });
-                        }}
-                      />
+                  <div className="addEmpInfoBox">
+                    <h1>ADD EMPLOYEE</h1>
+                    <div className="inputContEmpMV">
+                      <div>
+                        <h2>Name:</h2>
+                        <input />
+                      </div>
+                      <div>
+                        <h2>Job Title:</h2>
+                        <select>
+                          <option>Bartender</option>
+                          <option>Chef</option>
+                          <option>Manager</option>
+                          <option>Server</option>
+                        </select>
+                      </div>
+                      <div>
+                        <h2>Pin Number:</h2>
+                        <input
+                          type="number"
+                          onChange={e => {
+                            this.setState({
+                              pin: e.target.value
+                            });
+                          }}
+                        />
+                      </div>
                     </div>
                     <button>ADD EMPLOYEE</button>
                   </div>
@@ -189,7 +209,9 @@ const mapStateToProps = reduxState => {
 };
 
 const mapDispatchToProps = {
-  setUser
+  setEmployees,
+  setAllTickets,
+  setMenu
 };
 
 const invokedConnect = connect(

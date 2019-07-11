@@ -37,13 +37,14 @@ class Login extends Component {
     axios
       .post("/api/login", { typedEmail, typedPassword })
       .then(res => {
-        // this.props.setUser(res.data);
-        console.log(res.data);
+        this.props.setUser(res.data);
+        console.log();
       })
       .catch(err => console.log("LOGIN", err));
   };
 
   render() {
+    console.log(this.props);
     return (
       <div className="form">
         <div>

@@ -43,7 +43,7 @@ export const selectEmployee = (restaurant, pin) => {
   };
 };
 
-export default function reducet(state = initialState, action) {
+export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_EMPLOYEES + "_FULFILLED":
       return {

@@ -161,6 +161,39 @@
   height: 50px;
   background-color: #585555;
 }
+
+.addEmpInfoBox {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.inputContEmpMV {
+  height: 40%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.addItemInfoBox {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.inputContItemMV {
+  height: 50%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
 /*TICKET END*/
 
 /*FOOTER START*/
