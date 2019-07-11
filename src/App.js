@@ -1,16 +1,13 @@
-import React from "react";
-// import Register from './Components/Register/Register';
-import ServerView from "./Components/ServerView/ServerView";
-import "./App.css";
-import BartenderView from "./Components/BartenderView/BartenderView";
+import React from 'react';
+import ServerView from './Components/ServerView/ServerView';
+// import Login from './Components/Login/Login';
+import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {/* <Register /> */}
-        <ServerView />
-        {/* <BartenderView /> */}
+       <ServerView />
       </header>
     </div>
   );
