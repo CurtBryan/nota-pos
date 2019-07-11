@@ -1,5 +1,4 @@
 import axios from "axios";
-import { bindActionCreators } from "redux";
 
 const initialState = {
   menu: [],
@@ -12,6 +11,7 @@ const SET_MENU = "SET_MENU";
 const SET_EMPLOYEES = "SET_EMPLOYEES";
 const SET_CURRENTEMPLOYEE = "SET_CURRENTEMPLOYEE";
 
+// sets employee list for manager use
 export const setEmployees = restaurant => {
   const employees = axios
     .get(`/api/employees/${restaurant}`)
@@ -22,6 +22,7 @@ export const setEmployees = restaurant => {
   };
 };
 
+// pulls restaurant menu from server
 export const setMenu = restaurant => {
   const menu = axios.get(`/api/menu/${restaurant}`).then(res => res.data);
   return {
@@ -30,6 +31,7 @@ export const setMenu = restaurant => {
   };
 };
 
+// pulls a specific employee by restaurant and pin
 export const selectEmployee = (restaurant, pin) => {
   const employee = axios
     .get("/api/employee", {
@@ -43,7 +45,9 @@ export const selectEmployee = (restaurant, pin) => {
   };
 };
 
-export default function reducet(state = initialState, action) {
+// manipulates redux state of employee list, menu and current user
+// info
+export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_EMPLOYEES + "_FULFILLED":
       return {
