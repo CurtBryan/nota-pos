@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { setEmployees, setMenu } from "../../ducks/restaurantReducer";
+import { setAllTickets } from "../../ducks/ticketReducer";
 import { connect } from "react-redux";
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
 import "./ManagerView.css";
@@ -31,9 +32,9 @@ class ManagerView extends Component {
       //menu
       axios.get(`/api/menu/${user}`)
     ]).then(([res1, res2, res3]) => {
-      this.props.setEmployees(res1),
-        this.props.setAllUsers(res2),
-        this.props.setMenu(res3);
+      this.props.setEmployees(res1);
+      this.props.setAllTickets(res2);
+      this.props.setMenu(res3);
     });
   };
 
@@ -44,7 +45,7 @@ class ManagerView extends Component {
   };
 
   render() {
-    console.log(window.sessionStorage);
+    console.log(this.props);
     return (
       <div className="manager-page">
         <div className="table-containerMV">
