@@ -13,9 +13,14 @@ const SET_CURRENTEMPLOYEE = "SET_CURRENTEMPLOYEE";
 
 // sets employee list for manager use
 export const setEmployees = restaurant => {
+  // console.log('setEmployees', restaurant)
   const employees = axios
-    .get(`/api/employees/${restaurant}`)
-    .then(res => res.data);
+    .get(`/api/employee/${restaurant}`)
+    .then(res =>{
+      // console.log(res) 
+     return res.data
+    }
+    );
   return {
     type: SET_EMPLOYEES,
     payload: employees

@@ -14,6 +14,7 @@ export default function reducer(state = initalState, action){
 }
 
 export function setUser(user){
+    // console.log("hit", user)
     return {
         type: SET_USER,
         payload: user

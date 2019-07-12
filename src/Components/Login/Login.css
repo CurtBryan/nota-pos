@@ -6,7 +6,7 @@
     background-color: #547374
 }
 
-.title {
+.title-pos {
     text-align: center;
     color: white;
     font-size: 40px;
@@ -15,7 +15,7 @@
     margin: 0;
 }
 
-.conatiner {
+.info-card {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -23,7 +23,8 @@
     width: 60%;
     height: 50%;
     margin: 0 auto;
-} 
+   
+}
 
 .form input {
     width: 45%;
@@ -31,7 +32,7 @@
     margin-bottom: 3%;
 }
 
-.account-btn {
+.button {
     width: 45%;
     height: 10%;
     margin-top: 5%;
@@ -44,4 +45,3 @@
     color: white;
     text-align: center;
 }
-
