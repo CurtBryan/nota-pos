@@ -205,12 +205,12 @@
 }
 
 .footerButtonsMV {
-  width: 25vw;
+  width: 100vw;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
-.footerButtons > button {
+.footerButtonsMV > button {
   width: 120px;
   height: 50px;
   font-weight: 800;

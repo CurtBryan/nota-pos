@@ -4,7 +4,9 @@ import { setEmployees, setMenu } from "../../ducks/restaurantReducer";
 import { setAllTickets } from "../../ducks/ticketReducer";
 import { connect } from "react-redux";
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 import "./ManagerView.css";
+import ServerMV from "./ServerMV";
 
 class ManagerView extends Component {
   constructor() {
@@ -15,6 +17,7 @@ class ManagerView extends Component {
       EditEmployee: false,
       division: "",
       item: "",
+      sendToBar: false,
       price: 0,
       empName: "",
       jobTitle: "",
@@ -24,18 +27,9 @@ class ManagerView extends Component {
 
   componentDidMount = () => {
     const { user } = this.props.userInfo;
-    Promise.all([
-      //employees list
-      axios.get(`/api/employee/${user}`),
-      // all tickets
-      axios.get("/api/tickets", { user }),
-      //menu
-      axios.get(`/api/menu/${user}`)
-    ]).then(([res1, res2, res3]) => {
-      this.props.setEmployees(res1);
-      this.props.setAllTickets(res2);
-      this.props.setMenu(res3);
-    });
+    this.props.setEmployees(user);
+    // this.props.setAllTickets();
+    this.props.setMenu(user);
   };
 
   universalHandler = (prop, value) => {
@@ -44,8 +38,22 @@ class ManagerView extends Component {
     });
   };
 
+  // addItemToMenu = () => {
+  //   const {}
+  // };
+
   render() {
-    console.log(this.props);
+    console.log(this.state);
+    const {
+      editItem,
+      division,
+      item,
+      sendToBar,
+      price,
+      empName,
+      jobTitle,
+      pin
+    } = this.state;
     return (
       <div className="manager-page">
         <div className="table-containerMV">
@@ -112,7 +120,20 @@ class ManagerView extends Component {
                     <div className="inputContItemMV">
                       <div>
                         <h2>Catergory:</h2>
-                        <select>
+                        <select
+                          onChange={e => {
+                            if (!division === "Choose One...") {
+                              this.setState({
+                                division: e.target.value
+                              });
+                            } else {
+                              this.setState({
+                                division: ""
+                              });
+                            }
+                          }}
+                        >
+                          <option value="Choose One...">Choose One...</option>
                           <option value="App">App</option>
                           <option value="Entree">Entree</option>
                           <option value="Dessert">Dessert</option>
@@ -120,16 +141,36 @@ class ManagerView extends Component {
                         </select>
                       </div>
                       <div>
-                        <input type="checkbox" />
+                        <input
+                          type="checkbox"
+                          onChange={() => {
+                            this.setState({
+                              sendToBar: !sendToBar
+                            });
+                          }}
+                        />
                         <h2>Send Ticket to Bar?</h2>
                       </div>
                       <div>
                         <h2>Item Name:</h2>
-                        <input />
+                        <input
+                          onChange={e => {
+                            this.setState({
+                              item: e.target.value
+                            });
+                          }}
+                        />
                       </div>
                       <div>
                         <h2>Price:</h2>
-                        <input />
+                        <input
+                          type="number"
+                          onChange={e => {
+                            this.setState({
+                              price: e.target.value
+                            });
+                          }}
+                        />
                       </div>
                     </div>
                     <button>ADD ITEM</button>
@@ -144,7 +185,20 @@ class ManagerView extends Component {
                       </div>
                       <div>
                         <h2>Job Title:</h2>
-                        <select>
+                        <select
+                          onChange={e => {
+                            if (!division === "Choose One...") {
+                              this.setState({
+                                jobTitle: e.target.value
+                              });
+                            } else {
+                              this.setState({
+                                jobTitle: ""
+                              });
+                            }
+                          }}
+                        >
+                          <option>Choose One...</option>
                           <option>Bartender</option>
                           <option>Chef</option>
                           <option>Manager</option>
@@ -198,6 +252,15 @@ class ManagerView extends Component {
               {" "}
               EDIT EMPLOYEES{" "}
             </button>
+            <NavLink to="/servermv">
+              <button className="logout">DINING</button>
+            </NavLink>
+            <NavLink to="/cookmv">
+              <button className="logout">KITCHEN</button>
+            </NavLink>
+            <NavLink to="barmv">
+              <button className="logout">BAR</button>
+            </NavLink>
           </div>
         </footer>
       </div>
@@ -211,7 +274,7 @@ const mapStateToProps = reduxState => {
 
 const mapDispatchToProps = {
   setEmployees,
-  setAllTickets,
+  // setAllTickets,
   setMenu
 };
 
