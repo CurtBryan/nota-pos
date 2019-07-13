@@ -21,22 +21,18 @@ export const setAllTickets = restaurant => {
 };
 
 // pulls list of open bar tickets
-export const setBarTickets = restaurant => {
-  const barTicks = axios.get(`/api/bar/${restaurant}`).then(res => res.data);
+export const setBarTickets = tickets => {
   return {
     type: SET_BARTICKETS,
-    payload: barTicks
+    payload: tickets
   };
 };
 
 // pulls list of open kitchen tickets
-export const setKitchenTickets = restaurant => {
-  const kitchenTicks = axios
-    .get(`/api/kitchen/${restaurant}`)
-    .then(res => res.data);
+export const setKitchenTickets = tickets => {
   return {
     type: SET_KITCHENTICKETS,
-    payload: kitchenTicks
+    payload: tickets
   };
 };
 

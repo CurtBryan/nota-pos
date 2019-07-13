@@ -13,6 +13,10 @@ const ticketSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  itemnum: {
+    type: Number,
+    required: true
+  },
   item: {
     type: String,
     required: true
@@ -27,6 +31,9 @@ const ticketSchema = new mongoose.Schema({
   ticketnum: {
     type: Number,
     required: true
+  },
+  ticketsplit: {
+    type: Number
   },
   drink: {
     type: Boolean,

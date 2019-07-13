@@ -1,7 +1,9 @@
 const express = require("express");
+const app = express();
 const mongoose = require("mongoose");
 const session = require("express-session");
-const app = express();
+const server = require("http").Server(app);
+const io = require("socket.io")(server);
 require("dotenv").config();
 
 app.use(express.static(__dirname + "/build"));
@@ -60,6 +62,14 @@ mongoose
   .connect(CONNECTION_STRING, { useNewUrlParser: true, useCreateIndex: true })
   .then(() => console.log("mongo connected"))
   .catch(() => console.log("mongo failed"));
+
+io.sockets.on("connection", socket => {
+  socket.join("Restaurant");
+  socket.on("updateBarTickets", tickets => {
+    console.log("bar tickets hit");
+    io.emit("newBar", tickets);
+  });
+});
 
 // auth controller connections
 app.get("/api/user", userInfo);

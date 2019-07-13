@@ -6,6 +6,7 @@ module.exports = {
     const { restaurant } = req.body;
     ticket
       .find({ restaurant: restaurant }, { restaurant: 0 })
+      .sort({ ticketnum: 0 })
       .then(response => {
         res.status(200).send(response);
       });
@@ -30,6 +31,7 @@ module.exports = {
         { restaurant: restaurant, drink: false, show: true },
         { restaurant: 0, show: 0, drink: 0 }
       )
+      .sort({ ticketnum: 0 })
       .then(response => {
         res.status(200).send(response);
       });
@@ -42,6 +44,7 @@ module.exports = {
         { restaurant: restaurant, drink: true, show: true },
         { restaurant: 0, show: 0, drink: 0 }
       )
+      .sort({ ticketnum: 0 })
       .then(response => {
         res.status(200).send(response);
       });
@@ -52,6 +55,7 @@ module.exports = {
       restaurant,
       employee,
       tablenum,
+      itemnum,
       item,
       itemprice,
       mod,
@@ -62,6 +66,7 @@ module.exports = {
       restaurant: restaurant,
       employee: employee,
       tablenum: tablenum,
+      itemnum: itemnum,
       item: item,
       itemprice: itemprice,
       mod: mod,
@@ -78,27 +83,29 @@ module.exports = {
     const {
       restaurant,
       tablenum,
+      itemnum,
       item,
       itemprice,
       mod,
       ticketnum,
+      ticketsplit,
       employee,
-      newitem,
       newtable
     } = req.body;
     ticket
       .findOne({
         restaurant: restaurant,
         tablenum: tablenum,
+        ticketnum: ticketnum,
         item: item,
         show: true
       })
       .then(record => {
         record.tablenum = newtable;
-        record.item = newitem;
+        record.itemnum = itemnum;
         record.itemprice = itemprice;
         record.mod = mod;
-        record.ticketnum = ticketnum;
+        record.ticketsplit = ticketsplit;
         record.employee = employee;
         record.save().then(() => {
           ticket
@@ -114,9 +121,13 @@ module.exports = {
   },
   // set show to false "printing" ticket
   printTicket: (req, res, next) => {
-    const { restaurant, tablenum } = req.body;
+    const { restaurant, tablenum, ticketnum } = req.body;
     ticket
-      .find({ restaurant: restaurant, tablenum: tablenum })
+      .find({
+        restaurant: restaurant,
+        tablenum: tablenum,
+        ticketnum: ticketnum
+      })
       .then(record => {
         record.forEach(element => {
           element.show = false;
