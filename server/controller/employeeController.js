@@ -14,6 +14,7 @@ module.exports = {
   // pulls complete restaurant employee list
   getEmployees: (req, res, next) => {
     const { restaurant } = req.params;
+    console.log(restaurant);
     employee
       .find({ restaurant: restaurant }, { name: 1, pin: 1, position: 1 })
       .then(response => {

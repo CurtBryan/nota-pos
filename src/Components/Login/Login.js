@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { connect } from "react-redux";
+// import Register from '../Register/Register';
+import { setEmployees } from "../../ducks/restaurantReducer";
 import { setUser } from "../../ducks/userReducer";
 import "./Login.css";
+import EmpLogin from "../EmpLogin/EmpLogin";
 
 class Login extends Component {
   constructor() {
@@ -31,20 +34,21 @@ class Login extends Component {
     });
   };
 
-  loginAccount = async () => {
+  loginAccount = () => {
     const { typedEmail, typedPassword } = this.state;
     // Add post endpoint for account login
-    console.log(this.state);
+    //  console.log(this.state)
     axios
       .post("/api/login", { typedEmail, typedPassword })
       .then(res => {
         this.props.setUser(res.data);
-        console.log(res.data);
+        console.log();
       })
       .catch(err => console.log("LOGIN", err));
   };
 
   render() {
+    const { user } = this.props.userInfo;
     return (
       <div className="form-container">
         <div className="form">
@@ -66,14 +70,16 @@ class Login extends Component {
               name="typedPassword"
             />
 
-            <Link to="/emplogin" style={{ textDecoration: "none" }}>
+            {!user ? (
               <button className="account-btn" onClick={this.loginAccount}>
                 Submit
               </button>
-            </Link>
+            ) : (
+              <EmpLogin />
+            )}
           </div>
 
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/register" style={{ textDecoration: "none" }}>
             <p className="account">Need to create an account?</p>
           </Link>
         </div>
@@ -85,14 +91,12 @@ class Login extends Component {
 const mapStateToProps = reduxState => {
   return reduxState;
 };
-
 const mapDispatchToProps = {
-  setUser
+  setUser,
+  setEmployees
 };
 
-const invokedConnect = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
-);
-
-export default invokedConnect(Login);
+)(Login);

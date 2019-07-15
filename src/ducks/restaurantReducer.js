@@ -13,9 +13,11 @@ const SET_CURRENTEMPLOYEE = "SET_CURRENTEMPLOYEE";
 
 // sets employee list for manager use
 export const setEmployees = restaurant => {
-  const employees = axios
-    .get(`/api/employees/${restaurant}`)
-    .then(res => res.data);
+  // console.log('setEmployees', restaurant)
+  const employees = axios.get(`/api/employee/${restaurant}`).then(res => {
+    // console.log(res)
+    return res.data;
+  });
   return {
     type: SET_EMPLOYEES,
     payload: employees
@@ -34,7 +36,7 @@ export const setMenu = restaurant => {
 // pulls a specific employee by restaurant and pin
 export const selectEmployee = (restaurant, pin) => {
   const employee = axios
-    .get("/api/employee", {
+    .post("/api/employee", {
       restaurant: restaurant,
       pin: pin
     })
@@ -44,6 +46,14 @@ export const selectEmployee = (restaurant, pin) => {
     payload: employee
   };
 };
+
+// export const logoutEmployee = () => {
+//   const logout = {null, null}
+//   return {
+//     type: SET_CURRENTEMPLOYEE,
+//     payload:
+//   };
+// };
 
 // manipulates redux state of employee list, menu and current user
 // info

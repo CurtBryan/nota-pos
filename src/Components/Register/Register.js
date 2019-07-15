@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Login from '../Login/Login';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { setUser } from '../../ducks/userReducer';
@@ -40,54 +41,61 @@ class Register extends Component {
 
 
     }
-
+    
     render(){
+        const {user} = this.props.setUser
+
         return (
-            <div className="form-container">
-                <div className="form">
-                    <p className= "title-pos">NotaPOS</p>
-                        <div className="info-card">
-                            <input 
-                            placeholder="Name"
-                            onChange={e => 
-                                this.registerHandler(e.target.name, e.target.value)
-                            }
-                            type="text"
-                            value={this.state.typedName}
-                            name="typedName"
-                            />
-                            <input 
-                            placeholder="Email"
-                            onChange={e => 
-                                this.registerHandler(e.target.name, e.target.value)
-                            }
-                            type="text"
-                            value={this.state.typedEmail}
-                            name="typedEmail"
-                            />
-                            <input 
-                            placeholder="Password"
-                            onChange={e => 
-                                this.registerHandler(e.target.name, e.target.value)
-                            }
-                            type="current-password"
-                            value={this.state.typedPassword}
-                            name="typedPassword"
-                            />
-                        
-                                <button className ="account-btn" onClick={this.registerAccount}> Register </button>
-                             
-                        </div>
-                       
-                       <Link to="/login" style={{ textDecoration: 'none'}}>
-                            <p className="account">Do you have an account?</p>
-                       </Link>
-                </div>
-            </div>
-        )
-    }
+        <div>
+            { user ? (
+                <Login />) 
+                : (
+                    <div className="form-container">
+                        <div className="form">
+                            <p className= "title-pos">NotaPOS</p>
+                                <div className="info-card">
+                                    <input 
+                                    placeholder="Name"
+                                    onChange={e => 
+                                        this.registerHandler(e.target.name, e.target.value)
+                                    }
+                                    type="text"
+                                    value={this.state.typedName}
+                                    name="typedName"
+                                    />
+                                    <input 
+                                    placeholder="Email"
+                                    onChange={e => 
+                                        this.registerHandler(e.target.name, e.target.value)
+                                    }
+                                    type="text"
+                                    value={this.state.typedEmail}
+                                    name="typedEmail"
+                                    />
+                                    <input 
+                                    placeholder="Password"
+                                    onChange={e => 
+                                        this.registerHandler(e.target.name, e.target.value)
+                                    }
+                                    type="current-password"
+                                    value={this.state.typedPassword}
+                                    name="typedPassword"
+                                    />
+                                        <button className="account-btn" onClick= {this.registerAccount}> Register </button>
+                                </div>
+                                
+                                <Link to="/" style={{ textDecoration: 'none'}}>
+                                        <p className="account">Do you have an account?</p>
+                                </Link>
+                            </div>
+                    </div>
+            
+             )}
+    </div>
 
   
+    )
+}
 }
 
 

@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { setEmployees, setMenu } from "../../ducks/restaurantReducer";
+import {
+  setEmployees,
+  selectEmployee,
+  setMenu
+} from "../../ducks/restaurantReducer";
 import { setAllTickets } from "../../ducks/ticketReducer";
 import { connect } from "react-redux";
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import "./ManagerView.css";
 import ServerMV from "./ServerMV";
 
@@ -21,7 +25,8 @@ class ManagerView extends Component {
       price: 0,
       empName: "",
       jobTitle: "",
-      pin: 0
+      pin: 0,
+      redirect: false
     };
   }
 
@@ -42,8 +47,12 @@ class ManagerView extends Component {
   //   const {}
   // };
 
+  logout = () => {
+    this.props.selectEmployee(null);
+  };
+
   render() {
-    console.log(this.state);
+    console.log(this.props);
     const {
       editItem,
       division,
@@ -56,6 +65,11 @@ class ManagerView extends Component {
     } = this.state;
     return (
       <div className="manager-page">
+        {!this.props.restaurantInfo.currentEmployeePos ? (
+          <div>
+            <Redirect to="/" />
+          </div>
+        ) : null}
         <div className="table-containerMV">
           <button className="tableNavButtons">
             <FaAngleDoubleLeft />
@@ -227,7 +241,14 @@ class ManagerView extends Component {
         </div>
         <footer className="footerMV">
           <div className="footerButtonsMV">
-            <button className="logout">LOGOUT</button>
+            <button
+              onClick={() => {
+                this.logout();
+              }}
+              className="logout"
+            >
+              LOGOUT
+            </button>
             <button
               className="logout"
               onClick={() => {
@@ -274,7 +295,7 @@ const mapStateToProps = reduxState => {
 
 const mapDispatchToProps = {
   setEmployees,
-  // setAllTickets,
+  selectEmployee,
   setMenu
 };
 
