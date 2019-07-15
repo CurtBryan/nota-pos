@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css?family=Audiowide&display=swap');
 
 .form {
     width: 100vw;
@@ -11,6 +11,7 @@
     color: white;
     font-size: 40px;
     text-transform: uppercase;
+    font-family: 'Audiowide', cursive;
     font-weight: 200;
     margin: 0;
 }
@@ -30,18 +31,22 @@
     width: 45%;
     height: 10%;
     margin-bottom: 3%;
+    font-size: 16px;
 }
 
-.account-btn  {
+
+button {
     width: 45%;
     height: 10%;
-    margin-top: 5%;
+    margin-top: 2%;
     color: white;
     border: none;
+    font-size: 16px;
     background-color: #38494A;
 }
 
 .account {
     color: white;
     text-align: center;
+     font-size: 16px;
 }
