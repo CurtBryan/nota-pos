@@ -77,7 +77,7 @@ module.exports = {
     menu
       .findOne({ restaurant: restaurant, division: division })
       .then(record => {
-        record.items[index - 1].price = price;
+        record.items[index].price = price;
         record.save().then(() => {
           menu
             .find({ restaurant: restaurant }, { division: 1, items: 1 })

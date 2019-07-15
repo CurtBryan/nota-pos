@@ -39,7 +39,7 @@ class EmpLogin extends Component {
 
   conRender = () => {
     const { currentEmployeePos } = this.props.restaurantInfo;
-    console.log(currentEmployeePos);
+    // console.log(currentEmployeePos);
     if (currentEmployeePos === "Manager") {
       return <Redirect to="/manager" />;
     } else if (currentEmployeePos === "Server") {
@@ -76,7 +76,7 @@ class EmpLogin extends Component {
   };
 
   render() {
-    console.log(this.props.restaurantInfo.currentEmployeePos);
+    // console.log(this.props.restaurantInfo.currentEmployeePos);
     return this.conRender();
   }
 }

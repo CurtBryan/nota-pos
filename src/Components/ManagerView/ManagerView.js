@@ -1,16 +1,22 @@
 import React, { Component } from "react";
-import axios from "axios";
 import {
   setEmployees,
   selectEmployee,
   setMenu
 } from "../../ducks/restaurantReducer";
+import axios from "axios";
 import { setAllTickets } from "../../ducks/ticketReducer";
 import { connect } from "react-redux";
-import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
+import {
+  FaAngleDoubleLeft,
+  FaAngleDoubleRight,
+  FaTrashAlt,
+  FaEdit
+} from "react-icons/fa";
 import { NavLink, Redirect } from "react-router-dom";
 import "./ManagerView.css";
 import ServerMV from "./ServerMV";
+import Axios from "axios";
 
 class ManagerView extends Component {
   constructor() {
@@ -26,8 +32,11 @@ class ManagerView extends Component {
       empName: "",
       jobTitle: "",
       pin: 0,
-      redirect: false
+      redirect: false,
+      divSelect: 0,
+      editPrice: true
     };
+    this.toggleSwitch = this.toggleSwitch.bind(this);
   }
 
   componentDidMount = () => {
@@ -37,14 +46,24 @@ class ManagerView extends Component {
     this.props.setMenu(user);
   };
 
+  componentWillUnmount() {}
+
   universalHandler = (prop, value) => {
     this.setState({
       [prop]: value
     });
   };
 
-  // addItemToMenu = () => {
-  //   const {}
+  toggleSwitch() {
+    this.setState({
+      editMenu: !this.state.editMenu,
+      EditEmployee: !this.state.EditEmployee
+    });
+  }
+
+  // editItem = () => {
+  //   const {restaurant}
+  //    axios.post("/api/items", {})
   // };
 
   logout = () => {
@@ -52,7 +71,9 @@ class ManagerView extends Component {
   };
 
   render() {
-    console.log(this.props);
+    const { divSelect } = this.state;
+    console.log(this.props.restaurantInfo);
+    // console.log(this.props.restaurantInfo.menu[divSelect].items);
     const {
       editItem,
       division,
@@ -61,8 +82,61 @@ class ManagerView extends Component {
       price,
       empName,
       jobTitle,
-      pin
+      pin,
+      editMenu
     } = this.state;
+
+    let display;
+
+    console.log("PROPS IN MANAGER VIEW", this.props.restaurantInfo);
+    if (!this.props.restaurantInfo.menu.length) {
+      display = [];
+    } else if (editMenu) {
+      display = this.props.restaurantInfo.menu[divSelect].items.map(item => {
+        return (
+          <div key={item._id}>
+            {console.log(item)}
+            <section className="menu-itemsMV">
+              <div className="boxMV item1MV">
+                <h1>{item.item}</h1>
+                <h1>{item.price}</h1>
+                <div>
+                  <button>
+                    <FaEdit />
+                  </button>
+                  <button>
+                    <FaTrashAlt />
+                  </button>
+                </div>
+              </div>
+            </section>
+          </div>
+        );
+      });
+    } else {
+      display = this.props.restaurantInfo.employees.map(emp => {
+        return (
+          <div key={emp._id}>
+            <section className="menu-itemsMV">
+              <div className="boxMV item1MV">
+                <h1>{emp.name}</h1>
+                <h2>{emp.position}</h2>
+                <h2>{emp.pin}</h2>
+                <div>
+                  <button>
+                    <FaEdit />
+                  </button>
+                  <button>
+                    <FaTrashAlt />
+                  </button>
+                </div>
+              </div>
+            </section>
+          </div>
+        );
+      });
+    }
+    console.log(this.props);
     return (
       <div className="manager-page">
         {!this.props.restaurantInfo.currentEmployeePos ? (
@@ -86,42 +160,60 @@ class ManagerView extends Component {
         <div className="middleContMV">
           <div className="menu-selectionsMV">
             <div className="circle-containerMV">
-              <button className="circleMV">App</button>
-              <button className="circleMV">Entree</button>
-              <button className="circleMV">Dessert</button>
-              <button className="circleMV">Drink</button>
+              <button
+                onClick={() =>
+                  this.setState({
+                    divSelect: 0
+                  })
+                }
+                className="circleMV"
+              >
+                App
+              </button>
+              <button
+                onClick={() =>
+                  this.setState({
+                    divSelect: 1
+                  })
+                }
+                className="circleMV"
+              >
+                Entree
+              </button>
+              <button
+                onClick={() =>
+                  this.setState({
+                    divSelect: 2
+                  })
+                }
+                className="circleMV"
+              >
+                Dessert
+              </button>
+              <button
+                onClick={() =>
+                  this.setState({
+                    divSelect: 3
+                  })
+                }
+                className="circleMV"
+              >
+                Drink
+              </button>
             </div>
           </div>
           <div className="info-section">
             <div className="items-containerMV">
-              <section className="menu-itemsMV">
-                <div className="boxMV item1MV" />
-                <div className="boxMV item1MV" />
-                <div className="boxMV item1MV" />
-                <div className="boxMV item1MV" />
-                <div className="boxMV item1MV" />
-              </section>
-              <section className="menu-itemsMV">
-                <div className="boxMV item2MV" />
-                <div className="boxMV item2MV" />
-                <div className="boxMV item2MV" />
-                <div className="boxMV item2MV" />
-                <div className="boxMV item2MV" />
-              </section>
-              <section className="menu-itemsMV">
-                <div className="boxMV item3MV" />
-                <div className="boxMV item3MV" />
-                <div className="boxMV item3MV" />
-                <div className="boxMV item3MV" />
-                <div className="boxMV item3MV" />
-              </section>
-              <section className="menu-itemsMV">
-                <div className="boxMV item4MV" />
-                <div className="boxMV item4MV" />
-                <div className="boxMV item4MV" />
-                <div className="boxMV item4MV" />
-                <div className="boxMV item4MV" />
-              </section>
+              {/* {mappedEmp.length === 0 ? (
+                <div> */}
+              <div className="menu-itemsMV">{display}</div>
+              {/* </div>
+              ) : (
+                <div>
+                  <div className="menu-itemsMV">{mappedEmp[0]}</div>
+                  <div className="menu-itemsMV">{mappedEmp}</div>
+                </div>
+              )} */}
             </div>
             <div className="ticketsMV">
               <p className="titleMV">POS-SYSTEM</p>
@@ -249,27 +341,11 @@ class ManagerView extends Component {
             >
               LOGOUT
             </button>
-            <button
-              className="logout"
-              onClick={() => {
-                this.setState({
-                  editMenu: true,
-                  EditEmployee: false
-                });
-              }}
-            >
+            <button className="logout" onClick={this.toggleSwitch}>
               {" "}
               EDIT MENU{" "}
             </button>
-            <button
-              className="logout"
-              onClick={() => {
-                this.setState({
-                  editMenu: false,
-                  EditEmployee: true
-                });
-              }}
-            >
+            <button className="logout" onClick={this.toggleSwitch}>
               {" "}
               EDIT EMPLOYEES{" "}
             </button>

@@ -26,7 +26,7 @@ class App extends Component {
           <Route path="/register" exact strict component={Register} />
           <Route path="/server" exact strict component={ServerView} />
           <Route path="/emplogin" exact strict component={EmpLogin} />
-          <Route path="/cook" exact strict component={CookView} /> }
+          <Route path="/cook" exact strict component={CookView} />
           <Route path="/manager" exact strict component={ManagerView} />
           <Route path="/servermv" exact strict component={ServerMV} />
           <Route path="/barmv" exact strict component={BarMV} />
