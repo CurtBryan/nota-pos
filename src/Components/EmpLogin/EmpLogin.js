@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { setUser } from '../../ducks/userReducer';
+import { setEmployees, selectEmployee } from '../../ducks/restaurantReducer';
 import { connect } from  'react-redux';
 import '../EmpLogin/EmpLogin.css';
 
@@ -9,57 +10,73 @@ class EmpLogin extends Component {
     constructor(){
         super()
         this.state = {
-            employee: ""
+            pin: null
         }
     }
 
     componentDidMount(){
-        this.empLoginAccount()
+        // this.empLoginAccount()
+        // console.log(this.props.userInfo)
+        this.props.setEmployees(this.props.userInfo.user)
+    
+    
     }
 
-    empLoginHandler = (prop, value) => {
+    empLoginPinHandler = ( value ) => {
         this.setState({
-            [prop]: value
+            pin: value
         })
     }
 
-    empLoginAccount = () => {
 
-         // Add post endpoint for account login
-        axios.post()
+
+    
+    empLoginAccount = () => {
+        console.log(this.props.restaurantInfo.employees)
+        const { pin } = this.state 
+        //  Add post endpoint for account login
+        axios.post(`/api/employee/$restaurant`, { pin }).then(res => {
+
+            this.props.selectEmployee(res.data)
+            console.log(res.data)
+        }).catch((err) => console.log("EMPLOGIN", err))
+
     }
 
     render(){
+    // console.log(this.props)
         return(
-            <div className="form">
-                <div>
-                    <input
-                    placeholder="employee"
-                    onChange={e =>
-                        this.empLoginHandler(e.target.namae, e.target.value)}
-                    type="text"
-                    value={this.employee}
-                    name= "employee"
-                    />
-                    <button onClick={this.empLoginAccount}>Submit</button>
-                </div>
-            </div>
-        )
+          
+                    <div className="form-container">
+                        <div className="form">
+                        <p className= "title-pos">NotaPOS</p>
+                            <div className="info-card">
+                                <input
+                                placeholder="Pin"
+                                onChange={e =>
+                                    this.setState({
+                                        pin: e.target.value
+                                    })}
+                                type="text"
+                                value={this.pin}
+                                name= "pin"
+                                />
+                                <button className ="account-btn" onClick={this.empLoginAccount}>Submit</button>
+                            </div>
+                        </div>
+                    </div>) 
+            
     }
 }
 
-const mapStateToProps = (reduxStates) => {
-    return reduxStates
+const mapStateToProps = (reduxState) => {
+    return reduxState
 }
 
 const mapDispatchToProps = {
+    setEmployees,
+    selectEmployee,
     setUser
 }
 
-const invokedConnect = connect (
-    mapStateToProps,
-    mapDispatchToProps
-
-)
-
-export default invokedConnect( EmpLogin )
+export default connect(mapStateToProps, mapDispatchToProps)(EmpLogin)

@@ -89,7 +89,7 @@ app.put("/api/items", updateItem);
 app.delete("/api/items", deleteItem);
 
 // employee controller connections
-app.get("api/employee", getCurrentEmployee);
+app.post("api/employee", getCurrentEmployee);
 app.get(`/api/employee/:restaurant`, getEmployees);
 app.post("/api/employee", postEmployee);
 app.put("/api/employee", updateEmployee);
