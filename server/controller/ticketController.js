@@ -1,6 +1,16 @@
 const ticket = require("../collections/ticket");
 
 module.exports = {
+  // gets all tickets made by a given employee
+  getEmployeeTickets: (req, res, next) => {
+    const { restaurant, employee } = req.body;
+    ticket
+      .find({ restaurant: restaurant, employee: employee, show: true })
+      .sort({ ticketnum: 0 })
+      .then(response => {
+        res.status(200).send(response);
+      });
+  },
   // pull log of all tickets on the server
   getAllTickets: (req, res, next) => {
     const { restaurant } = req.body;
@@ -13,10 +23,10 @@ module.exports = {
   },
   // get whole single ticket (server or manager adjust)
   getFullTicket: (req, res, next) => {
-    const { restaurant, tablenum } = req.body;
+    const { restaurant, ticketnum } = req.body;
     ticket
       .find(
-        { restaurant: restaurant, tablenum: tablenum, show: true },
+        { restaurant: restaurant, ticketnum: ticketnum, show: true },
         { restaurant: 0, show: 0, drink: 0 }
       )
       .then(response => {
@@ -28,7 +38,7 @@ module.exports = {
     const { restaurant } = req.params;
     ticket
       .find(
-        { restaurant: restaurant, drink: false, show: true },
+        { restaurant: restaurant, drink: false, fullfilled: false, show: true },
         { restaurant: 0, show: 0, drink: 0 }
       )
       .sort({ ticketnum: 0 })
@@ -41,7 +51,7 @@ module.exports = {
     const { restaurant } = req.params;
     ticket
       .find(
-        { restaurant: restaurant, drink: true, show: true },
+        { restaurant: restaurant, drink: true, fulfilled: false, show: true },
         { restaurant: 0, show: 0, drink: 0 }
       )
       .sort({ ticketnum: 0 })
@@ -117,6 +127,24 @@ module.exports = {
               res.status(200).send(response);
             });
         });
+      });
+  },
+  // marks a ticket by food or drink as completed on the bar/kitchen side
+  fulfillTicket: (req, res, next) => {
+    const { restaurant, ticketnum, drink } = req.body;
+    ticket
+      .find({ restaurant: restaurant, ticketnum: ticketnum, drink: drink })
+      .then(record => {
+        record.forEach(element => {
+          element.fulfilled = true;
+          element.save();
+        });
+      })
+      .then(() => {
+        ticket.find({ restaurant: restaurant, ticketnum: ticketnum });
+      })
+      .then(response => {
+        res.status(200).send(response);
       });
   },
   // set show to false "printing" ticket

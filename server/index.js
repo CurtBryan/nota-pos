@@ -38,13 +38,15 @@ const {
 } = require("./controller/employeeController");
 
 const {
+  getEmployeeTickets,
   getAllTickets,
   getDrinkTickets,
   getFoodTickets,
   getFullTicket,
   postTicket,
   editTicket,
-  printTicket
+  printTicket,
+  fulfillTicket
 } = require("./controller/ticketController");
 
 app.use(
@@ -96,13 +98,15 @@ app.put("/api/employee", updateEmployee);
 app.delete("/api/employee", deleteEmployee);
 
 // ticket controller connections
-app.get("/api/tickets", getAllTickets);
+app.post("/api/tickets", getAllTickets);
 app.get("/api/kitchen/:restaurant", getFoodTickets);
 app.get("/api/bar/:restaurant", getDrinkTickets);
-app.get("/api/ticket", getFullTicket);
+app.post("/api/ticket", getFullTicket);
+app.post("/api/emptickets", getEmployeeTickets);
 app.post("/api/tickets", postTicket);
 app.put("/api/ticket", editTicket);
 app.put("/api/tickets", printTicket);
+app.put("/api/madetickets", fulfillTicket);
 
 const port = SERVER_PORT || 4000;
 app.listen(port, () => console.log(`server up and running on ${port}`));

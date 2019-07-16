@@ -22,16 +22,12 @@ class DrinkTickets extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ticks: [],
-      numberofSelected: 1,
-      itemprice: 0,
-      mod: "",
-      ticketsplit: 1,
-      newPin: 0
+      ticks: []
     };
     socket.on("newBar", tickets => {
       this.props.setBarTickets(tickets);
     });
+    this.printForBar = this.printForBar.bind(this);
   }
 
   editTicketItem(item) {
@@ -51,7 +47,19 @@ class DrinkTickets extends Component {
       .then(res => socket.emit("updateBarTickets", res));
   }
 
+  // "prints" the ticket from the bar side, still visible to original author until closed on their end
+  printForBar(item) {
+    axios
+      .put("/api/madetickets", {
+        restaurant: this.props.restaurant,
+        ticketnum: item.ticketnum,
+        drink: true
+      })
+      .then(res => socket.emit("updateBarTickets", res));
+  }
+
   render() {
+    // maps employee tickets to an array of arrays by ticket number
     const { ticks } = this.state;
     const { tickets } = this.props;
     let counter = 0;
@@ -65,6 +73,7 @@ class DrinkTickets extends Component {
         counter++;
       }
     }
+    // maps tickets to from an array of arrays to the display
     let total = 0;
     let mappedTicks = ticks.map(element => {
       let mappedItems = element.map(item => {
@@ -78,14 +87,12 @@ class DrinkTickets extends Component {
       });
       <div className="Ticket">
         <ul className="ticket-items">{mappedItems}</ul>
+        <div className="total">Total: {total}</div>
+        <button onClick={this.printForBar(element[0].ticketnum)}>Print</button>
       </div>;
     });
-    return (
-      <div>
-        {mappedTicks}
-        <div className="total">Total: {total}</div>
-      </div>
-    );
+    // prints the tickets on screen
+    return <div>{mappedTicks}</div>;
   }
 }
 

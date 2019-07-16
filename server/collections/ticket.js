@@ -43,6 +43,10 @@ const ticketSchema = new mongoose.Schema({
     type: Date,
     required: true
   },
+  fulfilled: {
+    type: Boolean,
+    required: true
+  },
   show: {
     type: Boolean,
     required: true
