@@ -61,9 +61,45 @@ class ManagerView extends Component {
     });
   }
 
-  // editItem = () => {
-  //   const {restaurant}
-  //    axios.post("/api/items", {})
+  addItemToMenu = () => {
+    const { user } = this.props.userInfo;
+    const { division, item, price, sendToBar } = this.state;
+    console.log(this.state);
+    axios
+      .post("/api/items", {
+        restaurant: user,
+        division: division,
+        item: item,
+        price: price,
+        drink: sendToBar
+      })
+      .then(res => {
+        console.log(res);
+        this.props.setMenu(user);
+      });
+  };
+  addEmployee = () => {
+    const { user } = this.props.userInfo;
+    const { jobTitle, pin, empName } = this.state;
+    console.log(this.state);
+    axios
+      .post("/api/newEmployee", {
+        restaurant: user,
+        position: jobTitle,
+        pin: pin,
+        name: empName
+      })
+      .then(res => {
+        console.log(res);
+        this.props.setEmployees(user);
+      });
+  };
+
+  // editItem = (division, price, id) => {
+  //   const {user} = this.props.userInfo
+  //    axios.put("/api/items", {user, division, price, id}).then(res => {
+
+  //    })
   // };
 
   logout = () => {
@@ -72,8 +108,6 @@ class ManagerView extends Component {
 
   render() {
     const { divSelect } = this.state;
-    console.log(this.props.restaurantInfo);
-    // console.log(this.props.restaurantInfo.menu[divSelect].items);
     const {
       editItem,
       division,
@@ -88,18 +122,18 @@ class ManagerView extends Component {
 
     let display;
 
-    console.log("PROPS IN MANAGER VIEW", this.props.restaurantInfo);
+    console.log("STATE IN MANAGER VIEW", this.state);
+
     if (!this.props.restaurantInfo.menu.length) {
       display = [];
     } else if (editMenu) {
       display = this.props.restaurantInfo.menu[divSelect].items.map(item => {
         return (
           <div key={item._id}>
-            {console.log(item)}
             <section className="menu-itemsMV">
               <div className="boxMV item1MV">
                 <h1>{item.item}</h1>
-                <h1>{item.price}</h1>
+                <h1>${item.price}</h1>
                 <div>
                   <button>
                     <FaEdit />
@@ -136,7 +170,7 @@ class ManagerView extends Component {
         );
       });
     }
-    console.log(this.props);
+
     return (
       <div className="manager-page">
         {!this.props.restaurantInfo.currentEmployeePos ? (
@@ -204,16 +238,7 @@ class ManagerView extends Component {
           </div>
           <div className="info-section">
             <div className="items-containerMV">
-              {/* {mappedEmp.length === 0 ? (
-                <div> */}
               <div className="menu-itemsMV">{display}</div>
-              {/* </div>
-              ) : (
-                <div>
-                  <div className="menu-itemsMV">{mappedEmp[0]}</div>
-                  <div className="menu-itemsMV">{mappedEmp}</div>
-                </div>
-              )} */}
             </div>
             <div className="ticketsMV">
               <p className="titleMV">POS-SYSTEM</p>
@@ -228,11 +253,14 @@ class ManagerView extends Component {
                         <h2>Catergory:</h2>
                         <select
                           onChange={e => {
-                            if (!division === "Choose One...") {
+                            console.log(e.target.value);
+                            if (e.target.value !== "Choose One...") {
+                              console.log("hit");
                               this.setState({
                                 division: e.target.value
                               });
                             } else {
+                              console.log("hit2");
                               this.setState({
                                 division: ""
                               });
@@ -279,7 +307,7 @@ class ManagerView extends Component {
                         />
                       </div>
                     </div>
-                    <button>ADD ITEM</button>
+                    <button onClick={this.addItemToMenu}>ADD ITEM</button>
                   </div>
                 ) : (
                   <div className="addEmpInfoBox">
@@ -293,7 +321,7 @@ class ManagerView extends Component {
                         <h2>Job Title:</h2>
                         <select
                           onChange={e => {
-                            if (!division === "Choose One...") {
+                            if (division !== "Choose One...") {
                               this.setState({
                                 jobTitle: e.target.value
                               });
