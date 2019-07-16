@@ -57,7 +57,8 @@ module.exports = {
   },
   // deletes an employee by pin number
   deleteEmployee: (req, res, next) => {
-    const { restaurant, pin } = req.body;
+    const { restaurant, pin } = req.query;
+    console.log(req.body);
     employee.remove({ restaurant: restaurant, pin: pin }).then(() => {
       employee
         .find({ restaurant: restaurant }, { name: 1, pin: 1, position: 1 })

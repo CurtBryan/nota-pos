@@ -5,18 +5,15 @@ import {
   setMenu
 } from "../../ducks/restaurantReducer";
 import axios from "axios";
-import { setAllTickets } from "../../ducks/ticketReducer";
+// import { setAllTickets } from "../../ducks/ticketReducer";
 import { connect } from "react-redux";
 import {
   FaAngleDoubleLeft,
   FaAngleDoubleRight,
-  FaTrashAlt,
-  FaEdit
+  FaTrashAlt
 } from "react-icons/fa";
 import { NavLink, Redirect } from "react-router-dom";
 import "./ManagerView.css";
-import ServerMV from "./ServerMV";
-import Axios from "axios";
 
 class ManagerView extends Component {
   constructor() {
@@ -34,9 +31,14 @@ class ManagerView extends Component {
       pin: 0,
       redirect: false,
       divSelect: 0,
-      editPrice: true
+      editPrice: true,
+      oldPin: 0,
+      editEmpPin: false,
+      editItemPrice: false
     };
-    this.toggleSwitch = this.toggleSwitch.bind(this);
+    this.toggleSwitch1 = this.toggleSwitch1.bind(this);
+    this.toggleSwitch2 = this.toggleSwitch2.bind(this);
+    this.deleteEmp = this.deleteEmp.bind(this);
   }
 
   componentDidMount = () => {
@@ -54,10 +56,16 @@ class ManagerView extends Component {
     });
   };
 
-  toggleSwitch() {
+  toggleSwitch1() {
     this.setState({
-      editMenu: !this.state.editMenu,
-      EditEmployee: !this.state.EditEmployee
+      editMenu: true,
+      EditEmployee: false
+    });
+  }
+  toggleSwitch2() {
+    this.setState({
+      editMenu: false,
+      EditEmployee: true
     });
   }
 
@@ -91,12 +99,12 @@ class ManagerView extends Component {
       });
   };
 
-  // editItem = (division, price, id) => {
-  //   const {user} = this.props.userInfo
-  //    axios.put("/api/items", {user, division, price, id}).then(res => {
-
-  //    })
-  // };
+  deleteEmp(pin) {
+    const { user } = this.props.userInfo;
+    axios.delete(`/api/employee?restaurant=${user}&pin=${pin}`).then(() => {
+      this.props.setEmployees(user);
+    });
+  }
 
   logout = () => {
     this.props.selectEmployee(null);
@@ -104,17 +112,7 @@ class ManagerView extends Component {
 
   render() {
     const { divSelect } = this.state;
-    const {
-      editItem,
-      division,
-      item,
-      sendToBar,
-      price,
-      empName,
-      jobTitle,
-      pin,
-      editMenu
-    } = this.state;
+    const { division, sendToBar, editMenu } = this.state;
 
     let display;
 
@@ -128,14 +126,6 @@ class ManagerView extends Component {
               <div className="boxMV item1MV">
                 <h1>{item.item}</h1>
                 <h1>${item.price}</h1>
-                <div>
-                  <button>
-                    <FaEdit />
-                  </button>
-                  <button>
-                    <FaTrashAlt />
-                  </button>
-                </div>
               </div>
             </section>
           </div>
@@ -151,10 +141,7 @@ class ManagerView extends Component {
                 <h2>{emp.position}</h2>
                 <h2>{emp.pin}</h2>
                 <div>
-                  <button>
-                    <FaEdit />
-                  </button>
-                  <button>
+                  <button onClick={() => this.deleteEmp(emp.pin)}>
                     <FaTrashAlt />
                   </button>
                 </div>
@@ -164,7 +151,6 @@ class ManagerView extends Component {
         );
       });
     }
-
     return (
       <div className="manager-page">
         {!this.props.restaurantInfo.currentEmployeePos ? (
@@ -172,19 +158,6 @@ class ManagerView extends Component {
             <Redirect to="/" />
           </div>
         ) : null}
-        <div className="table-containerMV">
-          <button className="tableNavButtons">
-            <FaAngleDoubleLeft />
-          </button>
-          <button className="table" />
-          <button className="table" />
-          <button className="table" />
-          <button className="table" />
-          <button className="table" />
-          <button className="tableNavButtons">
-            <FaAngleDoubleRight />
-          </button>
-        </div>
         <div className="middleContMV">
           <div className="menu-selectionsMV">
             <div className="circle-containerMV">
@@ -362,26 +335,26 @@ class ManagerView extends Component {
               onClick={() => {
                 this.logout();
               }}
-              className="logout"
+              className="logout-btn"
             >
               LOGOUT
             </button>
-            <button className="logout" onClick={this.toggleSwitch}>
+            <button className="logout-btn" onClick={this.toggleSwitch1}>
               {" "}
               EDIT MENU{" "}
             </button>
-            <button className="logout" onClick={this.toggleSwitch}>
+            <button className="logout-btn" onClick={this.toggleSwitch2}>
               {" "}
               EDIT EMPLOYEES{" "}
             </button>
             <NavLink to="/servermv">
-              <button className="logout">DINING</button>
+              <button className="logout-btn">DINING</button>
             </NavLink>
             <NavLink to="/cookmv">
-              <button className="logout">KITCHEN</button>
+              <button className="logout-btn">KITCHEN</button>
             </NavLink>
             <NavLink to="barmv">
-              <button className="logout">BAR</button>
+              <button className="logout-btn">BAR</button>
             </NavLink>
           </div>
         </footer>

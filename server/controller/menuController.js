@@ -91,11 +91,12 @@ module.exports = {
   },
   // removes a single item
   deleteItem: (req, res, next) => {
-    const { restaurant, division, index } = req.body;
+    const { restaurant, division, item } = req.query;
     menu
       .findOne({ restaurant: restaurant, division: division })
       .then(record => {
-        record.items.splice(index - 1, 1);
+        console.log(item);
+        record.remove({ items: item });
         record.save().then(() => {
           menu
             .find({ restaurant: restaurant }, { division: 1, items: 1 })
