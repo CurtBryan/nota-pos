@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
 import { connect } from "react-redux";
+import { setBarTickets } from "../../ducks/ticketReducer";
 import "./DrinkTickets.css";
 import axios from "axios";
-const socket = io();
+const socket = io("http://localhost:4000/");
 
 const mapStateToProps = reduxState => {
-  const { user, restaurantInfo, tickets } = reduxState;
+  const { userInfo, restaurantInfo, tickets } = reduxState;
   return {
-    user: user.user,
+    user: userInfo.user,
     restaurant: restaurantInfo,
     tickets: tickets.barTickets
   };
@@ -27,7 +28,28 @@ class DrinkTickets extends Component {
     socket.on("newBar", tickets => {
       this.props.setBarTickets(tickets);
     });
+    socket.on("updateTickets", () => {
+      this.grabBarTicketsNoSocket();
+    });
     this.printForBar = this.printForBar.bind(this);
+    this.grabBarTickets = this.grabBarTickets.bind(this);
+    this.grabBarTicketsNoSocket = this.grabBarTicketsNoSocket.bind(this);
+  }
+
+  componentDidMount() {
+    this.grabBarTickets();
+  }
+
+  grabBarTickets() {
+    axios.get(`/api/bar/${this.props.user}`).then(response => {
+      socket.emit("updateBarTickets", response);
+    });
+  }
+
+  grabBarTicketsNoSocket() {
+    axios.get(`/api/bar/${this.props.user}`).then(response => {
+      this.props.setBarTickets(response);
+    });
   }
 
   editTicketItem(item) {
@@ -78,18 +100,24 @@ class DrinkTickets extends Component {
     let mappedTicks = ticks.map(element => {
       let mappedItems = element.map(item => {
         total += item.itemprice * item.itemnum;
-        <li key={item._id}>
-          <span>
-            {item.itemnum} {item.item} {item.itemprice}
-          </span>
-          <span>{item.mod}</span>
-        </li>;
+        return (
+          <li key={item._id}>
+            <span>
+              {item.itemnum} {item.item} {item.itemprice}
+            </span>
+            <span>{item.mod}</span>
+          </li>
+        );
       });
-      <div className="Ticket">
-        <ul className="ticket-items">{mappedItems}</ul>
-        <div className="total">Total: {total}</div>
-        <button onClick={this.printForBar(element[0].ticketnum)}>Print</button>
-      </div>;
+      return (
+        <div className="Ticket">
+          <ul className="ticket-items">{mappedItems}</ul>
+          <div className="total">Total: {total}</div>
+          <button onClick={this.printForBar(element[0].ticketnum)}>
+            Print
+          </button>
+        </div>
+      );
     });
     // prints the tickets on screen
     return <div>{mappedTicks}</div>;

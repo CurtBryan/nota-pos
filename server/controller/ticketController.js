@@ -81,8 +81,10 @@ module.exports = {
       itemprice: itemprice,
       mod: mod,
       ticketnum: ticketnum,
+      ticketsplit: 1,
       drink: drink,
       date: Date.now(),
+      fulfilled: false,
       show: true
     });
     newTick.save().then(() => res.status(200).send("ticket sent"));
@@ -164,6 +166,15 @@ module.exports = {
       })
       .then(() => {
         res.status(200).send("ticket printed");
+      });
+  },
+  getLatestTicketNum: (req, res, next) => {
+    const { restaurant } = req.params;
+    ticket
+      .findOne({ restaurant: restaurant }, { ticketnum: 1 })
+      .sort({ ticketnum: 0 })
+      .then(response => {
+        res.status(200).send(response);
       });
   }
 };

@@ -57,9 +57,11 @@ module.exports = {
   // adds an item to a division
   postItem: (req, res, next) => {
     const { restaurant, division, item, price, drink } = req.body;
+    console.log(req.body);
     menu
       .findOne({ restaurant: restaurant, division: division })
       .then(record => {
+        console.log(record);
         record.items.push({ item: item, price: price, drink: drink });
         record.save().then(() => {
           menu
@@ -77,7 +79,7 @@ module.exports = {
     menu
       .findOne({ restaurant: restaurant, division: division })
       .then(record => {
-        record.items[index - 1].price = price;
+        record.items[index].price = price;
         record.save().then(() => {
           menu
             .find({ restaurant: restaurant }, { division: 1, items: 1 })

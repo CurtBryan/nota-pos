@@ -46,7 +46,8 @@ const {
   postTicket,
   editTicket,
   printTicket,
-  fulfillTicket
+  fulfillTicket,
+  getLatestTicketNum
 } = require("./controller/ticketController");
 
 app.use(
@@ -67,10 +68,14 @@ mongoose
 
 io.sockets.on("connection", socket => {
   socket.join("Restaurant");
+  console.log("new client connected");
   socket.on("updateBarTickets", tickets => {
     console.log("bar tickets hit");
     io.emit("newBar", tickets);
-  });
+  }),
+    socket.on("newTicket", () => {
+      io.emit("updateTickets");
+    });
 });
 
 // auth controller connections
@@ -91,9 +96,9 @@ app.put("/api/items", updateItem);
 app.delete("/api/items", deleteItem);
 
 // employee controller connections
-app.post("api/employee", getCurrentEmployee);
+app.post("/api/employee", getCurrentEmployee);
 app.get(`/api/employee/:restaurant`, getEmployees);
-app.post("/api/employee", postEmployee);
+app.post("/api/newEmployee", postEmployee);
 app.put("/api/employee", updateEmployee);
 app.delete("/api/employee", deleteEmployee);
 
@@ -107,6 +112,7 @@ app.post("/api/tickets", postTicket);
 app.put("/api/ticket", editTicket);
 app.put("/api/tickets", printTicket);
 app.put("/api/madetickets", fulfillTicket);
+app.get("/api/tickets/:restaurant", getLatestTicketNum);
 
 const port = SERVER_PORT || 4000;
-app.listen(port, () => console.log(`server up and running on ${port}`));
+server.listen(port, () => console.log(`server up and running on ${port}`));

@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { setUser } from "../../ducks/userReducer";
 import { connect } from "react-redux";
-import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import io from "socket.io-client";
 import "./BartenderView.css";
 import axios from "axios";
+const socket = io("http://localhost:4000/");
 
 class ServerView extends Component {
   constructor() {
@@ -15,6 +17,9 @@ class ServerView extends Component {
       newItems: [],
       mod: ""
     };
+    socket.on("updateTickets", () => {
+      this.getUnsetTickets();
+    });
     this.getUnsetTickets = this.getUnsetTickets.bind(this);
   }
   componentDidMount() {
@@ -55,7 +60,32 @@ class ServerView extends Component {
 
   editMod(item) {
     let index = this.state.newItems.indexOf(item);
-    return (this.state.newItems[index].mod = this.state.mod);
+    this.state.newItems[index].mod = this.state.mod;
+  }
+
+  removeNewItem(item) {
+    let index = this.state.newItems.indexOf(item);
+    this.state.newItems.splice(index, 1);
+  }
+
+  selectTable(item) {
+    this.setState({
+      currentTicket: this.empTickets[this.empTickets.indexOf(item)]
+    });
+  }
+
+  saveTicket() {
+    this.newItems
+      .forEach(item => {
+        axios.post("/api/tickets", {
+          restaurant: this.props.user,
+          employee: this.props.currentEmployeeName,
+          ...item
+        });
+      })
+      .then(response => {
+        socket.emit("newTicket", "sent new");
+      });
   }
 
   render() {
@@ -98,7 +128,7 @@ class ServerView extends Component {
           </span>
           <span>{item.mod}</span>
           <button onClick={() => this.editMod(item)}>mod</button>
-          <button onClick={() => this.removeNewItem(item.id)}>x</button>
+          <button onClick={() => this.removeNewItem(item)}>x</button>
         </li>
       );
     });
@@ -106,10 +136,7 @@ class ServerView extends Component {
     // maps tickets by table to the top bar
     const mappedTableButtons = empTickets.map(item => {
       return (
-        <button
-          className="table"
-          onClick={() => this.selectTable(item[0].tablenum)}
-        >
+        <button className="table" onClick={() => this.selectTable(item)}>
           {item[0].tablenum}
         </button>
       );
@@ -164,11 +191,18 @@ class ServerView extends Component {
               {mappedCurrentTicket}
               {mappedNewItems}
             </div>
-            <div className="price-tag">{total}</div>
+            <div className="price-tag">
+              <button onClick={() => this.printTicket()}>Print</button>
+              {total}
+              <button onClick={() => this.saveTicket()}>Save</button>
+            </div>
           </div>
         </div>
         <footer>
           <button className="logout"> LOGOUT </button>
+          <Link to="/bartickets">
+            <button>tickets</button>
+          </Link>
         </footer>
       </div>
     );
@@ -176,10 +210,11 @@ class ServerView extends Component {
 }
 
 const mapStateToProps = reduxState => {
-  const { userInfo, restaurantInfo } = reduxState;
+  const { userInfo, restaurantInfo, tickets } = reduxState;
   return {
     user: userInfo.user,
-    restaurant: restaurantInfo
+    restaurant: restaurantInfo,
+    latestticketnum: tickets.latestTicketNum
   };
 };
 

@@ -4,9 +4,7 @@
   height: 700px; */
   width: 100vw;
   height: 100vh;
-
 }
-
 
 /*TABLE DATA START*/
 .table-container {
@@ -24,7 +22,7 @@
   margin-left: 10px;
   margin-right: 10px;
   border: 1px solid #585555;
-} 
+}
 
 /*TABLE DATA END*/
 
@@ -32,7 +30,7 @@
 .menu-selections {
   width: 100px;
   height: 490px;
-  background-color: #EDEDED;
+  background-color: #ededed;
   margin-top: 40px;
   position: absolute;
   z-index: 5;
@@ -44,43 +42,38 @@
 }
 
 .circle {
-height: 50px;
-width: 50px;
-background-color: #bbb;
-margin-bottom: 5px;
-border: 3px solid white;
-border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  background-color: #bbb;
+  margin-bottom: 5px;
+  border: 3px solid white;
+  border-radius: 50%;
 }
 
 .circle:nth-child(1) {
-  background-color: #D84848;
+  background-color: #d84848;
 }
 
 .circle:nth-child(2) {
-  background-color: #62B8EF;
+  background-color: #62b8ef;
 }
 
 .circle:nth-child(3) {
-  background-color: #A0F290;
+  background-color: #a0f290;
 }
 
 .circle:nth-child(4) {
-  background-color: #FCC751;
+  background-color: #fcc751;
 }
-
 
 /*MENU SELECTION END*/
 
-
-
 /*INFO SECTION START*/
-.info-section{
+.info-section {
   display: flex;
   flex-direction: row;
 }
 /*INFO SECTION END*/
-
-
 
 /*MENU TABLE START*/
 .items-container {
@@ -106,26 +99,22 @@ border-radius: 50%;
 }
 
 .item1 {
-  background-color:  #D84848; 
+  background-color: #d84848;
 }
 
 .item2 {
-  background-color:  #62B8EF;
+  background-color: #62b8ef;
 }
 
 .item3 {
-  background-color: #A0F290;
-
+  background-color: #a0f290;
 }
 
 .item4 {
-  background-color:  #FCC751;
-
+  background-color: #fcc751;
 }
 
 /*MENU TABLE END*/
-
-
 
 /*TICKET START*/
 .tickets {
@@ -142,19 +131,18 @@ border-radius: 50%;
   margin-left: 30px;
   text-align: center;
   width: 350px;
-
 }
 
 .bar {
-  width: 395px;;
+  width: 395px;
   height: 30px;
-  background-color: #EDEDED;
+  background-color: #ededed;
   border: 1px solid gray;
 }
 
 .ticket {
   width: 395px;
-  height: 407px;;
+  height: 407px;
   background-color: white;
   border: 1px solid grey;
 }
@@ -163,24 +151,22 @@ border-radius: 50%;
   width: 395px;
   height: 50px;
   background-color: #585555;
-  
 }
 /*TICKET END*/
 
 /*FOOTER START*/
 
 footer {
-background-color: #EDEDED;
-height: 50px;
+  background-color: #ededed;
+  height: 50px;
 }
 
 .logout {
-width: 100px;
-height: 50px;
-font-weight: 800;
-background-color: #547374;
-color: white;
+  width: 100px;
+  height: 50px;
+  font-weight: 800;
+  background-color: #547374;
+  color: white;
 }
-
 
 /*FOOTER END*/
