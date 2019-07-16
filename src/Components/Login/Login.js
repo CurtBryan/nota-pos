@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
-// import Register from '../Register/Register';
+import Logo from '../Logo/Logo';
 import { setEmployees } from '../../ducks/restaurantReducer';
 import { setUser } from '../../ducks/userReducer';
 import './Login.css';
@@ -55,6 +55,7 @@ class Login extends Component {
     
             
                 <div className="form-container">
+                    <Logo />
                      <div className="form">
                         <p className="title-pos">NotaPOS</p>
                             <div className="info-card">
@@ -93,11 +94,13 @@ class Login extends Component {
                                 }
 
 
-                                </div>
-
+                        </div>
                                 <Link to="/register" style={{ textDecoration: 'none'}}>
                                     <p className="account">Need to create an account?</p>
                                 </Link>
+            
+                          
+                       
                 </div>
                 </div>
                         

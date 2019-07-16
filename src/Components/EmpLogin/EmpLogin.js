@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Logo from '../Logo/Logo';
 import axios from 'axios';
 import { setUser } from '../../ducks/userReducer';
 import { setEmployees, selectEmployee } from '../../ducks/restaurantReducer';
@@ -48,6 +49,7 @@ class EmpLogin extends Component {
         return(
           
                     <div className="form-container">
+                        <Logo />
                         <div className="form">
                         <p className= "title-pos">NotaPOS</p>
                             <div className="info-card">

@@ -6,6 +6,7 @@ import { Switch, Route } from 'react-router-dom';
 import Logo from './Components/Logo/Logo';
 import EmpLogin from './Components/EmpLogin/EmpLogin';
 import ServerView from './Components/ServerView/ServerView';
+import ServerTest from './Components/ServerView/ServerTest';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
 import './App.css';
@@ -28,6 +29,7 @@ class App extends Component {
         <Route path="/server" exact strict component={ServerView} />
         <Route path="/emplogin" exact strict component={EmpLogin} />
         <Route path="/logo" exact strict component={Logo} />
+        <Route path="/test" exact strict component={ServerTest} />
         {/* <Route path="/cook" exact strict component={CookView} />
         <Route path="/manager" exact strict component={ManagerView} />
         <Route path="/bartender" exact strict component={BartenderView} /> */}

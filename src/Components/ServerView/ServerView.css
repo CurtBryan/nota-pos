@@ -2,8 +2,8 @@
   background-color: #547374;
   /* width: 800px;
   height: 700px; */
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+
 
 }
 
@@ -32,7 +32,7 @@
 .menu-selections {
   width: 100px;
   height: 490px;
-  background-color: #EDEDED;
+  /* background-color: #EDEDED; */
   margin-top: 40px;
   position: absolute;
   z-index: 5;
@@ -40,34 +40,35 @@
 
 .circle-container {
   margin-top: 30px;
-  margin-left: 20px;
 }
 
 .circle {
-height: 50px;
-width: 50px;
-background-color: #bbb;
+height: 100%;
+width: 100%;
+text-align: center;
+background-color: #547374;
+border: 1px solid white;
+color: white;
+text-transform: uppercase;
+font-size: 15px;
+font-weight: 700;
 margin-bottom: 5px;
-border: 3px solid white;
-border-radius: 50%;
 }
 
-.circle:nth-child(1) {
-  background-color: #D84848;
+.sides {
+  margin-top: 5%;
+  height: 60px;
 }
 
-.circle:nth-child(2) {
-  background-color: #62B8EF;
-}
+.steak {
+  margin-top: 5%;
+  height: 60px;
+  }
 
-.circle:nth-child(3) {
-  background-color: #A0F290;
-}
-
-.circle:nth-child(4) {
-  background-color: #FCC751;
-}
-
+.pie {
+  margin-top: 5%;
+  height: 50px;
+  }
 
 /*MENU SELECTION END*/
 
@@ -88,8 +89,8 @@ border-radius: 50%;
   flex-direction: row;
   justify-content: center;
   background-color: white;
-  width: 885px;
-  height: 570px;
+  width: 69%;
+  height: 705px;
 }
 
 .menu-items {
@@ -100,27 +101,12 @@ border-radius: 50%;
 }
 
 .box {
-  width: 130px;
+  width: 150px;
   height: 90px;
   margin-bottom: 10px;
-}
-
-.item1 {
-  background-color:  #D84848; 
-}
-
-.item2 {
-  background-color:  #62B8EF;
-}
-
-.item3 {
-  background-color: #A0F290;
-
-}
-
-.item4 {
-  background-color:  #FCC751;
-
+  background-color: #edf1f1;
+  border: 1px solid #547374;
+  border-radius: 5%;
 }
 
 /*MENU TABLE END*/
@@ -130,23 +116,28 @@ border-radius: 50%;
 /*TICKET START*/
 .tickets {
   background-color: #547374;
-  width: 300px;
+  width: 21%;
   height: 450px;
+  top: 0;
+  left: 69%;
+  margin-right:0;
+  position: absolute;
 }
 
 .title {
   background-color: #547374;
+  font-family: 'Audiowide', cursive;
   color: white;
-  font-weight: 800;
+  font-weight: 200;
   font-size: 40px;
   margin-left: 30px;
   text-align: center;
-  width: 350px;
+  width: 100%;
 
 }
 
 .bar {
-  width: 395px;;
+  width: 131%;
   height: 30px;
   background-color: #EDEDED;
   border: 1px solid gray;
@@ -156,23 +147,56 @@ border-radius: 50%;
   width: 395px;
   height: 407px;;
   background-color: white;
+  width: 131%;
   border: 1px solid grey;
 }
 
 .price-tag {
-  width: 395px;
-  height: 50px;
+  width: 132%;
+  height: 30%;
   background-color: #585555;
+  margin-bottom: 0;
   
+}
+
+.extra{
+  display: flex;
+  width: 132%;
+  margin-top: 5%;
+}
+
+.price {
+
+  height: 40%;
+  width: 7%;
+  border: 1px solid white;
+  padding: 25px;
+  margin:  0 auto;
+  
+}
+
+.trash {
+
+  height: 40%;
+  width: 7%;
+  border: 1px solid white;
+  padding: 25px;
+  margin:  0 auto;
+}
+
+.print {
+
+  height: 40%;
+  width: 7%;
+  border: 1px solid white;
+  padding: 25px;
+  margin:  0 auto;
 }
 /*TICKET END*/
 
-/*FOOTER START*/
+/*LOGOUT START*/
 
-footer {
-background-color: #EDEDED;
-height: 50px;
-}
+
 
 .logout {
 width: 100px;
@@ -180,6 +204,11 @@ height: 50px;
 font-weight: 800;
 background-color: #547374;
 color: white;
+z-index: 5;
+position: absolute;
+margin-top: 43%;
+
+
 }
 
 

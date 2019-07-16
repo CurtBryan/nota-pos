@@ -3,7 +3,8 @@
 .form {
     width: 100vw;
     height: 100vh;
-    background-color: #547374
+    background-color: #547374;
+    text-align: center;
 }
 
 .title-pos {
@@ -13,7 +14,7 @@
     text-transform: uppercase;
     font-family: 'Audiowide', cursive;
     font-weight: 200;
-    margin: 0;
+    padding-top: 100px;
 }
 
 .info-card {
@@ -44,8 +45,11 @@ button {
     background-color: #38494A;
 }
 
+
 .account {
     color: white;
-    text-align: center;
     font-size: 16px;
+
+ 
 }
+
