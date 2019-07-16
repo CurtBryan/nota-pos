@@ -14,7 +14,7 @@ module.exports = {
   // pulls complete restaurant employee list
   getEmployees: (req, res, next) => {
     const { restaurant } = req.params;
-    console.log(restaurant)
+    console.log(restaurant);
     employee
       .find({ restaurant: restaurant }, { name: 1, pin: 1, position: 1 })
       .then(response => {
@@ -25,6 +25,7 @@ module.exports = {
   // posts new employee to a given restaurant
   postEmployee: (req, res, next) => {
     const { restaurant, name, position, pin } = req.body;
+    console.log(req.body);
     const emp = new employee({
       restaurant: restaurant,
       pin: pin,
