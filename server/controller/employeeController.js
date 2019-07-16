@@ -25,6 +25,7 @@ module.exports = {
   // posts new employee to a given restaurant
   postEmployee: (req, res, next) => {
     const { restaurant, name, position, pin } = req.body;
+    console.log(req.body);
     const emp = new employee({
       restaurant: restaurant,
       pin: pin,

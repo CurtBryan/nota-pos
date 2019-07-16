@@ -64,7 +64,6 @@ class ManagerView extends Component {
   addItemToMenu = () => {
     const { user } = this.props.userInfo;
     const { division, item, price, sendToBar } = this.state;
-    console.log(this.state);
     axios
       .post("/api/items", {
         restaurant: user,
@@ -73,24 +72,21 @@ class ManagerView extends Component {
         price: price,
         drink: sendToBar
       })
-      .then(res => {
-        console.log(res);
+      .then(() => {
         this.props.setMenu(user);
       });
   };
   addEmployee = () => {
     const { user } = this.props.userInfo;
     const { jobTitle, pin, empName } = this.state;
-    console.log(this.state);
     axios
       .post("/api/newEmployee", {
         restaurant: user,
+        name: empName,
         position: jobTitle,
-        pin: pin,
-        name: empName
+        pin: pin
       })
-      .then(res => {
-        console.log(res);
+      .then(() => {
         this.props.setEmployees(user);
       });
   };
@@ -121,8 +117,6 @@ class ManagerView extends Component {
     } = this.state;
 
     let display;
-
-    console.log("STATE IN MANAGER VIEW", this.state);
 
     if (!this.props.restaurantInfo.menu.length) {
       display = [];
@@ -253,14 +247,11 @@ class ManagerView extends Component {
                         <h2>Catergory:</h2>
                         <select
                           onChange={e => {
-                            console.log(e.target.value);
                             if (e.target.value !== "Choose One...") {
-                              console.log("hit");
                               this.setState({
                                 division: e.target.value
                               });
                             } else {
-                              console.log("hit2");
                               this.setState({
                                 division: ""
                               });
@@ -315,7 +306,13 @@ class ManagerView extends Component {
                     <div className="inputContEmpMV">
                       <div>
                         <h2>Name:</h2>
-                        <input />
+                        <input
+                          onChange={e => {
+                            this.setState({
+                              empName: e.target.value
+                            });
+                          }}
+                        />
                       </div>
                       <div>
                         <h2>Job Title:</h2>
@@ -351,7 +348,7 @@ class ManagerView extends Component {
                         />
                       </div>
                     </div>
-                    <button>ADD EMPLOYEE</button>
+                    <button onClick={this.addEmployee}>ADD EMPLOYEE</button>
                   </div>
                 )}
               </div>
