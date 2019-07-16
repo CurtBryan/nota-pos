@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Logo from '../Logo/Logo';
-import axios from 'axios';
 import { setUser } from '../../ducks/userReducer';
+import { Redirect } from "react-router-dom";
 import { setEmployees, selectEmployee } from '../../ducks/restaurantReducer';
 import { connect } from  'react-redux';
 import '../EmpLogin/EmpLogin.css';
@@ -33,23 +32,57 @@ class EmpLogin extends Component {
 
     
     empLoginAccount = () => {
-        console.log(this.props.restaurantInfo.employees)
-        const { pin } = this.state 
+        const { pin } = this.state;
+        const { user } = this.props.userInfo;
         //  Add post endpoint for account login
-        axios.post(`/api/employee/$restaurant`, { pin }).then(res => {
-
-            this.props.selectEmployee(res.data)
-            console.log(res.data)
-        }).catch((err) => console.log("EMPLOGIN", err))
-
-    }
+        this.props.selectEmployee(user, pin);
+      };
+    
 
     render(){
     // console.log(this.props)
+    conRender = () => {
+        const { currentEmployeePos } = this.props.restaurantInfo;
+        // console.log(currentEmployeePos);
+        if (currentEmployeePos === "Manager") {
+          return <Redirect to="/manager" />;
+        } else if (currentEmployeePos === "Server") {
+          return <Redirect to="/server" />;
+        } else if (currentEmployeePos === "Chef") {
+          return <Redirect to="/cook" />;
+        } else if (currentEmployeePos === "Bartender") {
+          return <Redirect to="/bartender" />;
+        } else {
+          return (
+            <div className="form-container">
+              <div className="form">
+                <p className="title-pos">NotaPOS</p>
+                <div className="info-card">
+                  <input
+                    placeholder="Pin"
+                    onChange={e =>
+                      this.setState({
+                        pin: e.target.value
+                      })
+                    }
+                    type="text"
+                    value={this.pin}
+                    name="pin"
+                  />
+                  <button className="account-btn" onClick={this.empLoginAccount}>
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </div>
+          );
+        }
+      };
+    
         return(
           
                     <div className="form-container">
-                        <Logo />
+                       
                         <div className="form">
                         <p className= "title-pos">NotaPOS</p>
                             <div className="info-card">

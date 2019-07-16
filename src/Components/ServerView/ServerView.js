@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { setUser } from '../../ducks/userReducer';
+import { setMenu } from '../../ducks/restaurantReducer';
 import { connect } from 'react-redux';
 import sides from './sides.png';
 import steak from './steak.png';
@@ -23,6 +24,9 @@ class ServerView extends Component {
 
 
     render(){
+
+        // const { menu } = this.props.restaurantReducer
+        console.log(this.props.restaurantInfo.menu)
         return(
             <div className="server-page" >
                 <div className="table-container">
@@ -115,7 +119,8 @@ const mapStateToProps = (reduxState) => {
 }
 
 const mapDispatchToProps = {
-    setUser
+    setUser,
+    setMenu
 }
 
 const invokedConnect = connect(
