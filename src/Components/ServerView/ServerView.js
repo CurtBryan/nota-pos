@@ -35,47 +35,50 @@ class ServerView extends Component {
 
     render(){
 
-        const { divison } = this.state;
-        console.log(this.props)
-        return (
+      const { divison } = this.state;
+        // console.log(this.props.restaurantInfo.menu[divison])
 
-
+        // const mappedMenu = this.props.restaurantInfo.menu[divison].map( menu => {
+        // return (
+        //   <div  className="box" key={menu.id}>
+        //     <h1>{menu.item}</h1>
+        //     <h1>{menu.price}</h1>
+        //   </div>
+        // )
+        // })
         
-        <div className="view-container">
+        return (
+          
+          <div className="view-container">
+          
           {!this.props.restaurantInfo.currentEmployeePos ? (
-          <div>
-            <Redirect to="/" />
-          </div>
-          ) : null}
-
-          {!this.props.restaurantInfo.currentEmployeePos ? (
-          <div>
-            <Redirect to="/" />
-          </div>
-        ) : null}
+            <div>
+              <Redirect to="/" />
+            </div>
+            ) : null}
    
-
         {/* MENU *SIDE NAVIGATION */}
   
        <div className="menu-nav">
   
-          <button className="btn-menu"  onClick={() => this.setState({ divison: 0 })} >
+          <button className="btn-menu"  onClick={() => this.setState({ divison: 3 })} >
             <img className="drink" src={cola} alt="drink"/>
             Drinks
+
           </button>
-          <button className="btn-menu" >
+          <button className="btn-menu" onClick={() => this.setState({ divison: 0 })}>
             <img  className="guac" src={guacamole} alt="guac"/>
             Appetizers
           </button>
-          <button className="btn-menu">
+          <button className="btn-menu" onClick={() => this.setState({ divison: 1 })}>
             <img  className="ham" src={hamburger} alt="ham"/>
             Entrees
           </button>
-         {/* <button className="btn-menu">
+           <button className="btn-menu" onClick={() => this.setState({ divison: 2 })}>
             <img  className="pie" src={cupcake} alt="pie"/>
             Desserts
-          </button>
-           <button className="btn-menu">
+           </button>
+          <button className="btn-menu">
             <img  className="server" src={server} alt="server"/>
           Server
           </button>
@@ -86,7 +89,7 @@ class ServerView extends Component {
           <button className="btn-menu">
             <img  className="bar" src={bar} alt="bar"/>
           Bartender
-          </button> */}
+          </button> 
   
           <button className="btn-logout" onClick={() => {this.logout();}}>
           Logout
@@ -97,8 +100,8 @@ class ServerView extends Component {
       {/* BOX *CONTAINER */}
     
          <div className="box-container">
-  
-           <div className="box">
+           {/* {mappedMenu} */}
+          <div className="box">
              <h1>Ribs</h1>
              <h1>18.99</h1>
            </div>
@@ -145,7 +148,7 @@ class ServerView extends Component {
            <div className="box">
            <h1>Nuggets</h1>
              <h1>8.99</h1>
-           </div>
+           </div> 
   
          </div>
       
