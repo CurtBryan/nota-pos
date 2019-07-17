@@ -7,7 +7,7 @@
 /* EMPLOYEE */
 
 .menu-nav {
-  width: 100px;
+  width: 115px;
   height: 100vh;
   background-color: #547374;
   display: flex;
@@ -16,20 +16,22 @@
 
 /* MANAGER */
 
-.menu-nav {
+/* .menu-nav {
   width: 100px;
   height: 103vh;
   background-color: #547374;
   display: flex;
   flex-direction: column;
-}
+} */
 
 .btn-menu {
   background-color: #547374;
   border: none;
+  margin: 20px;
   text-transform: uppercase;
   color: white;
   font-weight: 800;
+  font-size: 12px;
 
 }
 
@@ -43,25 +45,24 @@
 }
 
 .drink {
- width: 70%;
+ width: 170%;
  margin-top: 8px;
  margin-bottom: 8px;
 }
 
 .guac {
-  width: 60%;
   margin-top: 8px;
   margin-bottom: 8px;
 }
 
 .ham {
-  width: 70%;
+  width: 150%;
   margin-top: 8px;
   margin-bottom: 8px;
 }
 
 .pie {
-  width: 70%;
+  width: 150%;
   margin-top: 8px;
   margin-bottom: 8px;
 }
@@ -86,25 +87,27 @@
 
 /* EMPLOYEE */
 
-/* .btn-logout {
+ .btn-logout {
   margin-top: 30vh;
   background-color: #547374;
   border: none;
   color: white;
   font-weight: 800;
+  margin-left: 15px;
   text-transform: uppercase;
-} */
+} 
 
 /* MANAGER */
 
-.btn-logout {
+/* .btn-logout {
   margin: 10px;
   background-color: #547374;
   border: none;
   color: white;
   font-weight: 800;
   text-transform: uppercase;
-}
+  
+} */
 
 /* BOX *CONTAINER */
 

@@ -36,16 +36,19 @@ class ServerView extends Component {
     render(){
 
       const { divison } = this.state;
-        // console.log(this.props.restaurantInfo.menu[divison])
+        console.log(this.props.restaurantInfo.menu[divison])
 
-        // const mappedMenu = this.props.restaurantInfo.menu[divison].map( menu => {
-        // return (
-        //   <div  className="box" key={menu.id}>
-        //     <h1>{menu.item}</h1>
-        //     <h1>{menu.price}</h1>
-        //   </div>
-        // )
-        // })
+        if (!this.props.restaurantInfo.menu.length) {
+          return [];
+        } 
+        const mappedMenu = this.props.restaurantInfo.menu[divison].items.map( menu => {
+        return (
+          <div  className="box" key={menu.id}>
+            <h1>{menu.item}</h1>
+            <h1>{menu.price}</h1>
+          </div>
+        )
+        })
         
         return (
           
@@ -68,7 +71,7 @@ class ServerView extends Component {
           </button>
           <button className="btn-menu" onClick={() => this.setState({ divison: 0 })}>
             <img  className="guac" src={guacamole} alt="guac"/>
-            Appetizers
+            Starts
           </button>
           <button className="btn-menu" onClick={() => this.setState({ divison: 1 })}>
             <img  className="ham" src={hamburger} alt="ham"/>
@@ -78,8 +81,13 @@ class ServerView extends Component {
             <img  className="pie" src={cupcake} alt="pie"/>
             Desserts
            </button>
+         
+
+          {(this.props.restaurantInfo.currentEmployeePos === "Manager") ?
+         
+          ( <div>
           <button className="btn-menu">
-            <img  className="server" src={server} alt="server"/>
+          <img  className="server" src={server} alt="server"/>
           Server
           </button>
             <button className="btn-menu">
@@ -90,17 +98,20 @@ class ServerView extends Component {
             <img  className="bar" src={bar} alt="bar"/>
           Bartender
           </button> 
-  
-          <button className="btn-logout" onClick={() => {this.logout();}}>
+            </div>
+        ) :
+          (null)
+          }
+
+        <button className="btn-logout" onClick={() => {this.logout();}}>
           Logout
-          </button>
-  
+        </button>
        </div>
   
       {/* BOX *CONTAINER */}
     
          <div className="box-container">
-           {/* {mappedMenu} */}
+           {mappedMenu}
           <div className="box">
              <h1>Ribs</h1>
              <h1>18.99</h1>

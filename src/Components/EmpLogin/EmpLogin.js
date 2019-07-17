@@ -51,10 +51,11 @@ class EmpLogin extends Component {
     } else {
       return (
         <div className="form-container">
-          <div>
-            <p className="title-pos">NotaPOS</p>
+          <div className="form-emplogin">
+          
             <div className="info-card">
               <input
+                className="pin"
                 placeholder="Pin"
                 onChange={e =>
                   this.setState({
@@ -65,7 +66,7 @@ class EmpLogin extends Component {
                 value={this.pin}
                 name="pin"
               />
-              <button className="account-btn" onClick={this.empLoginAccount}>
+              <button className="account-btns" onClick={this.empLoginAccount}>
                 Submit
               </button>
             </div>

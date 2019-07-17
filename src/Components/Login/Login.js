@@ -61,8 +61,10 @@ class Login extends Component {
           <p className="title-pos">NotaPOS</p>
           <div className="info-card">
          
+          {!user ? (
+            <div>
             <div className="form-login" >
-            <input
+            <input className="login"
               placeholder="Email"
               onChange={e => this.loginEmailHandler(e.target.value)}
               type="text"
@@ -70,7 +72,7 @@ class Login extends Component {
               name="typedEmail"
             />
 
-            <input
+            <input  className="login"
               placeholder="Password"
               onChange={e => this.loginPasswordHandler(e.target.value)}
               type="text"
@@ -78,13 +80,13 @@ class Login extends Component {
               name="typedPassword"
             />
             </div>
-             {!user ? (
+           
 
               <button className="account-btn" onClick={this.loginAccount}>
                 Submit
               </button>
          
-
+              </div>
             ) : (
               <EmpLogin />
             )}
