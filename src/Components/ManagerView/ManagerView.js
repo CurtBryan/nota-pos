@@ -347,15 +347,6 @@ class ManagerView extends Component {
               {" "}
               EDIT EMPLOYEES{" "}
             </button>
-            <NavLink to="/servermv">
-              <button className="logout-btn">DINING</button>
-            </NavLink>
-            <NavLink to="/cookmv">
-              <button className="logout-btn">KITCHEN</button>
-            </NavLink>
-            <NavLink to="barmv">
-              <button className="logout-btn">BAR</button>
-            </NavLink>
           </div>
         </footer>
       </div>
