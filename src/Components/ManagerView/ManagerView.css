@@ -1,32 +1,8 @@
 .manager-page {
   background-color: #547374;
-  /* width: 800px;
-      height: 700px; */
   width: 100vw;
   height: 100vh;
 }
-
-/*TABLE DATA START*/
-.table-containerMV {
-  display: none;
-  flex-direction: row;
-  justify-content: center;
-  width: 69%;
-  height: 10vh;
-  border: 1px solid grey;
-}
-
-.table {
-  width: 100px;
-  height: 80px;
-  background-color: #585555;
-  margin-left: 10px;
-  margin-right: 10px;
-  border: 1px solid #585555;
-}
-
-/*TABLE DATA END*/
-
 /*MENU SELECTION START*/
 .middleContMV {
   display: flex;
@@ -200,19 +176,22 @@
 
 .footerMV {
   background-color: #ededed;
-  height: 8vh;
+  height: 18vh;
   display: flex;
 }
 
 .footerButtonsMV {
-  width: 100vw;
+  /* background-color: #a0f290; */
   display: flex;
-  align-items: center;
+  width: 100vw;
+  height: 18vh;
+  align-items: flex-start;
+  justify-content: space-between;
 }
 
-.footerButtonsMV > button {
-  width: 120px;
-  height: 50px;
+.logout-btn {
+  width: 10vw;
+  height: 12vh;
   font-weight: 800;
   background-color: #547374;
   color: white;
