@@ -1,118 +1,113 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { connect } from 'react-redux';
-import Logo from '../Logo/Logo';
-import { setEmployees } from '../../ducks/restaurantReducer';
-import { setUser } from '../../ducks/userReducer';
-import './Login.css';
-import EmpLogin from '../EmpLogin/EmpLogin';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { connect } from "react-redux";
+import Logo from "../Logo/Logo";
+import { setEmployees } from "../../ducks/restaurantReducer";
+import { setUser } from "../../ducks/userReducer";
+import "./Login.css";
+import EmpLogin from "../EmpLogin/EmpLogin";
 
 
 class Login extends Component {
-    constructor(){
-        super()
-        this.state = {
-            typedEmail: "",
-            typedPassword: "",
-        }
-    }
+  constructor() {
+    super();
+    this.state = {
+      typedEmail: "",
+      typedPassword: ""
+    };
+  }
 
-    componentDidMount(){
-        this.loginEmailHandler()
-        this.loginPasswordHandler()
-    }
+  componentDidMount() {
+    this.loginEmailHandler();
+    this.loginPasswordHandler();
+  }
 
-    loginEmailHandler = ( value ) => {
-        this.setState({
-            typedEmail: value,
-        })
-    }
+  loginEmailHandler = value => {
+    this.setState({
+      typedEmail: value
+    });
+  };
 
-    loginPasswordHandler = ( value ) => {
-        this.setState({
-            typedPassword: value,
-        })
-    }
+  loginPasswordHandler = value => {
+    this.setState({
+      typedPassword: value
+    });
+  };
 
+  loginAccount = () => {
+    const { typedEmail, typedPassword } = this.state;
+    // Add post endpoint for account login
+    //  console.log(this.state)
+    axios
+      .post("/api/login", { typedEmail, typedPassword })
+      .then(res => {
+        this.props.setUser(res.data);
+        console.log();
+      })
+      .catch(err => console.log("LOGIN", err));
+  };
 
-    loginAccount = () => {
-        const { typedEmail,  typedPassword } = this.state
-         // Add post endpoint for account login
-        //  console.log(this.state)
-        axios.post("/api/login", { typedEmail, typedPassword }).then(res => {
+  render() {
+    const { user } = this.props.userInfo;
 
-            this.props.setUser(res.data)
-            console.log()
-        }).catch((err) => console.log("LOGIN",err))
-    }
+  //   if (!this.props.setEmployees) {
+  //     return <></>;
+  // }
+    return (
+      <div className="form-container">
+          <Logo />
+        <div className="form">
+          <p className="title-pos">NotaPOS</p>
+          <div className="info-card">
+         
+            <div className="form-login" >
+            <input
+              placeholder="Email"
+              onChange={e => this.loginEmailHandler(e.target.value)}
+              type="text"
+              value={this.typedEmail}
+              name="typedEmail"
+            />
 
+            <input
+              placeholder="Password"
+              onChange={e => this.loginPasswordHandler(e.target.value)}
+              type="text"
+              value={this.typedPassword}
+              name="typedPassword"
+            />
+            </div>
+             {!user ? (
 
+              <button className="account-btn" onClick={this.loginAccount}>
+                Submit
+              </button>
+         
 
-    render(){
-        const { user } = this.props.userInfo
-        return(
-    
-            
-                <div className="form-container">
-                    <Logo />
-                     <div className="form">
-                        <p className="title-pos">NotaPOS</p>
-                            <div className="info-card">
-                                <input 
-                                placeholder="Email"
-                                onChange={e => 
-                                this.loginEmailHandler(e.target.value)
-                                }
-                                type="text"
-                                value={this.typedEmail}
-                                name="typedEmail"
-                                />
+            ) : (
+              <EmpLogin />
+            )}
+          </div>
 
-                                <input 
-                                placeholder="Password"
-                                onChange={e => 
-                                    this.loginPasswordHandler(e.target.value)
-                                }
-                                type="text"
-                                value={this.typedPassword}
-                                name="typedPassword"
-
-                                />
-                                    
-                                {!user ?
-                                (
-                                 
-                                      <button className="account-btn" onClick={this.loginAccount}>Submit</button>
-                                  
-                             
-                                )
-                                :
-                                (
-                                    <EmpLogin />
-                                )
-                                }
-
-
-                        </div>
-                                <Link to="/register" style={{ textDecoration: 'none'}}>
-                                    <p className="account">Need to create an account?</p>
-                                </Link>
-            
-                          
-                       
-                </div>
-                </div>
-                        
-        )}
+          <Link to="/register" style={{ textDecoration: "none" }}>
+            <p className="account">Need to create an account?</p>
+          </Link>
+        </div>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = reduxState => {
-    return reduxState
-  };
-  const mapDispatchToProps = {
-    setUser,
-    setEmployees
-  };
- 
-  export default connect(mapStateToProps, mapDispatchToProps)(Login);
+  return reduxState;
+};
+const mapDispatchToProps = {
+  setUser,
+  setEmployees
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);

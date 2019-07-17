@@ -1,10 +1,14 @@
 import React, { Component } from "react";
+import axios from "axios";
 import { setUser } from "../../ducks/userReducer";
 import { setEmployees, selectEmployee } from "../../ducks/restaurantReducer";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import "../EmpLogin/EmpLogin.css";
-
+import ManagerView from "../ManagerView/ManagerView";
+import ServerView from "../ServerView/ServerView";
+import CookView from "../CookView/CookView";
+import BartenderView from "../BartenderView/BartenderView";
 
 class EmpLogin extends Component {
   constructor() {
@@ -15,8 +19,8 @@ class EmpLogin extends Component {
   }
 
   componentDidMount() {
-    this.empLoginAccount()
-    console.log(this.props.userInfo)
+    // this.empLoginAccount()
+    // console.log(this.props.userInfo)
     this.props.setEmployees(this.props.userInfo.user);
   }
 
@@ -47,7 +51,7 @@ class EmpLogin extends Component {
     } else {
       return (
         <div className="form-container">
-          <div className="form">
+          <div>
             <p className="title-pos">NotaPOS</p>
             <div className="info-card">
               <input

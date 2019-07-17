@@ -1,215 +1,199 @@
-.server-page {
+.view-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+/* EMPLOYEE */
+
+.menu-nav {
+  width: 100px;
+  height: 100vh;
   background-color: #547374;
-  /* width: 800px;
-  height: 700px; */
-  width: 100%;
-
-
-}
-
-
-/*TABLE DATA START*/
-.table-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 69%;
-  border: 1px solid grey;
-}
-
-.table {
-  width: 100px;
-  height: 80px;
-  background-color: #585555;
-  margin-left: 10px;
-  margin-right: 10px;
-  border: 1px solid #585555;
-} 
-
-/*TABLE DATA END*/
-
-/*MENU SELECTION START*/
-.menu-selections {
-  width: 100px;
-  height: 490px;
-  /* background-color: #EDEDED; */
-  margin-top: 40px;
-  position: absolute;
-  z-index: 5;
-}
-
-.circle-container {
-  margin-top: 30px;
-}
-
-.circle {
-height: 100%;
-width: 100%;
-text-align: center;
-background-color: #547374;
-border: 1px solid white;
-color: white;
-text-transform: uppercase;
-font-size: 15px;
-font-weight: 700;
-margin-bottom: 5px;
-}
-
-.sides {
-  margin-top: 5%;
-  height: 60px;
-}
-
-.steak {
-  margin-top: 5%;
-  height: 60px;
-  }
-
-.pie {
-  margin-top: 5%;
-  height: 50px;
-  }
-
-/*MENU SELECTION END*/
-
-
-
-/*INFO SECTION START*/
-.info-section{
-  display: flex;
-  flex-direction: row;
-}
-/*INFO SECTION END*/
-
-
-
-/*MENU TABLE START*/
-.items-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  background-color: white;
-  width: 69%;
-  height: 705px;
-}
-
-.menu-items {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin-left: 10px;
 }
 
-.box {
-  width: 150px;
-  height: 90px;
-  margin-bottom: 10px;
-  background-color: #edf1f1;
-  border: 1px solid #547374;
-  border-radius: 5%;
-}
+/* MANAGER */
 
-/*MENU TABLE END*/
-
-
-
-/*TICKET START*/
-.tickets {
+.menu-nav {
+  width: 100px;
+  height: 103vh;
   background-color: #547374;
-  width: 21%;
-  height: 450px;
-  top: 0;
-  left: 69%;
-  margin-right:0;
-  position: absolute;
+  display: flex;
+  flex-direction: column;
 }
 
-.title {
+.btn-menu {
   background-color: #547374;
-  font-family: 'Audiowide', cursive;
+  border: none;
+  text-transform: uppercase;
   color: white;
-  font-weight: 200;
-  font-size: 40px;
-  margin-left: 30px;
-  text-align: center;
-  width: 100%;
+  font-weight: 800;
 
+}
+
+.btn-emp {
+  background-color: white;
+  border: 1px solid  #C9E0DE;
+  margin: 5%;
+  text-transform: uppercase;
+  color: #547374;
+  font-weight: 800;
+}
+
+.drink {
+ width: 70%;
+ margin-top: 8px;
+ margin-bottom: 8px;
+}
+
+.guac {
+  width: 60%;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.ham {
+  width: 70%;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.pie {
+  width: 70%;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.server {
+  width: 70%;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.chef {
+  width: 70%;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 .bar {
-  width: 131%;
-  height: 30px;
-  background-color: #EDEDED;
-  border: 1px solid gray;
+  width: 60%;
+  margin-top: 8px;
+  margin-bottom:8px;
+}
+
+/* EMPLOYEE */
+
+/* .btn-logout {
+  margin-top: 30vh;
+  background-color: #547374;
+  border: none;
+  color: white;
+  font-weight: 800;
+  text-transform: uppercase;
+} */
+
+/* MANAGER */
+
+.btn-logout {
+  margin: 10px;
+  background-color: #547374;
+  border: none;
+  color: white;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+/* BOX *CONTAINER */
+
+.box-container{
+  width: 60%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.box {
+  border: 1px solid #547374;
+  background-color: #C9E0DE;
+  border-radius: 5%;
+  width: 20%;
+  height: 20%;
+  margin: 8px;
+  font-size: 6px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #547374;
+  font-weight: 800;
+}
+
+
+/* PRICE *CONTAINER */
+
+.price-container {
+  background-color: #547374;
+  width: 40%;
+  margin: 10px;
+  height: 96vh;
+}
+
+.title-conatiner{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.title {
+  text-transform: uppercase;
+  color: white;
+  font-size: 15px;
+  margin: 10px;
 }
 
 .ticket {
-  width: 395px;
-  height: 407px;;
-  background-color: white;
-  width: 131%;
-  border: 1px solid grey;
-}
-
-.price-tag {
-  width: 132%;
-  height: 30%;
-  background-color: #585555;
-  margin-bottom: 0;
-  
-}
-
-.extra{
   display: flex;
-  width: 132%;
-  margin-top: 5%;
+  flex-direction: row;
+  color: white;
+  justify-content: space-evenly;
+  font-size:  8px;
+  margin-left: 3%;
 }
 
-.price {
+.quantity {
+  display: flex;
+}
 
-  height: 40%;
-  width: 7%;
+.circle {
   border: 1px solid white;
-  padding: 25px;
-  margin:  0 auto;
-  
+  background-color: #C9E0DE;
+  color: #547374;
+  border-radius: 100%;
+  width: 28px;
+  height: 25px;
+  margin-top: 2%;
+  text-align: center;
+  font-size: 20px;
+}
+
+.x {
+  margin: 8%;
 }
 
 .trash {
-
-  height: 40%;
-  width: 7%;
-  border: 1px solid white;
-  padding: 25px;
-  margin:  0 auto;
+  height: 20px;
+  margin-top: 2%;
 }
 
-.print {
-
-  height: 40%;
-  width: 7%;
-  border: 1px solid white;
-  padding: 25px;
-  margin:  0 auto;
+.total {
+  background-color: white;
+  color: #547374;
+  width: 90%;
+  height: 50px;
+  font-size: 20px;
+  font-weight: 600;
+  margin-left: 5%;
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 90%;
 }
-/*TICKET END*/
-
-/*LOGOUT START*/
-
-
-
-.logout {
-width: 100px;
-height: 50px;
-font-weight: 800;
-background-color: #547374;
-color: white;
-z-index: 5;
-position: absolute;
-margin-top: 43%;
-
-
-}
-
-
-/*FOOTER END*/
