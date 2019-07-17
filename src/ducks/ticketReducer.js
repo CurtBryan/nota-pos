@@ -3,12 +3,25 @@ import axios from "axios";
 const initialState = {
   allTickets: [],
   barTickets: [],
-  kitchenTickets: []
+  kitchenTickets: [],
+  latestTicketNum: 0
 };
 
 const SET_ALLTICKETS = "SET_ALLTICKETS";
 const SET_BARTICKETS = "SET_BARTICKETS";
 const SET_KITCHENTICKETS = "SET_KITCHENTICKETS";
+const SET_LATESTTICKETNUM = "SET_LATESTTICKETNUM";
+
+// sets the latest ticket number to base all further tickets off of
+export const setLatestTicketNum = restaurant => {
+  const ticketnum = axios
+    .get(`/api/tickets/${restaurant}`)
+    .then(res => res.data);
+  return {
+    type: SET_LATESTTICKETNUM,
+    payload: ticketnum
+  };
+};
 
 // pulls list of all saved tickets by restaurant (map in reverse
 // to see recent tickets first)
@@ -21,22 +34,18 @@ export const setAllTickets = restaurant => {
 };
 
 // pulls list of open bar tickets
-export const setBarTickets = restaurant => {
-  const barTicks = axios.get(`/api/bar/${restaurant}`).then(res => res.data);
+export const setBarTickets = tickets => {
   return {
     type: SET_BARTICKETS,
-    payload: barTicks
+    payload: tickets
   };
 };
 
 // pulls list of open kitchen tickets
-export const setKitchenTickets = restaurant => {
-  const kitchenTicks = axios
-    .get(`/api/kitchen/${restaurant}`)
-    .then(res => res.data);
+export const setKitchenTickets = tickets => {
   return {
     type: SET_KITCHENTICKETS,
-    payload: kitchenTicks
+    payload: tickets
   };
 };
 
@@ -57,6 +66,11 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         kitchenTickets: action.payload
+      };
+    case SET_LATESTTICKETNUM + "_FULFILLED":
+      return {
+        ...state,
+        latestTicketNum: action.payload
       };
     default:
       return state;
