@@ -123,9 +123,10 @@
   background-color: #C9E0DE;
   border-radius: 5%;
   width: 20%;
-  height: 20%;
+  height: 15%;
   margin: 8px;
-  font-size: 6px;
+  padding: 8px;
+  font-size: 13px;
   text-align: center;
   text-transform: uppercase;
   color: #547374;
