@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { setUser } from "../../ducks/userReducer";
+import { setMenu } from "../../ducks/restaurantReducer";
+import { setLatestTicketNum } from "../../ducks/ticketReducer";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import io from "socket.io-client";
 import "./BartenderView.css";
 import axios from "axios";
@@ -12,34 +14,41 @@ class ServerView extends Component {
     super();
     this.state = {
       tickets: [],
-      empTickets: [],
+      // empTickets: [],
       currentTicket: [],
       newItems: [],
-      mod: ""
+      mod: "",
+      divSelect: 0
     };
     socket.on("updateTickets", () => {
+      // console.log("updating Tickets");
       this.getUnsetTickets();
+      this.props.setLatestTicketNum(this.props.user);
     });
     this.getUnsetTickets = this.getUnsetTickets.bind(this);
   }
   componentDidMount() {
     this.getUnsetTickets();
+    this.props.setMenu(this.props.user);
+    this.props.setLatestTicketNum(this.props.user);
   }
 
-  getUnsetTickets() {
+  getUnsetTickets = () => {
     axios
       .post("/api/emptickets", {
         restaurant: this.props.user,
         employee: this.props.restaurant.currentEmployeeName
       })
       .then(res => {
+        console.log(res);
         this.setState({
-          tickets: res
+          tickets: res.data
         });
       });
-  }
+  };
 
   addAnother(item) {
+    console.log(item);
     axios
       .put("/api/ticket", {
         restaurant: this.props.user,
@@ -51,7 +60,7 @@ class ServerView extends Component {
         ticketnum: item.ticketnum,
         ticketsplit: item.ticketsplit,
         employee: item.employee,
-        newtable: item.table
+        newtable: item.tablenum
       })
       .then(() => {
         this.getUnsetTickets();
@@ -66,31 +75,79 @@ class ServerView extends Component {
   removeNewItem(item) {
     let index = this.state.newItems.indexOf(item);
     this.state.newItems.splice(index, 1);
+    this.setState({ state: this.state });
   }
 
-  selectTable(item) {
+  selectTable(item, arr) {
+    console.log(item, arr);
     this.setState({
-      currentTicket: this.empTickets[this.empTickets.indexOf(item)]
+      currentTicket: arr[arr.indexOf(item)]
     });
   }
 
   saveTicket() {
-    this.newItems
-      .forEach(item => {
-        axios.post("/api/tickets", {
-          restaurant: this.props.user,
-          employee: this.props.currentEmployeeName,
+    let promises = [];
+    this.state.newItems.forEach(item => {
+      promises.push(
+        axios.post("/api/newticket", {
           ...item
-        });
-      })
-      .then(response => {
-        socket.emit("newTicket", "sent new");
-      });
+        })
+      );
+    });
+    console.log(promises);
+    Promise.all(promises).then(response => {
+      socket.emit("newTicket", "sent new");
+    });
   }
+
+  logout = () => {
+    this.props.selectEmployee(null);
+  };
+
+  addItem = item => {
+    if (this.state.newTicketNumber !== 0 && this.props.latestticketnum) {
+      // console.log(item);
+      this.setState({
+        newItems: [
+          ...this.state.newItems,
+          {
+            restaurant: this.props.user,
+            employee: this.props.restaurant.currentEmployeeName,
+            tablenum: this.state.newTableNum,
+            itemnum: 1,
+            item: item.item,
+            itemprice: item.price,
+            drink: item.drink,
+            mod: this.state.mod,
+            ticketnum: this.props.latestticketnum + 1
+          }
+        ]
+      });
+      // console.log(this.state.newItems);
+    } else {
+      return "Please select a table number to start a new ticket";
+    }
+  };
+
+  handleKeyDown = e => {
+    if (e.key === "Enter") {
+      this.setState({
+        newTableNum: parseInt(e.target.value)
+      });
+    }
+  };
 
   render() {
     // maps employee tickets to an array of arrays by ticket number
-    const { currentTicket, newItems, empTickets, tickets } = this.state;
+    console.log(this.state);
+    const {
+      currentTicket,
+      newItems,
+      // empTickets,
+      tickets,
+      divSelect
+    } = this.state;
+    let empTickets = [];
     let counter = 0;
     let total = 0;
     for (let i = 0; i < tickets.length; i++) {
@@ -136,57 +193,109 @@ class ServerView extends Component {
     // maps tickets by table to the top bar
     const mappedTableButtons = empTickets.map(item => {
       return (
-        <button className="table" onClick={() => this.selectTable(item)}>
+        <button
+          className="table"
+          onClick={() => this.selectTable(item, empTickets)}
+        >
           {item[0].tablenum}
         </button>
       );
     });
 
+    let display;
+
+    // mapped menu items
+    if (!this.props.restaurant.menu.length) {
+      display = [];
+    } else {
+      display = this.props.restaurant.menu[divSelect].items.map(item => {
+        return (
+          <div key={item._id}>
+            <section className="menu-itemsMV">
+              <button
+                className="boxMV item1MV"
+                onClick={() => this.addItem(item)}
+              >
+                <h1>{item.item}</h1>
+                <h1>${item.price}</h1>
+              </button>
+            </section>
+          </div>
+        );
+      });
+    }
+
     return (
       <div className="bartender-page">
+        {!this.props.restaurant.currentEmployeePos ? (
+          <div>
+            <Redirect to="/" />
+          </div>
+        ) : null}
         <div className="table-container">{mappedTableButtons}</div>
         <div className="menu-selections">
           <div className="circle-container">
-            <div className="circle" />
-            <div className="circle" />
-            <div className="circle" />
-            <div className="circle" />
+            <button
+              onClick={() =>
+                this.setState({
+                  divSelect: 0
+                })
+              }
+              className="circleMV"
+            >
+              App
+            </button>
+            <button
+              onClick={() =>
+                this.setState({
+                  divSelect: 1
+                })
+              }
+              className="circleMV"
+            >
+              Entree
+            </button>
+            <button
+              onClick={() =>
+                this.setState({
+                  divSelect: 2
+                })
+              }
+              className="circleMV"
+            >
+              Dessert
+            </button>
+            <button
+              onClick={() =>
+                this.setState({
+                  divSelect: 3
+                })
+              }
+              className="circleMV"
+            >
+              Drink
+            </button>
           </div>
         </div>
         <div className="info-section">
-          <div className="items-container">
-            <section className="menu-items">
-              <div className="box item1" />
-              <div className="box item1" />
-              <div className="box item1" />
-              <div className="box item1" />
-              <div className="box item1" />
-            </section>
-            <section className="menu-items">
-              <div className="box item2" />
-              <div className="box item2" />
-              <div className="box item2" />
-              <div className="box item2" />
-              <div className="box item2" />
-            </section>
-            <section className="menu-items">
-              <div className="box item3" />
-              <div className="box item3" />
-              <div className="box item3" />
-              <div className="box item3" />
-              <div className="box item3" />
-            </section>
-            <section className="menu-items">
-              <div className="box item4" />
-              <div className="box item4" />
-              <div className="box item4" />
-              <div className="box item4" />
-              <div className="box item4" />
-            </section>
-          </div>
+          <div className="items-container">{display}</div>
           <div className="tickets">
             <p className="title">NOTA-POS</p>
-            <div className="bar" />
+            <div className="bar">
+              {!this.state.currentTicket[0] ? (
+                <div className="new table num input">
+                  <span>New Table Number: </span>
+                  <input onKeyDown={e => this.handleKeyDown(e)} />
+                  <span>Table Number: {this.state.newTableNum} </span>
+                </div>
+              ) : (
+                <div className="Current table num display">
+                  <span>
+                    Current Table Number: {this.state.currentTicket[0].tablenum}
+                  </span>
+                </div>
+              )}
+            </div>
             <div className="ticket">
               {mappedCurrentTicket}
               {mappedNewItems}
@@ -219,7 +328,9 @@ const mapStateToProps = reduxState => {
 };
 
 const mapDispatchToProps = {
-  setUser
+  setUser,
+  setMenu,
+  setLatestTicketNum
 };
 
 const invokedConnect = connect(

@@ -38,7 +38,7 @@ module.exports = {
     const { restaurant } = req.params;
     ticket
       .find(
-        { restaurant: restaurant, drink: false, fullfilled: false, show: true },
+        { restaurant: restaurant, drink: false, fullfilled: false },
         { restaurant: 0, show: 0, drink: 0 }
       )
       .sort({ ticketnum: 0 })
@@ -51,7 +51,7 @@ module.exports = {
     const { restaurant } = req.params;
     ticket
       .find(
-        { restaurant: restaurant, drink: true, fulfilled: false, show: true },
+        { restaurant: restaurant, drink: true, fulfilled: false },
         { restaurant: 0, show: 0, drink: 0 }
       )
       .sort({ ticketnum: 0 })
@@ -61,6 +61,7 @@ module.exports = {
   },
   // post a new ticket item (for loop in front posts whole ticket)
   postTicket: (req, res, next) => {
+    console.log(req.body);
     const {
       restaurant,
       employee,
