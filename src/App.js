@@ -10,6 +10,7 @@ import Register from "./Components/Register/Register";
 import ServerMV from "./Components/ManagerView/ServerMV";
 import CookMV from "./Components/ManagerView/CookMV";
 import BarMV from "./Components/ManagerView/BarMV";
+import DrinkTickets from "./Components/DrinkTickets/DrinkTickets";
 import "./App.css";
 
 class App extends Component {
@@ -32,6 +33,7 @@ class App extends Component {
           <Route path="/barmv" exact strict component={BarMV} />
           <Route path="/cookmv" exact strict component={CookMV} />
           <Route path="/bartender" exact strict component={BartenderView} />
+          <Route path="/bartickets" exact strict component={DrinkTickets} />
         </Switch>
       </div>
     );
