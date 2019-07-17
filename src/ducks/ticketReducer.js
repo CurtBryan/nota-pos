@@ -14,12 +14,13 @@ const SET_LATESTTICKETNUM = "SET_LATESTTICKETNUM";
 
 // sets the latest ticket number to base all further tickets off of
 export const setLatestTicketNum = restaurant => {
-  const ticketnum = axios
+  const ticketnumber = axios
     .get(`/api/tickets/${restaurant}`)
-    .then(res => res.data);
+    .then(res => res.data.ticketnum);
+  console.log(ticketnumber);
   return {
     type: SET_LATESTTICKETNUM,
-    payload: ticketnum
+    payload: ticketnumber
   };
 };
 
@@ -51,6 +52,7 @@ export const setKitchenTickets = tickets => {
 
 // manipulates redux state of all ticket lists
 export default function reducer(state = initialState, action) {
+  console.log(action);
   switch (action.type) {
     case SET_ALLTICKETS + "_FULFILLED":
       return {
