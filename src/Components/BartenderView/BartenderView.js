@@ -6,6 +6,14 @@ import { selectEmployee } from "../../ducks/restaurantReducer";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import io from "socket.io-client";
+import cola from '../ServerView/cola.png';
+import guacamole from '../ServerView/guacamole.png';
+import hamburger from '../ServerView/hamburger.png';
+import cupcake from '../ServerView/cupcake.png';
+import server from '../ServerView/server.png';
+import chef from '../ServerView/chef.png';
+import bar from '../ServerView/bar.png';
+import trash from '../ServerView/trash.png';
 import "./BartenderView.css";
 import axios from "axios";
 const socket = io("http://localhost:4000/");
@@ -228,61 +236,76 @@ class ServerView extends Component {
     }
 
     return (
-      <div className="bartender-page">
+      <div className="view-container">
         {!this.props.restaurant.currentEmployeePos ? (
           <div>
             <Redirect to="/" />
           </div>
         ) : null}
-        <div className="table-container">{mappedTableButtons}</div>
-        <div className="menu-selections">
-          <div className="circle-container">
-            <button
-              onClick={() =>
-                this.setState({
-                  divSelect: 0
-                })
-              }
-              className="circleMV"
-            >
-              App
-            </button>
-            <button
-              onClick={() =>
-                this.setState({
-                  divSelect: 1
-                })
-              }
-              className="circleMV"
-            >
-              Entree
-            </button>
-            <button
-              onClick={() =>
-                this.setState({
-                  divSelect: 2
-                })
-              }
-              className="circleMV"
-            >
-              Dessert
-            </button>
-            <button
+        {/* <div className="table-container">{mappedTableButtons}</div> */}
+        <div className="menu-nav">
+             <button className="btn-menu"
               onClick={() =>
                 this.setState({
                   divSelect: 3
                 })
               }
-              className="circleMV"
+              
             >
-              Drink
+               <img className="drink" src={cola} alt="drink"/>
+              Drinks
             </button>
-          </div>
-        </div>
-        <div className="info-section">
-          <div className="items-container">{display}</div>
-          <div className="tickets">
-            <p className="title">NOTA-POS</p>
+            <button className="btn-menu"
+            
+            onClick={() =>
+              this.setState({
+                divSelect: 0
+              })
+            }
+        
+          >
+             <img  className="guac" src={guacamole} alt="guac"/>
+            Starts
+          </button>
+            <button className="btn-menu"
+              onClick={() =>
+                this.setState({
+                  divSelect: 1
+                })
+              }
+             
+            >
+               <img  className="ham" src={hamburger} alt="ham"/>
+              Entrees
+            </button>
+          
+          
+            <button className="btn-menu"
+              onClick={() =>
+                this.setState({
+                  divSelect: 2
+                })
+              }
+              
+            >
+               <img  className="pie" src={cupcake} alt="pie"/>
+              Desserts
+            </button>
+            <button
+            className="logout"
+            onClick={() => {
+              this.logout();
+            }}
+          >
+            {" "}
+            LOGOUT{" "}
+          </button>
+         
+        
+       
+     
+          <div className="box-container">{display}</div>
+          <div className="price-container">
             <div className="bar">
               {!this.state.currentTicket[0] ? (
                 <div className="new table num input">
@@ -298,9 +321,11 @@ class ServerView extends Component {
                 </div>
               )}
             </div>
+            <div className="ticket-container">
             <div className="ticket">
               {mappedCurrentTicket}
               {mappedNewItems}
+            </div>
             </div>
             <div className="price-tag">
               <button onClick={() => this.printTicket()}>Print</button>
@@ -309,21 +334,14 @@ class ServerView extends Component {
             </div>
           </div>
         </div>
-        <footer>
-          <button
-            className="logout"
-            onClick={() => {
-              this.logout();
-            }}
-          >
-            {" "}
-            LOGOUT{" "}
-          </button>
+      
+         
           <Link to="/bartickets">
             <button>tickets</button>
           </Link>
-        </footer>
-      </div>
+       
+
+        </div>
     );
   }
 }

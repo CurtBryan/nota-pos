@@ -1,0 +1,18 @@
+.pin {
+    width: 300%;
+    height: 50px;
+    margin-bottom: 3%;
+    font-size: 16px;
+}
+
+
+
+.account-btns {
+    width: 300%;
+    height:  50px;
+    margin-top: 8%;
+    color: white;
+    border: none;
+    font-size: 16px;
+    background-color: #38494A;
+}
