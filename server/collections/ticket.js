@@ -6,7 +6,7 @@ const ticketSchema = new mongoose.Schema({
     required: true
   },
   employee: {
-    type: Number,
+    type: String,
     required: true
   },
   tablenum: {

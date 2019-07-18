@@ -208,9 +208,9 @@ class ServerView extends Component {
 }
   
 
-const mapStateToProps = (reduxState) => {
-    return reduxState
-}
+const mapStateToProps = reduxState => {
+  return reduxState;
+};
 
 const mapDispatchToProps = {
     setUser,
@@ -219,8 +219,8 @@ const mapDispatchToProps = {
 }
 
 const invokedConnect = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)
+  mapStateToProps,
+  mapDispatchToProps
+);
 
-export default invokedConnect(ServerView)
+export default invokedConnect(ServerView);

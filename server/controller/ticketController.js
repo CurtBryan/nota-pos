@@ -6,7 +6,7 @@ module.exports = {
     const { restaurant, employee } = req.body;
     ticket
       .find({ restaurant: restaurant, employee: employee, show: true })
-      .sort({ ticketnum: 0 })
+      .sort({ ticketnum: -1 })
       .then(response => {
         res.status(200).send(response);
       });
@@ -16,7 +16,7 @@ module.exports = {
     const { restaurant } = req.body;
     ticket
       .find({ restaurant: restaurant }, { restaurant: 0 })
-      .sort({ ticketnum: 0 })
+      .sort({ ticketnum: -1 })
       .then(response => {
         res.status(200).send(response);
       });
@@ -38,10 +38,10 @@ module.exports = {
     const { restaurant } = req.params;
     ticket
       .find(
-        { restaurant: restaurant, drink: false, fullfilled: false, show: true },
+        { restaurant: restaurant, drink: false, fulfilled: false },
         { restaurant: 0, show: 0, drink: 0 }
       )
-      .sort({ ticketnum: 0 })
+      .sort({ ticketnum: -1 })
       .then(response => {
         res.status(200).send(response);
       });
@@ -51,16 +51,17 @@ module.exports = {
     const { restaurant } = req.params;
     ticket
       .find(
-        { restaurant: restaurant, drink: true, fulfilled: false, show: true },
+        { restaurant: restaurant, drink: true, fulfilled: false },
         { restaurant: 0, show: 0, drink: 0 }
       )
-      .sort({ ticketnum: 0 })
+      .sort({ ticketnum: -1 })
       .then(response => {
         res.status(200).send(response);
       });
   },
   // post a new ticket item (for loop in front posts whole ticket)
   postTicket: (req, res, next) => {
+    console.log(req.body);
     const {
       restaurant,
       employee,
@@ -171,10 +172,11 @@ module.exports = {
   getLatestTicketNum: (req, res, next) => {
     const { restaurant } = req.params;
     ticket
-      .findOne({ restaurant: restaurant }, { ticketnum: 1 })
-      .sort({ ticketnum: 0 })
+      .find({ restaurant: restaurant }, { ticketnum: 1 })
+      .sort({ ticketnum: -1 })
       .then(response => {
-        res.status(200).send(response);
+        // console.log(response);
+        res.status(200).send(response[0]);
       });
   }
 };

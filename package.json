@@ -4,12 +4,14 @@
   "main": "server/index.js",
   "private": true,
   "dependencies": {
+    "@testing-library/react": "^8.0.5",
     "axios": "^0.19.0",
     "bcrypt": "git+https://github.com/kelektiv/node.bcrypt.js.git#master",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "express-session": "^1.16.2",
     "http-proxy-middleware": "^0.19.1",
+    "jooks": "0.0.16",
     "mongoose": "^5.6.3",
     "node-gyp": "^5.0.2",
     "react": "^16.8.6",
@@ -18,9 +20,11 @@
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
+    "react-test-renderer": "^16.8.6",
     "react-zdog": "^1.0.10",
     "redux": "^4.0.3",
     "redux-promise-middleware": "^6.1.1",
+    "sinon": "^7.3.2",
     "socket.io": "^2.2.0",
     "zdog": "^1.1.0"
   },
@@ -44,5 +48,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {}
 }

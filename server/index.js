@@ -73,8 +73,13 @@ io.sockets.on("connection", socket => {
     console.log("bar tickets hit");
     io.emit("newBar", tickets);
   }),
+    socket.on("updateKitchenTickets", tickets => {
+      console.log("kitchen tickets hit", tickets);
+      io.emit("newKitchen", tickets);
+    }),
     socket.on("newTicket", () => {
-      io.emit("updateTickets");
+      console.log("newTicket hit");
+      io.emit("updateTickets", "newTicket");
     });
 });
 
@@ -108,7 +113,7 @@ app.get("/api/kitchen/:restaurant", getFoodTickets);
 app.get("/api/bar/:restaurant", getDrinkTickets);
 app.post("/api/ticket", getFullTicket);
 app.post("/api/emptickets", getEmployeeTickets);
-app.post("/api/tickets", postTicket);
+app.post("/api/newticket", postTicket);
 app.put("/api/ticket", editTicket);
 app.put("/api/tickets", printTicket);
 app.put("/api/madetickets", fulfillTicket);
