@@ -1,0 +1,15 @@
+.serverMVPage {
+  background-color: #547374;
+  height: 100vh;
+  width: 100vw;
+}
+
+.mappedticks {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ticketBox {
+    
+}
