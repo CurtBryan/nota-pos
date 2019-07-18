@@ -158,6 +158,11 @@ class ManagerView extends Component {
             <Redirect to="/" />
           </div>
         ) : null}
+        {!this.state.redirect ? null : (
+          <div>
+            <Redirect to="/serverMV" />
+          </div>
+        )}
         <div className="middleContMV">
           <div className="menu-selectionsMV">
             <div className="circle-containerMV">
@@ -263,6 +268,7 @@ class ManagerView extends Component {
                         <h2>Price:</h2>
                         <input
                           type="number"
+                          min="0"
                           onChange={e => {
                             this.setState({
                               price: e.target.value
@@ -313,6 +319,7 @@ class ManagerView extends Component {
                         <h2>Pin Number:</h2>
                         <input
                           type="number"
+                          min="0"
                           onChange={e => {
                             this.setState({
                               pin: e.target.value
@@ -346,6 +353,17 @@ class ManagerView extends Component {
             <button className="logout-btn" onClick={this.toggleSwitch2}>
               {" "}
               EDIT EMPLOYEES{" "}
+            </button>
+            <button
+              className="logout-btn"
+              onClick={() => {
+                this.setState({
+                  redirect: true
+                });
+              }}
+            >
+              {" "}
+              SEE TICKETS{" "}
             </button>
           </div>
         </footer>

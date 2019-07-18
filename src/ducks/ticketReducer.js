@@ -27,7 +27,10 @@ export const setLatestTicketNum = restaurant => {
 // pulls list of all saved tickets by restaurant (map in reverse
 // to see recent tickets first)
 export const setAllTickets = restaurant => {
-  const tickets = axios.post("/api/tickets", restaurant).then(res => res.data);
+  console.log("hit", restaurant);
+  const tickets = axios
+    .post("/api/tickets", { restaurant: restaurant })
+    .then(res => res.data);
   return {
     type: SET_ALLTICKETS,
     payload: tickets
@@ -52,7 +55,7 @@ export const setKitchenTickets = tickets => {
 
 // manipulates redux state of all ticket lists
 export default function reducer(state = initialState, action) {
-  console.log(action);
+  // console.log(action);
   switch (action.type) {
     case SET_ALLTICKETS + "_FULFILLED":
       return {
