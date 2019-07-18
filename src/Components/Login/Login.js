@@ -8,7 +8,6 @@ import { setUser } from "../../ducks/userReducer";
 import "./Login.css";
 import EmpLogin from "../EmpLogin/EmpLogin";
 
-
 class Login extends Component {
   constructor() {
     super();
@@ -62,7 +61,6 @@ class Login extends Component {
               value={this.typedEmail}
               name="typedEmail"
             />
-
             <input
               placeholder="Password"
               onChange={e => this.loginPasswordHandler(e.target.value)}
@@ -70,7 +68,6 @@ class Login extends Component {
               value={this.typedPassword}
               name="typedPassword"
             />
-
             {!user ? (
               <button className="account-btn" onClick={this.loginAccount}>
                 Submit
@@ -79,7 +76,6 @@ class Login extends Component {
               <EmpLogin />
             )}
           </div>
-
           <Link to="/register" style={{ textDecoration: "none" }}>
             <p className="account">Need to create an account?</p>
           </Link>
