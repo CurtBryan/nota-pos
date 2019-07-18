@@ -2,6 +2,7 @@
   width: 100vw;
   height: 100vh;
   display: flex;
+  background-color: gret
 }
 
 /* EMPLOYEE */
@@ -199,5 +200,15 @@
   margin-left: 5%;
   text-transform: uppercase;
   text-align: center;
-  margin-top: 90%;
+
+}
+
+.new-table-num-input {
+  display: flex;
+  flex-direction: row;
+  color: white;
+  width: 60%;
+  padding: 10px;
+  font-size:  14px;
+  text-transform: uppercase;
 }

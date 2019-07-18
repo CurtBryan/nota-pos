@@ -8,7 +8,6 @@ import { setUser } from "../../ducks/userReducer";
 import "./Login.css";
 import EmpLogin from "../EmpLogin/EmpLogin";
 
-
 class Login extends Component {
   constructor() {
     super();
@@ -91,7 +90,6 @@ class Login extends Component {
               <EmpLogin />
             )}
           </div>
-
           <Link to="/register" style={{ textDecoration: "none" }}>
             <p className="account">Need to create an account?</p>
           </Link>
