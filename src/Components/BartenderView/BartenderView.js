@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { setUser } from "../../ducks/userReducer";
 import { setMenu } from "../../ducks/restaurantReducer";
 import { setLatestTicketNum } from "../../ducks/ticketReducer";
+import { selectEmployee } from "../../ducks/restaurantReducer";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import io from "socket.io-client";
@@ -40,7 +41,7 @@ class ServerView extends Component {
         employee: this.props.restaurant.currentEmployeeName
       })
       .then(res => {
-        console.log(res);
+        // console.log(res);
         this.setState({
           tickets: res.data
         });
@@ -140,6 +141,7 @@ class ServerView extends Component {
   render() {
     // maps employee tickets to an array of arrays by ticket number
     console.log(this.state);
+    console.log(this.props.latestticketnum);
     const {
       currentTicket,
       newItems,
@@ -308,7 +310,15 @@ class ServerView extends Component {
           </div>
         </div>
         <footer>
-          <button className="logout"> LOGOUT </button>
+          <button
+            className="logout"
+            onClick={() => {
+              this.logout();
+            }}
+          >
+            {" "}
+            LOGOUT{" "}
+          </button>
           <Link to="/bartickets">
             <button>tickets</button>
           </Link>
@@ -330,7 +340,8 @@ const mapStateToProps = reduxState => {
 const mapDispatchToProps = {
   setUser,
   setMenu,
-  setLatestTicketNum
+  setLatestTicketNum,
+  selectEmployee
 };
 
 const invokedConnect = connect(

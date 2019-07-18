@@ -41,7 +41,7 @@ export const setAllTickets = restaurant => {
 export const setBarTickets = tickets => {
   return {
     type: SET_BARTICKETS,
-    payload: tickets
+    payload: tickets.data
   };
 };
 
@@ -49,7 +49,7 @@ export const setBarTickets = tickets => {
 export const setKitchenTickets = tickets => {
   return {
     type: SET_KITCHENTICKETS,
-    payload: tickets
+    payload: tickets.data
   };
 };
 
@@ -62,12 +62,12 @@ export default function reducer(state = initialState, action) {
         ...state,
         allTickets: action.payload
       };
-    case SET_BARTICKETS + "_FULFILLED":
+    case SET_BARTICKETS:
       return {
         ...state,
         barTickets: action.payload
       };
-    case SET_KITCHENTICKETS + "_FULFILLED":
+    case SET_KITCHENTICKETS:
       return {
         ...state,
         kitchenTickets: action.payload

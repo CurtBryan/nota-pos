@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import io from "socket.io-client";
 import { connect } from "react-redux";
 import { setBarTickets } from "../../ducks/ticketReducer";
+import { Redirect } from "react-router-dom";
 import "./DrinkTickets.css";
 import axios from "axios";
 const socket = io("http://localhost:4000/");
@@ -26,6 +27,7 @@ class DrinkTickets extends Component {
       ticks: []
     };
     socket.on("newBar", tickets => {
+      console.log("newBar hit", tickets);
       this.props.setBarTickets(tickets);
     });
     socket.on("updateTickets", () => {
@@ -73,7 +75,7 @@ class DrinkTickets extends Component {
   printForBar(item) {
     axios
       .put("/api/madetickets", {
-        restaurant: this.props.restaurant,
+        restaurant: this.props.user,
         ticketnum: item.ticketnum,
         drink: true
       })
@@ -82,6 +84,7 @@ class DrinkTickets extends Component {
 
   render() {
     // maps employee tickets to an array of arrays by ticket number
+    console.log(this.props.tickets);
     const { ticks } = this.state;
     const { tickets } = this.props;
     let counter = 0;
@@ -119,8 +122,19 @@ class DrinkTickets extends Component {
         </div>
       );
     });
+    console.log(mappedTicks);
     // prints the tickets on screen
-    return <div>{mappedTicks}</div>;
+    return (
+      <div className="MappedTickets">
+        {" "}
+        {!this.props.restaurant.currentEmployeePos ? (
+          <div>
+            <Redirect to="/" />
+          </div>
+        ) : null}
+        {mappedTicks}
+      </div>
+    );
   }
 }
 

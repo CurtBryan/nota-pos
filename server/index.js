@@ -73,6 +73,10 @@ io.sockets.on("connection", socket => {
     console.log("bar tickets hit");
     io.emit("newBar", tickets);
   }),
+    socket.on("updateKitchenTickets", tickets => {
+      console.log("kitchen tickets hit", tickets);
+      io.emit("newKitchen", tickets);
+    }),
     socket.on("newTicket", () => {
       console.log("newTicket hit");
       io.emit("updateTickets", "newTicket");
