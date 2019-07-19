@@ -18,7 +18,7 @@ import "./BartenderView.css";
 import axios from "axios";
 const socket = io("http://localhost:4000/");
 
-class ServerView extends Component {
+class BartenderView extends Component {
   constructor() {
     super();
     this.state = {
@@ -175,8 +175,8 @@ class ServerView extends Component {
     const mappedCurrentTicket = currentTicket.map(item => {
       total += item.itemprice;
       return (
-        <li className="ticketItem" key={item._id}>
-          <button onClick={e => this.addAnother(item)}>+</button>
+        <li  key={item._id}>
+             {/* <button onClick={e => this.addAnother(item)}>+</button> */}
           <span>
             {item.itemnum} {item.item} {item.itemprice}
           </span>
@@ -189,14 +189,19 @@ class ServerView extends Component {
     const mappedNewItems = newItems.map(item => {
       total += item.itemprice;
       return (
-        <li className="ticketItem" key={item.id}>
-          <span>
+        <div className="menu-item-list-container">
+        <li className="menu-item-list" key={item.id}>
+          <span className="menu-item-list">
             {item.itemnum} {item.item} {item.itemprice}
           </span>
           <span>{item.mod}</span>
-          <button onClick={() => this.editMod(item)}>mod</button>
-          <button onClick={() => this.removeNewItem(item)}>x</button>
+          <button className="price-btn" onClick={() => this.editMod(item)}>Notes</button>
+          <button className="price-btn" onClick={() => this.removeNewItem(item)}>
+          <img  className="trash" src={trash} alt="trash"/> 
+         </button>
         </li>
+        <br />
+        </div>
       );
     });
 
@@ -204,7 +209,6 @@ class ServerView extends Component {
     const mappedTableButtons = empTickets.map(item => {
       return (
         <button
-          className="table"
           onClick={() => this.selectTable(item, empTickets)}
         >
           {item[0].tablenum}
@@ -221,10 +225,10 @@ class ServerView extends Component {
       display = this.props.restaurant.menu[divSelect].items.map(item => {
         return (
           <div key={item._id}>
-            <section className="menu-itemsMV">
+            <section className="box-container">
               <button
-                className="boxMV item1MV"
-                onClick={() => this.addItem(item)}
+                 className="box"
+                 onClick={() => this.addItem(item)}
               >
                 <h1>{item.item}</h1>
                 <h1>${item.price}</h1>
@@ -236,13 +240,16 @@ class ServerView extends Component {
     }
 
     return (
+      <div>
+       <div className="table-container-items">
+      </div>
       <div className="view-container">
         {!this.props.restaurant.currentEmployeePos ? (
           <div>
             <Redirect to="/" />
           </div>
         ) : null}
-        {/* <div className="table-container">{mappedTableButtons}</div> */}
+       
         <div className="menu-nav">
              <button className="btn-menu"
               onClick={() =>
@@ -292,7 +299,7 @@ class ServerView extends Component {
               Desserts
             </button>
             <button
-            className="logout"
+            className="logout link"
             onClick={() => {
               this.logout();
             }}
@@ -301,17 +308,32 @@ class ServerView extends Component {
             LOGOUT{" "}
           </button>
          
-        
+          <Link to="/bartickets">
+            <button className="logout ticket-link" >tickets</button>
+          </Link>
+        </div>
        
      
           <div className="box-container">{display}</div>
           <div className="price-container">
-            <div className="bar">
-              {!this.state.currentTicket[0] ? (
-                <div className="new table num input">
-                  <span>New Table Number: </span>
+        
+           
+
+        <div className="title-conatiner">
+           <h1 className="title">Orders</h1>
+        
+         </div>
+  
+         <hr/>
+
+            <div className="ticket-container">
+            {mappedTableButtons}   
+        <div className="tickets-items">{mappedCurrentTicket}</div>
+        <span className="new-table-num-input">Table Number: {this.state.newTableNum} </span>
+       {!this.state.currentTicket[0] ? (
+                <div className="new-table-num-input">
+                  <span>New Table Number : </span>
                   <input onKeyDown={e => this.handleKeyDown(e)} />
-                  <span>Table Number: {this.state.newTableNum} </span>
                 </div>
               ) : (
                 <div className="Current table num display">
@@ -319,29 +341,27 @@ class ServerView extends Component {
                     Current Table Number: {this.state.currentTicket[0].tablenum}
                   </span>
                 </div>
-              )}
+        )}
+
+            <div className="tickets">
+            
+            <div className="tickets-menu">  {mappedNewItems} </div>
             </div>
-            <div className="ticket-container">
-            <div className="ticket">
-              {mappedCurrentTicket}
-              {mappedNewItems}
             </div>
-            </div>
-            <div className="price-tag">
+            
+            <div className="total-price">{total}</div> 
+            <div className="btn-extra">
               <button onClick={() => this.printTicket()}>Print</button>
-              {total}
               <button onClick={() => this.saveTicket()}>Save</button>
             </div>
+       
           </div>
         </div>
-      
-         
-          <Link to="/bartickets">
-            <button>tickets</button>
-          </Link>
-       
-
         </div>
+         
+      
+
+        
     );
   }
 }
@@ -367,4 +387,4 @@ const invokedConnect = connect(
   mapDispatchToProps
 );
 
-export default invokedConnect(ServerView);
+export default invokedConnect(BartenderView);

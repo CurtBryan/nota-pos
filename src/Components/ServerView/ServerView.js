@@ -164,7 +164,6 @@ class ServerView extends Component {
       newItems,
       // empTickets,
       tickets,
-      divSelect
     } = this.state;
     let empTickets = [];
     let counter = 0;
@@ -179,6 +178,8 @@ class ServerView extends Component {
         counter++;
       }
     }
+
+
 
 
       console.log(this.props.restaurant)
@@ -202,7 +203,7 @@ class ServerView extends Component {
         const mappedCurrentTicket = currentTicket.map(item => {
           total += item.itemprice;
           return (
-            <li className="ticketItem" key={item._id}>
+            <li key={item._id}>
               <button onClick={e => this.addAnother(item)}>+</button>
               <span>
                 {item.itemnum} {item.item} {item.itemprice}
@@ -216,22 +217,32 @@ class ServerView extends Component {
           const mappedNewItems = newItems.map(item => {
             total += item.itemprice;
             return (
-              <li className="ticketItem" key={item.id}>
-                <span>
-                  {item.itemnum} {item.item} {item.itemprice}
+              <div className="menu-item-list-container">
+              <li  className="menu-item-list" key={item.id}>
+                <span className="menu-item-list">
+                {item.itemnum}{item.item} {item.itemprice}
                 </span>
                 <span>{item.mod}</span>
-                <button onClick={() => this.editMod(item)}>mod</button>
-                <button onClick={() => this.removeNewItem(item)}>x</button>
+                <button className="price-btn" onClick={() => this.editMod(item)}>Notes</button>
+                <br/>
+                <button className="price-btn" onClick={() => this.removeNewItem(item)}>
+                <img  className="trash" src={trash} alt="trash"/> 
+                </button>
               </li>
+              <br/>
+              </div>
             );
           });
+
+  
+         
+
 
           // maps tickets by table to the top bar
           const mappedTableButtons = empTickets.map(item => {
             return (
               <button
-                className="table"
+                // className="table"
                 onClick={() => this.selectTable(item, empTickets)}
               >
                 {item[0].tablenum}
@@ -240,6 +251,28 @@ class ServerView extends Component {
           });
 
           let display;
+
+          // mapped menu items
+    if (!this.props.restaurant.menu.length) {
+      display = [];
+    } else {
+      display = this.props.restaurant.menu[divison].items.map(item => {
+        return (
+          <div key={item._id}>
+            <section className="box-container">
+              <button
+              className="box"
+                onClick={() => this.addItem(item)}
+              >
+                <h1>{item.item}</h1>
+                <h1>${item.price}</h1>
+              </button>
+            </section>
+          </div>
+        );
+      });
+    }
+
 
 
         return (
@@ -254,7 +287,7 @@ class ServerView extends Component {
         ) : null}     
    
         {/* MENU *SIDE NAVIGATION */}
-          {/* <div className="table-container">{mappedTableButtons}</div> */}
+          <div>{mappedTableButtons}</div>
        <div className="menu-nav">
   
           <button className="btn-menu"  onClick={() => this.setState({ divison: 3 })} >
@@ -304,56 +337,7 @@ class ServerView extends Component {
       {/* BOX *CONTAINER */}
     
          <div className="box-container">
-           {mappedMenu}
-          <div className="box">
-             <h1>Ribs</h1>
-             <h1>18.99</h1>
-           </div>
-           <div className="box">
-           <h1>Nachos</h1>
-             <h1>12.99</h1>
-           </div>
-           <div className="box">
-           <h1>Mac&Cheese</h1>
-             <h1>6.99</h1>
-           </div>
-           <div className="box">
-           <h1>Cuban Sub</h1>
-             <h1>12.99</h1>
-           </div>
-           <div className="box">
-           <h1>Salmon</h1>
-             <h1>13.99</h1>
-           </div>
-           <div className="box">
-           <h1>Hot Dog</h1>
-             <h1>12.99</h1>
-           </div>
-           <div className="box">
-           <h1>Pizza</h1>
-             <h1>16.99</h1>
-           </div>
-           <div className="box">
-           <h1>Steak</h1>
-             <h1>20.99</h1>
-           </div>
-           <div className="box">
-           <h1>Pannin</h1>
-             <h1>10.99</h1>
-           </div>
-           <div className="box">
-           <h1>Cold Cut</h1>
-             <h1>13.99</h1>
-           </div>
-           <div className="box">
-           <h1>Burger</h1>
-             <h1>15.99</h1>
-           </div>
-           <div className="box">
-           <h1>Nuggets</h1>
-             <h1>8.99</h1>
-           </div> 
-  
+        {display}
          </div>
       
       {/* PRICE *CONTAINER */}
@@ -380,9 +364,7 @@ class ServerView extends Component {
       {/* TITLES */}
   
          <div className="title-conatiner">
-           <h1 className="title">Item</h1>
-           <h1 className="title">Quantity</h1>
-           <h1 className="title"> Price </h1>
+           <h1 className="title">Orders</h1>
          </div>
   
          <hr/>
@@ -391,30 +373,19 @@ class ServerView extends Component {
        {/* TICKETS */}
   
        <div className="ticket-container">
-      
-          <div className="ticket">
-    
-          <h1 className="title">Burger</h1>
+
+            <div className="tickets">
+              {mappedCurrentTicket}
+              {mappedNewItems}
+            </div>
   
-          <div className="quantity">
-            <div className="circle"> -</div>
-            <h1 className="x">2x</h1>
-            <div className="circle">+</div>
-          </div>
-  
-          <h1>15.99</h1>
-          <img  className="trash" src={trash} alt="trash"/>
-         
-          </div>
-  
-          <button className="total">
-           Total
-          </button>
-          <div className="price-tag">
+        
+              <button className="total-price">{total}</button> 
+            <div className="btn-extra">
               <button onClick={() => this.printTicket()}>Print</button>
-              {total}
               <button onClick={() => this.saveTicket()}>Save</button>
-        </div>
+            </div>
+       
       </div>
   
     </div>
@@ -424,6 +395,7 @@ class ServerView extends Component {
 }
 }
   
+
 
 const mapStateToProps = reduxState => {
   const { userInfo, restaurantInfo, tickets } = reduxState;
@@ -435,11 +407,11 @@ const mapStateToProps = reduxState => {
 };
 
 const mapDispatchToProps = {
-    setUser,
-    setMenu,
-    setLatestTicketNum,
-    selectEmployee
-}
+  setUser,
+  setMenu,
+  setLatestTicketNum,
+  selectEmployee
+};
 
 const invokedConnect = connect(
   mapStateToProps,

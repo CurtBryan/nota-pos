@@ -4,6 +4,8 @@ const Restaurant = require("../collections/restaurant");
 module.exports = {
   login: (req, res, next) => {
     const { typedEmail, typedPassword } = req.body;
+    // console.log(typedEmail, typedPassword);
+    // const query = { email: `${typedEmail}`, password: `${typedPassword}` };
     Restaurant.find({ email: typedEmail })
       .then(restaurant => {
         bcrypt
@@ -11,7 +13,6 @@ module.exports = {
           .then(matchedPassword => {
             if (matchedPassword) {
               req.session.user = restaurant[0].name;
-              console.log(req.session.user);
               res.status(200).send(req.session.user);
             } else {
               res.status(401).send("incorrect info mang");
@@ -26,29 +27,26 @@ module.exports = {
   register: (req, res, next) => {
     const { typedName, typedEmail, typedPassword } = req.body;
     const saltRounds = 12;
-    bcrypt
-      .genSalt(saltRounds)
-      .then(salt => {
-        bcrypt.hash(typedPassword, salt).then(hashedPassword => {
-          const restaurant = new Restaurant({
-            name: typedName,
-            email: typedEmail,
-            password: hashedPassword
-          });
-          restaurant.save(err => {
-            if (err) {
-              res
-                .status(400)
-                .send("there was an error on the server", console.log(err));
-            }
-            Restaurant.find({ email: typedEmail }).then(restaurant => {
-              req.session.user = restaurant[0].name;
-              res.status(200).send(req.session.user);
-            });
+    bcrypt.genSalt(saltRounds).then(salt => {
+      bcrypt.hash(typedPassword, salt).then(hashedPassword => {
+        const restaurant = new Restaurant({
+          name: typedName,
+          email: typedEmail,
+          password: hashedPassword
+        });
+        restaurant.save(err => {
+          if (err) {
+            res
+              .status(400)
+              .send("there was an error on the server", console.log(err));
+          }
+          Restaurant.find({ email: typedEmail }).then(restaurant => {
+            req.session.user = restaurant[0].name;
+            res.status(200).send(req.session.user);
           });
         });
-      })
-      .catch(err => console.log(err));
+      });
+    });
   },
   userInfo: (req, res, next) => {
     res.status(200).send(req.session.user);

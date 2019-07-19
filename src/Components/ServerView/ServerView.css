@@ -1,8 +1,8 @@
 .view-container {
-  width: 100vw;
-  height: 100vh;
+  /* width: 100vw;
+  height: 100vh; */
   display: flex;
-  background-color: gret
+  
 }
 
 /* EMPLOYEE */
@@ -13,6 +13,7 @@
   background-color: #547374;
   display: flex;
   flex-direction: column;
+
 }
 
 /* MANAGER */
@@ -123,10 +124,7 @@
   border: 1px solid #547374;
   background-color: #C9E0DE;
   border-radius: 5%;
-  width: 20%;
-  height: 15%;
-  margin: 8px;
-  padding: 8px;
+  width: 250px;
   font-size: 13px;
   text-align: center;
   text-transform: uppercase;
@@ -156,21 +154,23 @@
   margin: 10px;
 }
 
-.ticket {
+.tickets {
   display: flex;
   flex-direction: row;
   color: white;
   justify-content: space-evenly;
   font-size:  8px;
   margin-left: 3%;
+  margin-top: 10%;
 }
 
 .quantity {
   display: flex;
+
 }
 
 .circle {
-  border: 1px solid white;
+  border: 1px solid blue;
   background-color: #C9E0DE;
   color: #547374;
   border-radius: 100%;
@@ -178,11 +178,29 @@
   height: 25px;
   margin-top: 2%;
   text-align: center;
-  font-size: 20px;
+  font-size: 80px;
 }
 
-.x {
-  margin: 8%;
+.menu-item-list-container{
+  display: flex;
+  height: 400px;
+  list-style-type: none;
+  /* width: 300px; */
+
+}
+
+.price-button {
+  background-color: #547374; 
+
+}
+.menu-item-list{
+  display: flex;
+   flex-direction: column;
+  font-size: 14px;
+  
+  width: 200px;
+ 
+  text-transform: uppercase;
 }
 
 .trash {
@@ -190,11 +208,11 @@
   margin-top: 2%;
 }
 
-.total {
+.total-price {
   background-color: white;
+  
   color: #547374;
   width: 90%;
-  height: 50px;
   font-size: 20px;
   font-weight: 600;
   margin-left: 5%;
@@ -211,4 +229,19 @@
   padding: 10px;
   font-size:  14px;
   text-transform: uppercase;
+}
+
+.btn-extra {
+  display: flex;
+  justify-content: center;
+}
+
+.tickets-items {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  color: white;
+  width: 100%;
+ 
 }

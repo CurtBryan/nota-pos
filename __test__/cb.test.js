@@ -13,6 +13,7 @@ require("dotenv").config();
 const { CONNECTION_STRING } = process.env;
 const login = require("../server/controller/authController");
 const loginFeat = login.login;
+const register = login.register;
 const mongoose = require("mongoose");
 
 // connect mongoose outside of describe function
@@ -58,4 +59,42 @@ describe("integration tests", () => {
     };
     loginFeat(req, res);
   });
+
+  it("should register", done => {
+    const req = {
+      body: { typedName: "Italy", typedEmail: "italy.com", typedPassword: "italy" },
+      session: { user: {} }
+    };
+    const res = {
+      send: function(data) {
+        expect(data).toEqual("there was an error on the server")
+        done();
+      },
+      status(num) {
+        expect(num).toBe(400);
+        return this;
+      }
+    };
+    register(req, res);
+  });
+  it("shouldn't register", done => {
+    const req = {
+      body: { typedName: "Italy", typedEmail: "italy.com", typedPassword: "italy" },
+      session: { user: {} }
+    };
+    const res = {
+      send: function(data) {
+        expect(data).toEqual("incorrect info mang");
+        done();
+      },
+      status(num) {
+        expect(num).toBe(401);
+        return this;
+      }
+    };
+    loginFeat(req, res);
+  });
+
+
 });
+
