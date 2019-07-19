@@ -9,11 +9,9 @@
     ]
   },
   "dependencies": {
-    "@shelf/jest-mongodb": "^1.1.0",
     "axios": "^0.19.0",
-    "bcrypt": "git+https://github.com/kelektiv/node.bcrypt.js.git#master",
+    "bcrypt": "^3.0.6",
     "dotenv": "^8.0.0",
-    "express": "^4.17.1",
     "express-session": "^1.16.2",
     "http-proxy-middleware": "^0.19.1",
     "jooks": "0.0.16",
@@ -29,6 +27,7 @@
     "react-zdog": "^1.0.10",
     "redux": "^4.0.3",
     "redux-promise-middleware": "^6.1.1",
+    "sinon": "^7.3.2",
     "socket.io": "^2.2.0",
     "zdog": "^1.1.0"
   },
@@ -52,5 +51,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {}
 }

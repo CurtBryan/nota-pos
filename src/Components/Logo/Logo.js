@@ -1,43 +1,45 @@
-import ReactDOM from 'react-dom';
-import React, { useState, useEffect, useRef } from 'react';
-import { Illustration, Ellipse, Group, useRender, Shape } from 'react-zdog';
+import React, { useRef } from 'react';
+import { Illustration, Group, useRender, Box } from 'react-zdog';
 import '../Logo/Logo.css';
+
 
 function Content() {
 
+let isSpinning = true;
 
-  const [visible, setVisible] = useState(true)
-
-useEffect(() => {
-    // Test taking an object away
-    setTimeout(() => setVisible(false), 8000)
-  }, [])
-
-  const group = useRef()
-  useRender(() => (group.current.rotate.y += 0.1))
+   const group = useRef()
+  useRender(() => (
+    group.current.rotate.y += isSpinning ? 0.003 : 0,
+    group.current.rotate.x += isSpinning ? 0.003 : 0
+  
+    ))
 
   return (
     <Group ref={group}>
-      <Shape
-        path={[{ x: 0, y: -8 }, { x: 8, y: 8 }, { x: -8, y: 8 }]}
-        translate={{ z: 10 }}
-        color="#E62"
-        stroke={3}
+      <Box
+        width="30"
+        height="30"
+        depth="30"
+        color="#212e2e"
+        leftFace="#212e2e"
+        rightFace="#38494A"
+        topFace="#435c5c"
+        bottomFace='#4b6768'
+        stroke= "false"
         fill
       />
-      {visible && (
-        <Ellipse diameter={20} translate={{ z: -10 }} stroke={5} color="#636" />
-      )}
+
     </Group>
   )
 }
 
-export default function App() {
+export default function Logo() {
   return (
-    <Illustration zoom={10}>
+
+    <div className='canvas'>
+    <Illustration zoom={3}>
       <Content />
     </Illustration>
+    </div>
   )
 }
-
-ReactDOM.render(<App />, document.getElementById('root'))

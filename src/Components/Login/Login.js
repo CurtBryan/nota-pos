@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { connect } from "react-redux";
-// import Register from '../Register/Register';
+import Logo from "../Logo/Logo";
 import { setEmployees } from "../../ducks/restaurantReducer";
 import { setUser } from "../../ducks/userReducer";
 import "./Login.css";
@@ -49,29 +49,43 @@ class Login extends Component {
 
   render() {
     const { user } = this.props.userInfo;
+
+  //   if (!this.props.setEmployees) {
+  //     return <></>;
+  // }
     return (
       <div className="form-container">
+          <Logo />
         <div className="form">
           <p className="title-pos">NotaPOS</p>
           <div className="info-card">
-            <input
+         
+          {!user ? (
+            <div>
+            <div className="form-login" >
+            <input className="login"
               placeholder="Email"
               onChange={e => this.loginEmailHandler(e.target.value)}
               type="text"
               value={this.typedEmail}
               name="typedEmail"
             />
-            <input
+
+            <input  className="login"
               placeholder="Password"
               onChange={e => this.loginPasswordHandler(e.target.value)}
               type="text"
               value={this.typedPassword}
               name="typedPassword"
             />
-            {!user ? (
+            </div>
+           
+
               <button className="account-btn" onClick={this.loginAccount}>
                 Submit
               </button>
+         
+              </div>
             ) : (
               <EmpLogin />
             )}

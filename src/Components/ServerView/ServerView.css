@@ -1,172 +1,214 @@
-.server-page {
-  background-color: #547374;
-  /* width: 800px;
-  height: 700px; */
+.view-container {
   width: 100vw;
   height: 100vh;
-}
-
-/*TABLE DATA START*/
-.table-container {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 69%;
-  border: 1px solid grey;
+  background-color: gret
 }
 
-.table {
-  width: 100px;
-  height: 80px;
-  background-color: #585555;
-  margin-left: 10px;
-  margin-right: 10px;
-  border: 1px solid #585555;
-}
+/* EMPLOYEE */
 
-/*TABLE DATA END*/
-
-/*MENU SELECTION START*/
-.menu-selections {
-  width: 100px;
-  height: 490px;
-  background-color: #ededed;
-  margin-top: 40px;
-  position: absolute;
-  z-index: 5;
-}
-
-.circle-container {
-  margin-top: 30px;
-  margin-left: 20px;
-}
-
-.circle {
-  height: 50px;
-  width: 50px;
-  background-color: #bbb;
-  margin-bottom: 5px;
-  border: 3px solid white;
-  border-radius: 50%;
-}
-
-.circle:nth-child(1) {
-  background-color: #d84848;
-}
-
-.circle:nth-child(2) {
-  background-color: #62b8ef;
-}
-
-.circle:nth-child(3) {
-  background-color: #a0f290;
-}
-
-.circle:nth-child(4) {
-  background-color: #fcc751;
-}
-
-/*MENU SELECTION END*/
-
-/*INFO SECTION START*/
-.info-section {
-  display: flex;
-  flex-direction: row;
-}
-/*INFO SECTION END*/
-
-/*MENU TABLE START*/
-.items-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  background-color: white;
-  width: 885px;
-  height: 570px;
-}
-
-.menu-items {
+.menu-nav {
+  width: 115px;
+  height: 100vh;
+  background-color: #547374;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin-left: 10px;
 }
 
-.box {
-  width: 130px;
-  height: 90px;
-  margin-bottom: 10px;
-}
+/* MANAGER */
 
-.item1 {
-  background-color: #d84848;
-}
-
-.item2 {
-  background-color: #62b8ef;
-}
-
-.item3 {
-  background-color: #a0f290;
-}
-
-.item4 {
-  background-color: #fcc751;
-}
-
-/*MENU TABLE END*/
-
-/*TICKET START*/
-.tickets {
+/* .menu-nav {
+  width: 100px;
+  height: 103vh;
   background-color: #547374;
-  width: 300px;
-  height: 450px;
-}
+  display: flex;
+  flex-direction: column;
+} */
 
-.title {
+.btn-menu {
   background-color: #547374;
+  border: none;
+  margin: 20px;
+  text-transform: uppercase;
   color: white;
   font-weight: 800;
-  font-size: 40px;
-  margin-left: 30px;
-  text-align: center;
-  width: 350px;
+  font-size: 12px;
+
+}
+
+.btn-emp {
+  background-color: white;
+  border: 1px solid  #C9E0DE;
+  margin: 5%;
+  text-transform: uppercase;
+  color: #547374;
+  font-weight: 800;
+}
+
+.drink {
+ width: 170%;
+ margin-top: 8px;
+ margin-bottom: 8px;
+}
+
+.guac {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.ham {
+  width: 150%;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.pie {
+  width: 150%;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.server {
+  width: 70%;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.chef {
+  width: 70%;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 .bar {
-  width: 395px;
-  height: 30px;
-  background-color: #ededed;
-  border: 1px solid gray;
+  width: 60%;
+  margin-top: 8px;
+  margin-bottom:8px;
+}
+
+/* EMPLOYEE */
+
+ .btn-logout {
+  margin-top: 30vh;
+  background-color: #547374;
+  border: none;
+  color: white;
+  font-weight: 800;
+  margin-left: 15px;
+  text-transform: uppercase;
+} 
+
+/* MANAGER */
+
+/* .btn-logout {
+  margin: 10px;
+  background-color: #547374;
+  border: none;
+  color: white;
+  font-weight: 800;
+  text-transform: uppercase;
+  
+} */
+
+/* BOX *CONTAINER */
+
+.box-container{
+  width: 60%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.box {
+  border: 1px solid #547374;
+  background-color: #C9E0DE;
+  border-radius: 5%;
+  width: 20%;
+  height: 15%;
+  margin: 8px;
+  padding: 8px;
+  font-size: 13px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #547374;
+  font-weight: 800;
+}
+
+
+/* PRICE *CONTAINER */
+
+.price-container {
+  background-color: #547374;
+  width: 40%;
+  margin: 10px;
+  height: 96vh;
+}
+
+.title-conatiner{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.title {
+  text-transform: uppercase;
+  color: white;
+  font-size: 15px;
+  margin: 10px;
 }
 
 .ticket {
-  width: 395px;
-  height: 407px;
-  background-color: white;
-  border: 1px solid grey;
-}
-
-.price-tag {
-  width: 395px;
-  height: 50px;
-  background-color: #585555;
-}
-/*TICKET END*/
-
-/*FOOTER START*/
-
-footer {
-  background-color: #ededed;
-  height: 50px;
-}
-
-.logout {
-  width: 100px;
-  height: 50px;
-  font-weight: 800;
-  background-color: #547374;
+  display: flex;
+  flex-direction: row;
   color: white;
+  justify-content: space-evenly;
+  font-size:  8px;
+  margin-left: 3%;
 }
 
-/*FOOTER END*/
+.quantity {
+  display: flex;
+}
+
+.circle {
+  border: 1px solid white;
+  background-color: #C9E0DE;
+  color: #547374;
+  border-radius: 100%;
+  width: 28px;
+  height: 25px;
+  margin-top: 2%;
+  text-align: center;
+  font-size: 20px;
+}
+
+.x {
+  margin: 8%;
+}
+
+.trash {
+  height: 20px;
+  margin-top: 2%;
+}
+
+.total {
+  background-color: white;
+  color: #547374;
+  width: 90%;
+  height: 50px;
+  font-size: 20px;
+  font-weight: 600;
+  margin-left: 5%;
+  text-transform: uppercase;
+  text-align: center;
+
+}
+
+.new-table-num-input {
+  display: flex;
+  flex-direction: row;
+  color: white;
+  width: 60%;
+  padding: 10px;
+  font-size:  14px;
+  text-transform: uppercase;
+}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Login from '../Login/Login';
+import Logo from '../Logo/Logo';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { setUser } from '../../ducks/userReducer';
@@ -47,6 +48,7 @@ class Register extends Component {
 
         return (
         <div>
+            <Logo/>
             { user ? (
                 <Login />) 
                 : (
