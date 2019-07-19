@@ -14,12 +14,12 @@ module.exports = {
   // pull log of all tickets on the server
   getAllTickets: (req, res, next) => {
     const { restaurant } = req.body;
-    // console.log("hit", req.body);
+    console.log("hit", req.body);
     ticket
       .find({ restaurant: restaurant }, { restaurant: 0 })
       .sort({ ticketnum: -1 })
       .then(response => {
-        // console.log(response);
+        console.log(response);
         res.status(200).send(response);
       })
       .catch(err => {
@@ -186,3 +186,7 @@ module.exports = {
       });
   }
 };
+
+
+
+
