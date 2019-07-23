@@ -19,10 +19,7 @@ module.exports = {
             }
           });
       })
-      .catch(err => {
-        console.log(err);
-        res.status(401).send("incorrect info mang");
-      });
+      
   },
   register: (req, res, next) => {
     const { typedName, typedEmail, typedPassword } = req.body;
@@ -43,8 +40,10 @@ module.exports = {
           Restaurant.find({ email: typedEmail }).then(restaurant => {
             req.session.user = restaurant[0].name;
             res.status(200).send(req.session.user);
+          }).catch(err => {
+            res.status(404).send("not a valid restaurant");
           });
-        });
+        })
       });
     });
   },
